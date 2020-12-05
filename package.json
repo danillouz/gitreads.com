@@ -1,0 +1,41 @@
+{
+  "name": "gitreads.com",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint-staged": "lint-staged",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
+  },
+  "dependencies": {
+    "autoprefixer": "10.0.4",
+    "next": "10.0.3",
+    "postcss": "8.1.7",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "tailwindcss": "2.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "7.28.1",
+    "@testing-library/jest-dom": "5.11.6",
+    "@testing-library/react": "11.2.2",
+    "@testing-library/user-event": "12.5.0",
+    "@types/jest": "26.0.16",
+    "@types/node": "14.14.10",
+    "@types/react": "17.0.0",
+    "@typescript-eslint/eslint-plugin": "4.9.0",
+    "@typescript-eslint/parser": "4.9.0",
+    "babel-jest": "26.6.3",
+    "eslint": "7.15.0",
+    "eslint-config-prettier": "7.0.0",
+    "eslint-plugin-react": "7.21.5",
+    "husky": "5.0.4",
+    "jest": "26.6.3",
+    "lint-staged": "10.5.3",
+    "prettier": "2.2.1",
+    "typescript": "4.1.2"
+  }
+}
