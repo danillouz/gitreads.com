@@ -1,7 +1,6 @@
 import { AppProps } from "next/app"
 import Head from "next/head"
-
-import "../styles/tailwind.css"
+import "@styles/tailwind.css"
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props
