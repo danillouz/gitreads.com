@@ -29,7 +29,7 @@ const fetchUser = async (): Promise<User> => {
 }
 
 export const useFetchSession = (params: UseFetchSessionParams): Session => {
-  const { loginIsRequired = true } = params
+  const { loginIsRequired = true, redirectTo } = params
 
   const [isLoading, setIsLoading] = useState<boolean>(!globalUser)
   const [user, setUser] = useState<User | null>(globalUser)
@@ -50,7 +50,11 @@ export const useFetchSession = (params: UseFetchSessionParams): Session => {
       }
 
       if (!user && loginIsRequired) {
-        return (window.location.href = "/api/auth/login")
+        const loginUrl = "/api/auth/login"
+        const redirectUrl = redirectTo
+          ? `${loginUrl}?redirectTo=${encodeURIComponent(redirectTo)}`
+          : loginUrl
+        return window.location.assign(redirectUrl)
       }
 
       setUser(user)

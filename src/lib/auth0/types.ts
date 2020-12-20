@@ -29,4 +29,7 @@ export interface Session {
 export interface UseFetchSessionParams {
   // Force the user to login when there is no session (anymore)
   loginIsRequired?: boolean
+
+  // The path to redirect (back) to after login
+  redirectTo?: string
 }
