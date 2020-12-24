@@ -24,7 +24,7 @@ export const UserMenu = (props: UserMenuProps) => {
       <div className="relative">
         <button
           className="max-w-xs flex items-center rounded-full focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
-          aria-label="User menu"
+          aria-label="Open user menu"
           aria-haspopup="true"
           onClick={onClickBtn}
         >

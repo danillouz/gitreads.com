@@ -13,8 +13,6 @@ const callback = async (req: NextApiRequest, res: NextApiResponse): Promise<void
       // },
     })
   } catch (err) {
-    console.error("auth callback failed: ", err)
-
     res.status(err.status || 500).end(err.message)
   }
 }

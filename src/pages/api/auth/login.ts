@@ -15,8 +15,6 @@ const login = async (req: NextApiRequest, res: NextApiResponse): Promise<void> =
       },
     })
   } catch (err) {
-    console.error("login failed: ", err)
-
     res.status(err.status || 500).end(err.message)
   }
 }

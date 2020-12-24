@@ -11,8 +11,6 @@ const me = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
       refetch,
     })
   } catch (err) {
-    console.error("fetch user profile failed: ", err)
-
     res.status(err.status || 500).end(err.message)
   }
 }

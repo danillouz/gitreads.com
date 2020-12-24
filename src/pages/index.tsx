@@ -31,7 +31,12 @@ export const Home = (): JSX.Element => {
                 <div className="flex-shrink-0">
                   <Link href="/">
                     <a className="focus:outline-white">
-                      <img data-testid="logo" className="h-8" src="/gitreads.svg" alt="GitReads" />
+                      <img
+                        data-testid="logo"
+                        className="h-8 w-32"
+                        src="/img/gitreads.svg"
+                        alt="GitReads"
+                      />
                     </a>
                   </Link>
                 </div>
@@ -45,6 +50,7 @@ export const Home = (): JSX.Element => {
                 {!isLoading && (
                   <button
                     className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:ring-2 focus:ring-fuchsia-400 transition-colors duration-200"
+                    aria-label="Open menu"
                     onClick={onClickMobileNavBtn}
                   >
                     <svg
@@ -78,9 +84,7 @@ export const Home = (): JSX.Element => {
                   {user ? (
                     <div className="flex items-center space-x-3">
                       <Link href={appRoute}>
-                        <a className="nav-link" role="menuitem">
-                          App
-                        </a>
+                        <a className="nav-link">App</a>
                       </Link>
 
                       <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
@@ -90,16 +94,11 @@ export const Home = (): JSX.Element => {
                   ) : (
                     <div className="flex items-center space-x-3">
                       <Link href={loginUrl}>
-                        <a className="nav-link" role="menuitem">
-                          Login
-                        </a>
+                        <a className="nav-link">Login</a>
                       </Link>
 
                       <Link href={signupUrl}>
-                        <a
-                          className="nav-link text-white antialiased hover:bg-white hover:text-gray-800 border-2 border-white focus:ring-0 focus:bg-white focus:text-gray-800"
-                          role="menuitem"
-                        >
+                        <a className="nav-link text-white antialiased hover:bg-white hover:text-gray-800 border-2 border-white focus:ring-0 focus:bg-white focus:text-gray-800">
                           Signup
                         </a>
                       </Link>
