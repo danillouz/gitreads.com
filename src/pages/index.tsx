@@ -18,11 +18,8 @@ export const Home = (): JSX.Element => {
   const { user, isLoading } = useFetchSession(params)
 
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState<boolean>(false)
-  const onClickMobileNavBtn = () => setMobileNavIsOpen(!mobileNavIsOpen)
 
-  if (isLoading) {
-    return <p>Loading..</p>
-  }
+  const onClickMobileNavBtn = () => setMobileNavIsOpen(!mobileNavIsOpen)
 
   return (
     <Page>
@@ -34,7 +31,7 @@ export const Home = (): JSX.Element => {
                 <div className="flex-shrink-0">
                   <Link href="/">
                     <a className="focus:outline-white">
-                      <img className="h-8" src="/gitreads.svg" alt="GitReads" />
+                      <img data-testid="logo" className="h-8" src="/gitreads.svg" alt="GitReads" />
                     </a>
                   </Link>
                 </div>
@@ -45,102 +42,111 @@ export const Home = (): JSX.Element => {
               </nav>
 
               <div className="flex items-center -mr-2 md:hidden">
-                <button
-                  className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:ring-2 focus:ring-fuchsia-400 transition-colors duration-200"
-                  onClick={onClickMobileNavBtn}
-                >
-                  <svg
-                    className="block h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                {!isLoading && (
+                  <button
+                    className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:ring-2 focus:ring-fuchsia-400 transition-colors duration-200"
+                    onClick={onClickMobileNavBtn}
                   >
-                    {mobileNavIsOpen ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    ) : (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M4 8h16M4 16h16"
-                      />
-                    )}
-                  </svg>
-                </button>
-              </div>
-
-              <div className="hidden md:block">
-                {user ? (
-                  <div className="flex items-center space-x-3">
-                    <Link href={appRoute}>
-                      <a className="nav-link" role="menuitem">
-                        App
-                      </a>
-                    </Link>
-
-                    <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
-                      <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
-                    </UserMenu>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-3">
-                    <Link href={loginUrl}>
-                      <a className="nav-link" role="menuitem">
-                        Login
-                      </a>
-                    </Link>
-
-                    <Link href={signupUrl}>
-                      <a
-                        className="nav-link text-white antialiased hover:bg-white hover:text-gray-800 border-2 border-white focus:ring-0 focus:bg-white focus:text-gray-800"
-                        role="menuitem"
-                      >
-                        Signup
-                      </a>
-                    </Link>
-                  </div>
+                    <svg
+                      className="block h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      {mobileNavIsOpen ? (
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      ) : (
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d="M4 8h16M4 16h16"
+                        />
+                      )}
+                    </svg>
+                  </button>
                 )}
               </div>
+
+              {!isLoading && (
+                <div className="hidden md:block">
+                  {user ? (
+                    <div className="flex items-center space-x-3">
+                      <Link href={appRoute}>
+                        <a className="nav-link" role="menuitem">
+                          App
+                        </a>
+                      </Link>
+
+                      <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
+                        <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
+                      </UserMenu>
+                    </div>
+                  ) : (
+                    <div className="flex items-center space-x-3">
+                      <Link href={loginUrl}>
+                        <a className="nav-link" role="menuitem">
+                          Login
+                        </a>
+                      </Link>
+
+                      <Link href={signupUrl}>
+                        <a
+                          className="nav-link text-white antialiased hover:bg-white hover:text-gray-800 border-2 border-white focus:ring-0 focus:bg-white focus:text-gray-800"
+                          role="menuitem"
+                        >
+                          Signup
+                        </a>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </header>
 
-        <div
-          className={classnames("md:hidden sticky top-16 bg-gray-800 border-t border-gray-700", {
-            block: mobileNavIsOpen,
-            hidden: !mobileNavIsOpen,
-          })}
-        >
-          {user ? (
-            <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
-              <MobileUserMenuItem href={appRoute}>App</MobileUserMenuItem>
-              <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
-            </MobileUserMenu>
-          ) : (
-            <div className="px-2 py-3 space-y-1">
-              <Link href={loginUrl}>
-                <a className="nav-link" role="menuitem">
-                  Login
-                </a>
-              </Link>
+        {!isLoading && (
+          <div
+            className={classnames("md:hidden sticky top-16 bg-gray-800 border-t border-gray-700", {
+              block: mobileNavIsOpen,
+              hidden: !mobileNavIsOpen,
+            })}
+          >
+            {user ? (
+              <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
+                <MobileUserMenuItem href={appRoute}>App</MobileUserMenuItem>
+                <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
+              </MobileUserMenu>
+            ) : (
+              <div className="px-2 py-3 space-y-1">
+                <Link href={loginUrl}>
+                  <a className="nav-link" role="menuitem">
+                    Login
+                  </a>
+                </Link>
 
-              <Link href={signupUrl}>
-                <a className="nav-link" role="menuitem">
-                  Signup
-                </a>
-              </Link>
-            </div>
-          )}
-        </div>
+                <Link href={signupUrl}>
+                  <a className="nav-link" role="menuitem">
+                    Signup
+                  </a>
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
 
         <main className="flex-1">
           <div className="page-container">
-            <h1 className="text-7xl md:text-8xl lg:text-9xl leading-none font-extrabold tracking-tight mt-10 mb-8 sm:mt-14 sm:mb-10">
+            <h1
+              data-testid="hero"
+              className="text-7xl md:text-8xl lg:text-9xl leading-none font-extrabold tracking-tight mt-10 mb-8 sm:mt-14 sm:mb-10"
+            >
               <span
                 aria-hidden
                 className="absolute transform translate-x-2 translate-y-2 text-orange-300"
@@ -207,7 +213,7 @@ export const Home = (): JSX.Element => {
             </p>
 
             <div className="flex flex-wrap text-center my-12">
-              <Link href={user ? appRoute : signupUrl}>
+              <Link href={isLoading ? "/" : user ? appRoute : signupUrl}>
                 <a className="w-full sm:w-auto flex-none btn-retro text-lg">Git started</a>
               </Link>
             </div>

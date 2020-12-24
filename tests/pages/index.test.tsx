@@ -27,10 +27,30 @@ describe(`Home`, () => {
       expect(mockUseFetchSession).toBeCalledTimes(1)
     })
 
-    it("renders loading message", () => {
-      const { getByText } = render(<Home />)
-      const el = getByText("Loading..")
-      expect(el).toBeInTheDocument()
+    it("renders main content", () => {
+      const { getByTestId, getByText } = render(<Home />)
+
+      const logo = getByTestId("logo")
+      expect(logo).toBeInTheDocument()
+
+      const hero = getByTestId("hero")
+      expect(hero).toBeInTheDocument()
+
+      const cta = getByText("Git started")
+      expect(cta).toBeInTheDocument()
+      expect(cta).toHaveAttribute("href", "/")
+    })
+
+    it("does not render login link", () => {
+      const { queryAllByText } = render(<Home />)
+      const links = queryAllByText("Login")
+      expect(links).toHaveLength(0)
+    })
+
+    it("does not render signup link", () => {
+      const { queryAllByText } = render(<Home />)
+      const links = queryAllByText("Signup")
+      expect(links).toHaveLength(0)
     })
   })
 
