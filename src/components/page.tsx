@@ -15,8 +15,6 @@ const Page = (props: PageProps) => {
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="theme-color" content="#1e293b" />
-        <meta name="msapplication-TileColor" content="#d946ef" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d946ef" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
