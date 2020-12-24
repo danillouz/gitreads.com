@@ -7,7 +7,7 @@ type PageProps = {
 }
 
 const Page = (props: PageProps) => {
-  const { title = "GitReads", description = "Track and share what you read." } = props
+  const { title = "GitReads", description = "Collect and showcase books you read." } = props
 
   return (
     <>
@@ -22,6 +22,11 @@ const Page = (props: PageProps) => {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;700&display=swap"
+        />
       </Head>
 
       {props.children}
