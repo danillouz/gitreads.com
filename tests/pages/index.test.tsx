@@ -108,23 +108,11 @@ describe(`Home`, () => {
       expect(githubLink).toHaveAttribute("target", "_blank")
       expect(githubLink).toHaveAttribute("rel", "noopener noreferrer")
 
-      const blogLink = getByText("Blog")
-      expect(blogLink).toBeInTheDocument()
-      expect(blogLink).toHaveAttribute("href", "https://blog.danillouz.dev")
-      expect(blogLink).toHaveAttribute("target", "_blank")
-      expect(blogLink).toHaveAttribute("rel", "noopener noreferrer")
-
       const aboutLink = getByText("About")
       expect(aboutLink).toBeInTheDocument()
       expect(aboutLink).toHaveAttribute("href", "https://danillouz.dev")
       expect(aboutLink).toHaveAttribute("target", "_blank")
       expect(aboutLink).toHaveAttribute("rel", "noopener noreferrer")
-
-      const twitterLink = getByText("Twitter")
-      expect(twitterLink).toBeInTheDocument()
-      expect(twitterLink).toHaveAttribute("href", "https://twitter.com/danillouz")
-      expect(twitterLink).toHaveAttribute("target", "_blank")
-      expect(twitterLink).toHaveAttribute("rel", "noopener noreferrer")
 
       const copyright = getByTestId("copyright")
       expect(copyright).toBeInTheDocument()
@@ -227,23 +215,11 @@ describe(`Home`, () => {
       expect(githubLink).toHaveAttribute("target", "_blank")
       expect(githubLink).toHaveAttribute("rel", "noopener noreferrer")
 
-      const blogLink = getByText("Blog")
-      expect(blogLink).toBeInTheDocument()
-      expect(blogLink).toHaveAttribute("href", "https://blog.danillouz.dev")
-      expect(blogLink).toHaveAttribute("target", "_blank")
-      expect(blogLink).toHaveAttribute("rel", "noopener noreferrer")
-
       const aboutLink = getByText("About")
       expect(aboutLink).toBeInTheDocument()
       expect(aboutLink).toHaveAttribute("href", "https://danillouz.dev")
       expect(aboutLink).toHaveAttribute("target", "_blank")
       expect(aboutLink).toHaveAttribute("rel", "noopener noreferrer")
-
-      const twitterLink = getByText("Twitter")
-      expect(twitterLink).toBeInTheDocument()
-      expect(twitterLink).toHaveAttribute("href", "https://twitter.com/danillouz")
-      expect(twitterLink).toHaveAttribute("target", "_blank")
-      expect(twitterLink).toHaveAttribute("rel", "noopener noreferrer")
 
       const copyright = getByTestId("copyright")
       expect(copyright).toBeInTheDocument()

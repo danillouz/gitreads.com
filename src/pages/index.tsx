@@ -1,9 +1,11 @@
 import { useState } from "react"
 import Link from "next/link"
-import classnames from "classnames"
 import { UseFetchSessionParams, useFetchSession } from "@lib/auth0"
 import Page from "@components/page"
+import Logo from "@components/logo"
+import { Nav, MenuButton, MenuContainer } from "@components/nav"
 import { UserMenu, UserMenuItem, MobileUserMenu, MobileUserMenuItem } from "@components/user-menu"
+import Footer from "@components/footer"
 
 const apiBase = "/api/auth"
 const appRoute = "/app"
@@ -17,66 +19,26 @@ export const Home = (): JSX.Element => {
   }
   const { user, isLoading } = useFetchSession(params)
 
-  const [mobileNavIsOpen, setMobileNavIsOpen] = useState<boolean>(false)
+  const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
 
-  const onClickMobileNavBtn = () => setMobileNavIsOpen(!mobileNavIsOpen)
+  const handleMenuClick = () => setMenuIsOpen(!menuIsOpen)
 
   return (
-    <Page>
+    <Page title="Home - GitReads">
       <div className="flex flex-col min-h-screen bg-gray-50">
         <header className="sticky top-0 bg-gray-800">
           <div className="page-container">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Link href="/">
-                    <a className="focus:outline-white">
-                      <img
-                        data-testid="logo"
-                        className="h-8 w-32"
-                        src="/img/gitreads.svg"
-                        alt="GitReads"
-                      />
-                    </a>
-                  </Link>
+                  <Logo href="/" />
                 </div>
               </div>
 
-              <nav className="hidden md:block">
-                <div className="ml-4 flex items-baseline space-x-4"></div>
-              </nav>
+              <Nav />
 
               <div className="flex items-center -mr-2 md:hidden">
-                {!isLoading && (
-                  <button
-                    className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:ring-2 focus:ring-fuchsia-400 transition-colors duration-200"
-                    aria-label="Open menu"
-                    onClick={onClickMobileNavBtn}
-                  >
-                    <svg
-                      className="block h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      {mobileNavIsOpen ? (
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      ) : (
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M4 8h16M4 16h16"
-                        />
-                      )}
-                    </svg>
-                  </button>
-                )}
+                {!isLoading && <MenuButton isOpen={menuIsOpen} onMenuClick={handleMenuClick} />}
               </div>
 
               {!isLoading && (
@@ -109,12 +71,7 @@ export const Home = (): JSX.Element => {
         </header>
 
         {!isLoading && (
-          <div
-            className={classnames("md:hidden sticky top-16 bg-gray-800 border-t border-gray-700", {
-              block: mobileNavIsOpen,
-              hidden: !mobileNavIsOpen,
-            })}
-          >
+          <MenuContainer isOpen={menuIsOpen}>
             {user ? (
               <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
                 <MobileUserMenuItem href={appRoute}>App</MobileUserMenuItem>
@@ -135,62 +92,16 @@ export const Home = (): JSX.Element => {
                 </Link>
               </div>
             )}
-          </div>
+          </MenuContainer>
         )}
 
         <main className="flex-1">
           <div className="page-container">
             <h1 data-testid="hero" className="hero">
-              <span
-                aria-hidden
-                className="absolute transform translate-x-2 translate-y-2 text-orange-300"
-              >
-                Track.
-              </span>
-
-              <span
-                aria-hidden
-                className="absolute transform translate-x-1 translate-y-1 text-orange-100"
-              >
-                Track.
-              </span>
-
               <span className="text-orange-gradient">Track.</span>
-
               <br />
-
-              <span
-                aria-hidden
-                className="absolute transform translate-x-2 translate-y-2 text-purple-300"
-              >
-                Organize.
-              </span>
-
-              <span
-                aria-hidden
-                className="absolute transform translate-x-1 translate-y-1 text-purple-100"
-              >
-                Organize.
-              </span>
-
               <span className="text-purple-gradient">Organize.</span>
-
               <br />
-
-              <span
-                aria-hidden
-                className="absolute transform translate-x-2 translate-y-2 text-pink-300"
-              >
-                Share.
-              </span>
-
-              <span
-                aria-hidden
-                className="absolute transform translate-x-1 translate-y-1 text-pink-100"
-              >
-                Share.
-              </span>
-
               <span className="text-pink-gradient">Share.</span>
             </h1>
 
@@ -208,51 +119,25 @@ export const Home = (): JSX.Element => {
           </div>
         </main>
 
-        <footer className="bg-gray-800 py-8">
-          <div className="page-container">
-            <div className="flex flex-wrap items-center space-x-3">
-              <a
-                href="https://github.com/gitreads"
-                className="footer-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+        <Footer>
+          <a
+            href="https://github.com/gitreads"
+            className="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
 
-              <a
-                href="https://blog.danillouz.dev"
-                className="footer-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Blog
-              </a>
-
-              <a
-                href="https://danillouz.dev"
-                className="footer-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                About
-              </a>
-
-              <a
-                href="https://twitter.com/danillouz"
-                className="footer-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Twitter
-              </a>
-            </div>
-
-            <p data-testid="copyright" className="mt-2 px-3 py-2 text-sm text-gray-400">
-              &copy; {new Date().getFullYear()} GitReads
-            </p>
-          </div>
-        </footer>
+          <a
+            href="https://danillouz.dev"
+            className="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            About
+          </a>
+        </Footer>
       </div>
     </Page>
   )
