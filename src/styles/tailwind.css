@@ -12,6 +12,22 @@ For more info see: https://tailwindcss.com/docs/extracting-components#extracting
     @apply container mx-auto px-6;
   }
 
+  .hero {
+    @apply text-7xl md:text-8xl lg:text-9xl leading-none font-bold tracking-tight mt-10 mb-8 sm:mt-14 sm:mb-10;
+  }
+
+  .text-orange-gradient {
+    @apply relative bg-clip-text text-transparent bg-gradient-to-br from-yellow-400 to-orange-600;
+  }
+
+  .text-purple-gradient {
+    @apply relative bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-purple-600;
+  }
+
+  .text-pink-gradient {
+    @apply relative bg-clip-text text-transparent bg-gradient-to-br from-pink-500 to-rose-500;
+  }
+
   .btn-primary {
     @apply bg-gray-800 text-white antialiased leading-6 font-bold tracking-wider py-3 px-6 border border-transparent rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-800 focus:text-white transition-colors duration-200;
   }
@@ -22,6 +38,10 @@ For more info see: https://tailwindcss.com/docs/extracting-components#extracting
 
   .nav-link {
     @apply block px-3 py-2 rounded-lg font-medium text-gray-400 antialiased hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:text-white transition-colors duration-200;
+  }
+
+  .nav-link-cta {
+    @apply block px-3 py-2 rounded-lg font-medium text-white antialiased hover:bg-white hover:text-gray-800 border-2 border-white focus:ring-0 focus:outline-none focus:bg-white focus:text-gray-800 transition-colors duration-200;
   }
 
   .footer-link {
