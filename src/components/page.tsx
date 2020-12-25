@@ -6,7 +6,7 @@ type PageProps = {
   children: React.ReactNode
 }
 
-const Page = (props: PageProps) => {
+const Page = (props: PageProps): JSX.Element => {
   const { title = "GitReads", description = "Collect and showcase books you read." } = props
 
   return (

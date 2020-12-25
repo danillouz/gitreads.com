@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-const NotFound = () => {
+const NotFound = (): JSX.Element => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="text-center">

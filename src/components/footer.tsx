@@ -2,7 +2,7 @@ type FooterProps = {
   children?: React.ReactNode
 }
 
-const Footer = (props: FooterProps) => {
+const Footer = (props: FooterProps): JSX.Element => {
   return (
     <footer className="bg-gray-800 py-8">
       <div className="page-container">

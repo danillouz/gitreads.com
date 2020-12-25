@@ -6,7 +6,7 @@ type NavProps = {
   children?: React.ReactNode
 }
 
-export const Nav = (props: NavProps) => {
+export const Nav = (props: NavProps): JSX.Element => {
   return (
     <nav className="hidden md:block">
       <div className="flex items-baseline space-x-4">{props.children}</div>
@@ -14,7 +14,7 @@ export const Nav = (props: NavProps) => {
   )
 }
 
-export const MobileNav = (props: NavProps) => {
+export const MobileNav = (props: NavProps): JSX.Element => {
   return <nav className="px-3 py-5 border-b border-gray-700">{props.children}</nav>
 }
 
@@ -23,7 +23,7 @@ type NavItemProps = {
   children: React.ReactNode
 }
 
-export const NavItem = (props: NavItemProps) => {
+export const NavItem = (props: NavItemProps): JSX.Element => {
   const { href, children } = props
 
   const router = useRouter()
@@ -47,7 +47,7 @@ type MenuButtonProps = {
   isOpen: boolean
 }
 
-export const MenuButton = (props: MenuButtonProps) => {
+export const MenuButton = (props: MenuButtonProps): JSX.Element => {
   return (
     <button
       className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:ring-2 focus:ring-fuchsia-400 transition-colors duration-200"
@@ -80,7 +80,7 @@ type MenuContainerProps = {
   children?: React.ReactNode
 }
 
-export const MenuContainer = (props: MenuContainerProps) => {
+export const MenuContainer = (props: MenuContainerProps): JSX.Element => {
   const { isOpen } = props
 
   return (

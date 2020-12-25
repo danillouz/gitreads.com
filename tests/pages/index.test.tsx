@@ -27,7 +27,7 @@ describe(`Home`, () => {
       expect(mockUseFetchSession).toBeCalledTimes(1)
     })
 
-    it("renders main content", () => {
+    it(`renders main content`, () => {
       const { getByTestId, getByText } = render(<Home />)
 
       const logo = getByTestId("logo")
@@ -38,23 +38,23 @@ describe(`Home`, () => {
 
       const cta = getByText("Git started")
       expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", "/")
+      expect(cta).toHaveAttribute("href", "/app")
     })
 
-    it("does not render login link", () => {
+    it(`does not render login link`, () => {
       const { queryAllByText } = render(<Home />)
       const links = queryAllByText("Login")
       expect(links).toHaveLength(0)
     })
 
-    it("does not render signup link", () => {
+    it(`does not render signup link`, () => {
       const { queryAllByText } = render(<Home />)
       const links = queryAllByText("Signup")
       expect(links).toHaveLength(0)
     })
   })
 
-  describe("without a user session", () => {
+  describe(`without a user session`, () => {
     beforeEach(() => {
       mockUseFetchSession.mockImplementation(
         (): Session => {
@@ -70,7 +70,7 @@ describe(`Home`, () => {
       expect(mockUseFetchSession).toBeCalledTimes(1)
     })
 
-    it("renders login link", () => {
+    it(`renders login link`, () => {
       const { getAllByText } = render(<Home />)
       const links = getAllByText("Login")
       expect(links).toHaveLength(2)
@@ -81,7 +81,7 @@ describe(`Home`, () => {
       }
     })
 
-    it("renders signup link", () => {
+    it(`renders signup link`, () => {
       const { getAllByText } = render(<Home />)
       const links = getAllByText("Signup")
       expect(links).toHaveLength(2)
@@ -92,14 +92,14 @@ describe(`Home`, () => {
       }
     })
 
-    it("renders main CTA - signup", () => {
+    it(`renders main CTA`, () => {
       const { getByText } = render(<Home />)
       const cta = getByText("Git started")
       expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", "/api/auth/login?signup=true&redirectTo=%2Fapp")
+      expect(cta).toHaveAttribute("href", "/app")
     })
 
-    it("renders footer", () => {
+    it(`renders footer`, () => {
       const { getByText, getByTestId } = render(<Home />)
 
       const githubLink = getByText("GitHub")
@@ -120,7 +120,7 @@ describe(`Home`, () => {
     })
   })
 
-  describe("with a user session", () => {
+  describe(`with a user session`, () => {
     const user: User = {
       id: "auth0|5fe1c3f1d1e0eff6c2dff18d",
       name: "Jane Doe",
@@ -146,7 +146,7 @@ describe(`Home`, () => {
       expect(mockUseFetchSession).toBeCalledTimes(1)
     })
 
-    it("renders app link", () => {
+    it(`renders app link`, () => {
       const { getAllByText } = render(<Home />)
       const links = getAllByText("App")
       expect(links).toHaveLength(2)
@@ -157,7 +157,7 @@ describe(`Home`, () => {
       }
     })
 
-    it("renders user's avatar", () => {
+    it(`renders user's avatar`, () => {
       const { getAllByTestId } = render(<Home />)
       const avatars = getAllByTestId("avatar")
       expect(avatars).toHaveLength(2)
@@ -168,7 +168,7 @@ describe(`Home`, () => {
       }
     })
 
-    it("renders user's full name", () => {
+    it(`renders user's full name`, () => {
       const { getAllByText } = render(<Home />)
       const avatars = getAllByText(user.name)
       expect(avatars).toHaveLength(2)
@@ -178,7 +178,7 @@ describe(`Home`, () => {
       }
     })
 
-    it("renders user's email", () => {
+    it(`renders user's email`, () => {
       const { getAllByText } = render(<Home />)
       const avatars = getAllByText(user.email)
       expect(avatars).toHaveLength(2)
@@ -188,7 +188,7 @@ describe(`Home`, () => {
       }
     })
 
-    it("renders logout link", () => {
+    it(`renders logout link`, () => {
       const { getAllByText } = render(<Home />)
       const links = getAllByText("Logout")
       expect(links).toHaveLength(2)
@@ -199,14 +199,14 @@ describe(`Home`, () => {
       }
     })
 
-    it("renders main CTA - go to app", () => {
+    it(`renders main CTA`, () => {
       const { getByText } = render(<Home />)
       const cta = getByText("Git started")
       expect(cta).toBeInTheDocument()
       expect(cta).toHaveAttribute("href", "/app")
     })
 
-    it("renders footer", () => {
+    it(`renders footer`, () => {
       const { getByText, getByTestId } = render(<Home />)
 
       const githubLink = getByText("GitHub")

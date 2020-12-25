@@ -11,7 +11,7 @@ type UserMenuProps = {
   children: React.ReactNode
 }
 
-export const UserMenu = (props: UserMenuProps) => {
+export const UserMenu = (props: UserMenuProps): JSX.Element => {
   const { avatar, name = "Anonymous", email = "no email address", children } = props
 
   const [isOpen, setIsOpen] = useState(false)
@@ -64,7 +64,7 @@ type UserMenuItemProps = {
   children: React.ReactNode
 }
 
-export const UserMenuItem = (props: UserMenuItemProps) => {
+export const UserMenuItem = (props: UserMenuItemProps): JSX.Element => {
   return (
     <Link href={props.href}>
       <a
@@ -84,7 +84,7 @@ type MobileUserMenuProps = {
   children: React.ReactNode
 }
 
-export const MobileUserMenu = (props: MobileUserMenuProps) => {
+export const MobileUserMenu = (props: MobileUserMenuProps): JSX.Element => {
   const { name = "Anonymous", email = "no email address" } = props
 
   return (
@@ -110,7 +110,7 @@ type MobileUserMenuItemProps = {
   children: React.ReactNode
 }
 
-export const MobileUserMenuItem = (props: MobileUserMenuItemProps) => {
+export const MobileUserMenuItem = (props: MobileUserMenuItemProps): JSX.Element => {
   return (
     <Link href={props.href}>
       <a className="nav-link" role="menuitem">

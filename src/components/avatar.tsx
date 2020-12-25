@@ -6,7 +6,7 @@ type AvatarProps = {
   alt?: string
 }
 
-const Avatar = (props: AvatarProps) => {
+const Avatar = (props: AvatarProps): JSX.Element => {
   const { src, alt = "user avatar" } = props
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false)

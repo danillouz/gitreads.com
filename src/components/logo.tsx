@@ -4,7 +4,7 @@ type LogoProps = {
   href: string
 }
 
-const Logo = (props: LogoProps) => {
+const Logo = (props: LogoProps): JSX.Element => {
   return (
     <Link href={props.href}>
       <a className="focus:outline-white">
