@@ -31,7 +31,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
   return (
     <Page title="Home - GitReads">
       <div className="flex flex-col min-h-screen bg-gray-50">
-        <header className="sticky top-0 bg-gray-800">
+        <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700">
           <div className="page-container">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
@@ -78,10 +78,15 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
         {!isLoading && (
           <MenuContainer isOpen={menuIsOpen}>
             {user ? (
-              <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
-                <MobileUserMenuItem href={appRoute}>App</MobileUserMenuItem>
-                <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
-              </MobileUserMenu>
+              <>
+                <MobileNav>
+                  <NavItem href={appRoute}>App</NavItem>
+                </MobileNav>
+
+                <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
+                  <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
+                </MobileUserMenu>
+              </>
             ) : (
               <div className="px-2 py-3 space-y-1">
                 <Link href={loginUrl}>
@@ -100,9 +105,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
           </MenuContainer>
         )}
 
-        <main className="flex-1">
-          <div className="page-container">{props.children}</div>
-        </main>
+        <main className="flex-1">{props.children}</main>
 
         <Footer>
           <a
@@ -144,7 +147,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
   return (
     <Page title="App - GitReads">
       <div className="flex flex-col min-h-screen bg-gray-50">
-        <header className="sticky top-0 bg-gray-800">
+        <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700">
           <div className="page-container">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
@@ -153,8 +156,8 @@ export const AppShell = (props: ShellProps): JSX.Element => {
                 </div>
 
                 <Nav>
-                  <NavItem href="/libraries">Libraries</NavItem>
                   <NavItem href="/books">Books</NavItem>
+                  <NavItem href="/libraries">Libraries</NavItem>
                 </Nav>
               </div>
 
@@ -176,8 +179,8 @@ export const AppShell = (props: ShellProps): JSX.Element => {
         {!isLoading && (
           <MenuContainer isOpen={menuIsOpen}>
             <MobileNav>
-              <NavItem href="/libraries">Libraries</NavItem>
               <NavItem href="/books">Books</NavItem>
+              <NavItem href="/libraries">Libraries</NavItem>
             </MobileNav>
 
             <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
@@ -186,9 +189,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
           </MenuContainer>
         )}
 
-        <main className="flex-1">
-          <div className="page-container">{props.children}</div>
-        </main>
+        <main className="flex-1">{props.children}</main>
 
         <Footer>
           <Link href="/">

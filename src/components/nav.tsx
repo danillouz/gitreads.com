@@ -27,7 +27,7 @@ export const NavItem = (props: NavItemProps): JSX.Element => {
   const { href, children } = props
 
   const router = useRouter()
-  const isActive = router.pathname === href
+  const isActive = router?.pathname === href
 
   return (
     <Link href={href}>
@@ -85,10 +85,13 @@ export const MenuContainer = (props: MenuContainerProps): JSX.Element => {
 
   return (
     <div
-      className={classnames("md:hidden sticky top-16 bg-gray-800 border-t border-gray-700", {
-        block: isOpen,
-        hidden: !isOpen,
-      })}
+      className={classnames(
+        "md:hidden sticky top-header-height z-10 bg-gray-800 border-b border-gray-700",
+        {
+          block: isOpen,
+          hidden: !isOpen,
+        }
+      )}
     >
       {props.children}
     </div>
