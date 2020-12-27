@@ -1,8 +1,9 @@
 import { useState } from "react"
 import Link from "next/link"
+import classnames from "classnames"
 import { useSession, useLoginIsRequired } from "@lib/auth0"
 import Page from "@components/page"
-import Logo from "@components/logo"
+import { Logo } from "@components/logo"
 import { Nav, MobileNav, NavItem, MenuButton, MenuContainer } from "@components/nav"
 import { UserMenu, UserMenuItem, MobileUserMenu, MobileUserMenuItem } from "@components/user-menu"
 import Footer from "@components/footer"
@@ -38,8 +39,20 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
 
               <Nav />
 
-              <div className="flex items-center -mr-2 md:hidden">
-                {!isLoading && <MenuButton isOpen={menuIsOpen} onMenuClick={handleMenuClick} />}
+              <div
+                className={classnames(
+                  "flex items-center -mr-2 md:hidden transition-opacity duration-200",
+                  {
+                    "opacity-0": isLoading,
+                    "opacity-100": !isLoading,
+                  }
+                )}
+              >
+                <MenuButton
+                  isLoading={isLoading}
+                  isOpen={menuIsOpen}
+                  onMenuClick={handleMenuClick}
+                />
               </div>
 
               {!isLoading && (
@@ -133,6 +146,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
   useLoginIsRequired(session)
 
   const { user, isLoading } = session
+  const hasSession = !isLoading && Boolean(user)
 
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
 
@@ -149,7 +163,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
                   <Logo href="/app" />
                 </div>
 
-                {!isLoading && (
+                {hasSession && (
                   <Nav>
                     <NavItem href="/books">Books</NavItem>
                     <NavItem href="/libraries">Libraries</NavItem>
@@ -157,38 +171,47 @@ export const AppShell = (props: ShellProps): JSX.Element => {
                 )}
               </div>
 
-              <div className="flex items-center -mr-2 md:hidden">
-                {!isLoading && <MenuButton isOpen={menuIsOpen} onMenuClick={handleMenuClick} />}
+              <div
+                className={classnames(
+                  "flex items-center -mr-2 md:hidden transition-opacity duration-200",
+                  {
+                    "opacity-0": hasSession,
+                    "opacity-100": !hasSession,
+                  }
+                )}
+              >
+                <MenuButton
+                  isLoading={hasSession}
+                  isOpen={menuIsOpen}
+                  onMenuClick={handleMenuClick}
+                />
               </div>
 
-              {!isLoading &&
-                (user ? (
-                  <div className="hidden md:block">
-                    <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
-                      <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
-                    </UserMenu>
-                  </div>
-                ) : null)}
+              {hasSession && (
+                <div className="hidden md:block">
+                  <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
+                    <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
+                  </UserMenu>
+                </div>
+              )}
             </div>
           </div>
         </header>
 
-        {!isLoading && (
+        {hasSession && (
           <MenuContainer isOpen={menuIsOpen}>
             <MobileNav>
               <NavItem href="/books">Books</NavItem>
               <NavItem href="/libraries">Libraries</NavItem>
             </MobileNav>
 
-            {user && (
-              <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
-                <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
-              </MobileUserMenu>
-            )}
+            <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
+              <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
+            </MobileUserMenu>
           </MenuContainer>
         )}
 
-        <main className="flex-1">{!user || isLoading ? null : props.children}</main>
+        <main className="flex-1">{props.children}</main>
 
         <Footer>
           <Link href="/">

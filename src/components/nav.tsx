@@ -43,6 +43,7 @@ export const NavItem = (props: NavItemProps): JSX.Element => {
 }
 
 type MenuButtonProps = {
+  isLoading: boolean
   onMenuClick(event: React.MouseEvent<HTMLButtonElement>): void
   isOpen: boolean
 }
@@ -50,6 +51,7 @@ type MenuButtonProps = {
 export const MenuButton = (props: MenuButtonProps): JSX.Element => {
   return (
     <button
+      disabled={props.isLoading}
       className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:ring-2 focus:ring-fuchsia-400 transition-colors duration-200"
       aria-label="Open menu"
       onClick={props.onMenuClick}
