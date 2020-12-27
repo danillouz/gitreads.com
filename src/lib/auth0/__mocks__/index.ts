@@ -3,7 +3,7 @@ const auth0 = jest.fn(() => {
 })
 export default auth0
 
-export const useFetchSession = jest.fn(() => {
+export const useSession = jest.fn(() => {
   return {
     user: null,
     isLoading: true,

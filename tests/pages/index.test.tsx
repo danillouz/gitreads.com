@@ -1,19 +1,19 @@
 import { render } from "@testing-library/react"
-import { useFetchSession, Session, User } from "@lib/auth0"
+import { useSession, Session, User } from "@lib/auth0"
 import { Home } from "@pages/index"
 
 jest.mock("@lib/auth0")
 
-const mockUseFetchSession = useFetchSession as jest.MockedFunction<typeof useFetchSession>
+const mockUseSession = useSession as jest.MockedFunction<typeof useSession>
 
 describe(`Home`, () => {
   beforeEach(() => {
-    mockUseFetchSession.mockClear()
+    mockUseSession.mockClear()
   })
 
   describe(`when loading the user session`, () => {
     beforeEach(() => {
-      mockUseFetchSession.mockImplementation(
+      mockUseSession.mockImplementation(
         (): Session => {
           return {
             user: null,
@@ -24,7 +24,7 @@ describe(`Home`, () => {
     })
 
     afterEach(() => {
-      expect(mockUseFetchSession).toBeCalledTimes(1)
+      expect(mockUseSession).toBeCalledTimes(1)
     })
 
     it(`renders main content`, () => {
@@ -56,7 +56,7 @@ describe(`Home`, () => {
 
   describe(`without a user session`, () => {
     beforeEach(() => {
-      mockUseFetchSession.mockImplementation(
+      mockUseSession.mockImplementation(
         (): Session => {
           return {
             user: null,
@@ -67,7 +67,7 @@ describe(`Home`, () => {
     })
 
     afterEach(() => {
-      expect(mockUseFetchSession).toBeCalledTimes(1)
+      expect(mockUseSession).toBeCalledTimes(1)
     })
 
     it(`renders login link`, () => {
@@ -132,7 +132,7 @@ describe(`Home`, () => {
     }
 
     beforeEach(() => {
-      mockUseFetchSession.mockImplementation(
+      mockUseSession.mockImplementation(
         (): Session => {
           return {
             user,
@@ -143,7 +143,7 @@ describe(`Home`, () => {
     })
 
     afterEach(() => {
-      expect(mockUseFetchSession).toBeCalledTimes(1)
+      expect(mockUseSession).toBeCalledTimes(1)
     })
 
     it(`renders app link`, () => {

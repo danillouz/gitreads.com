@@ -1,8 +1,22 @@
-import { useState, useEffect } from "react"
-import { Auth0User, User, Session, UseFetchSessionParams } from "./types"
+import { createContext, useContext, useState, useEffect, ReactElement } from "react"
+import { useRouter } from "next/router"
+import { User, Session } from "./types"
 
 // Use a global to "cache" the session's user data, to prevent refetching after page navigations
 let globalUser: User = null
+
+type Auth0User = {
+  sub: string | null
+  name: string
+  nickname: string | null
+  email: string
+  email_verified: boolean
+  picture: string | null
+  updated_at: string | null
+
+  // Any custom OIDC claim that could be in the user's profile
+  [key: string]: unknown
+}
 
 const fetchUser = async (): Promise<User> => {
   if (globalUser) {
@@ -28,9 +42,16 @@ const fetchUser = async (): Promise<User> => {
   return globalUser
 }
 
-export const useFetchSession = (params: UseFetchSessionParams): Session => {
-  const { loginIsRequired = true, redirectTo } = params
+const SessionContext = createContext<Session>({
+  user: globalUser,
+  isLoading: true,
+})
 
+type SessionProviderProps = {
+  children: React.ReactNode
+}
+
+export const SessionProvider = (props: SessionProviderProps): ReactElement<Session> => {
   const [isLoading, setIsLoading] = useState<boolean>(!globalUser)
   const [user, setUser] = useState<User | null>(globalUser)
 
@@ -49,23 +70,57 @@ export const useFetchSession = (params: UseFetchSessionParams): Session => {
         return
       }
 
-      if (!user && loginIsRequired) {
-        const loginUrl = "/api/auth/login"
-        const redirectUrl = redirectTo
-          ? `${loginUrl}?redirectTo=${encodeURIComponent(redirectTo)}`
-          : loginUrl
-        return window.location.assign(redirectUrl)
-      }
-
       setUser(user)
       setIsLoading(false)
     })
 
-    return () => (isMounted = false)
+    return () => {
+      isMounted = false
+    }
   }, [globalUser])
 
-  return {
+  const session: Session = {
     isLoading,
     user,
   }
+
+  return <SessionContext.Provider value={session}>{props.children}</SessionContext.Provider>
+}
+
+export const useSession = (): Session => {
+  const ctx = useContext(SessionContext)
+  if (!ctx) {
+    throw new Error(
+      "useSession() hook can only be used in components wrapped by <SessionProvider />"
+    )
+  }
+
+  return ctx
+}
+
+export const useLoginIsRequired = (session: Session): void => {
+  const { user, isLoading } = session
+
+  const router = useRouter()
+
+  useEffect(() => {
+    const hasSession = Boolean(user)
+    if (hasSession) {
+      return
+    }
+
+    const loginIsRequired = !user && !isLoading
+    if (loginIsRequired) {
+      router.push({
+        pathname: "/api/auth/login",
+        query: {
+          // When a user navigates to a page that requires them to be logged in, but there's no
+          // session (anymore), make sure to redirect them back to said page after they logged in
+          // again
+          redirectTo: router.pathname,
+        },
+      })
+      return
+    }
+  }, [user, isLoading])
 }

@@ -1,7 +1,6 @@
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/router"
-import { UseFetchSessionParams, useFetchSession } from "@lib/auth0"
+import { useSession, useLoginIsRequired } from "@lib/auth0"
 import Page from "@components/page"
 import Logo from "@components/logo"
 import { Nav, MobileNav, NavItem, MenuButton, MenuContainer } from "@components/nav"
@@ -19,10 +18,7 @@ type ShellProps = {
 }
 
 export const HomeShell = (props: ShellProps): JSX.Element => {
-  const params: UseFetchSessionParams = {
-    loginIsRequired: false,
-  }
-  const { user, isLoading } = useFetchSession(params)
+  const { user, isLoading } = useSession()
 
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
 
@@ -132,13 +128,11 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
 }
 
 export const AppShell = (props: ShellProps): JSX.Element => {
-  const router = useRouter()
+  const session = useSession()
 
-  const params: UseFetchSessionParams = {
-    loginIsRequired: true,
-    redirectTo: router.pathname,
-  }
-  const { user, isLoading } = useFetchSession(params)
+  useLoginIsRequired(session)
+
+  const { user, isLoading } = session
 
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
 
@@ -155,23 +149,26 @@ export const AppShell = (props: ShellProps): JSX.Element => {
                   <Logo href="/app" />
                 </div>
 
-                <Nav>
-                  <NavItem href="/books">Books</NavItem>
-                  <NavItem href="/libraries">Libraries</NavItem>
-                </Nav>
+                {!isLoading && (
+                  <Nav>
+                    <NavItem href="/books">Books</NavItem>
+                    <NavItem href="/libraries">Libraries</NavItem>
+                  </Nav>
+                )}
               </div>
 
               <div className="flex items-center -mr-2 md:hidden">
                 {!isLoading && <MenuButton isOpen={menuIsOpen} onMenuClick={handleMenuClick} />}
               </div>
 
-              {!isLoading && (
-                <div className="hidden md:block">
-                  <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
-                    <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
-                  </UserMenu>
-                </div>
-              )}
+              {!isLoading &&
+                (user ? (
+                  <div className="hidden md:block">
+                    <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
+                      <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
+                    </UserMenu>
+                  </div>
+                ) : null)}
             </div>
           </div>
         </header>
@@ -183,13 +180,15 @@ export const AppShell = (props: ShellProps): JSX.Element => {
               <NavItem href="/libraries">Libraries</NavItem>
             </MobileNav>
 
-            <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
-              <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
-            </MobileUserMenu>
+            {user && (
+              <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
+                <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
+              </MobileUserMenu>
+            )}
           </MenuContainer>
         )}
 
-        <main className="flex-1">{props.children}</main>
+        <main className="flex-1">{!user || isLoading ? null : props.children}</main>
 
         <Footer>
           <Link href="/">
