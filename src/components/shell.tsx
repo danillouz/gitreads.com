@@ -3,7 +3,7 @@ import Link from "next/link"
 import classnames from "classnames"
 import { useSession, useLoginIsRequired } from "@lib/auth0"
 import Page from "@components/page"
-import { Logo } from "@components/logo"
+import { LogoWithName, Logo } from "@components/logo"
 import { Nav, MobileNav, NavItem, MenuButton, MenuContainer } from "@components/nav"
 import { UserMenu, UserMenuItem, MobileUserMenu, MobileUserMenuItem } from "@components/user-menu"
 import Footer from "@components/footer"
@@ -33,7 +33,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Logo href="/" />
+                  <LogoWithName href="/" />
                 </div>
               </div>
 
@@ -159,7 +159,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
           <div className="page-container">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
-                <div className="flex-shrink-0 mr-20">
+                <div className="flex-shrink-0 mr-4">
                   <Logo href="/app" />
                 </div>
 
@@ -175,13 +175,13 @@ export const AppShell = (props: ShellProps): JSX.Element => {
                 className={classnames(
                   "flex items-center -mr-2 md:hidden transition-opacity duration-200",
                   {
-                    "opacity-0": hasSession,
-                    "opacity-100": !hasSession,
+                    "opacity-0": !hasSession,
+                    "opacity-100": hasSession,
                   }
                 )}
               >
                 <MenuButton
-                  isLoading={hasSession}
+                  isLoading={!hasSession}
                   isOpen={menuIsOpen}
                   onMenuClick={handleMenuClick}
                 />
