@@ -119,7 +119,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
         <Footer>
           <a
             href="https://github.com/gitreads"
-            className="footer-link"
+            className="link"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -128,7 +128,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
 
           <a
             href="https://danillouz.dev"
-            className="footer-link"
+            className="link"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -215,12 +215,12 @@ export const AppShell = (props: ShellProps): JSX.Element => {
 
         <Footer>
           <Link href="/">
-            <a className="footer-link">Home</a>
+            <a className="link">Home</a>
           </Link>
 
           <a
             href="https://github.com/gitreads"
-            className="footer-link"
+            className="link"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -229,7 +229,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
 
           <a
             href="https://danillouz.dev"
-            className="footer-link"
+            className="link"
             target="_blank"
             rel="noopener noreferrer"
           >

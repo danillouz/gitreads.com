@@ -61,7 +61,7 @@ For more info see: https://tailwindcss.com/docs/extracting-components#extracting
     @apply block px-3 py-2 rounded-lg font-medium text-white antialiased hover:bg-white hover:text-gray-800 border-2 border-white focus:ring-0 focus:outline-none focus:bg-white focus:text-gray-800 transition-colors duration-200;
   }
 
-  .footer-link {
+  .link {
     @apply px-3 py-2 rounded-lg font-medium text-gray-400 antialiased hover:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:text-white transition-colors duration-200;
   }
 }
