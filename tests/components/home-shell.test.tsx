@@ -1,12 +1,13 @@
 import { render } from "@testing-library/react"
-import { useSession, Session, User } from "@lib/auth0"
-import { Home } from "@pages/index"
+import { useSession, Session } from "@lib/auth0"
+import { HomeShell } from "@components/shell"
+import { fakeUser } from "../fixtures/session"
 
 jest.mock("@lib/auth0")
 
 const mockUseSession = useSession as jest.MockedFunction<typeof useSession>
 
-describe(`Home`, () => {
+describe(`Home shell`, () => {
   beforeEach(() => {
     mockUseSession.mockClear()
   })
@@ -27,28 +28,21 @@ describe(`Home`, () => {
       expect(mockUseSession).toBeCalledTimes(1)
     })
 
-    it(`renders main content`, () => {
-      const { getByTestId, getByText } = render(<Home />)
-
-      const logo = getByTestId("logo")
+    it(`renders logo`, () => {
+      const { getByTestId } = render(<HomeShell />)
+      const logo = getByTestId("logo-with-name")
       expect(logo).toBeInTheDocument()
-
-      const hero = getByTestId("hero")
-      expect(hero).toBeInTheDocument()
-
-      const cta = getByText("Git started")
-      expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", "/app")
+      expect(logo.parentNode).toHaveAttribute("href", "/")
     })
 
     it(`does not render login link`, () => {
-      const { queryAllByText } = render(<Home />)
+      const { queryAllByText } = render(<HomeShell />)
       const links = queryAllByText("Login")
       expect(links).toHaveLength(0)
     })
 
     it(`does not render signup link`, () => {
-      const { queryAllByText } = render(<Home />)
+      const { queryAllByText } = render(<HomeShell />)
       const links = queryAllByText("Signup")
       expect(links).toHaveLength(0)
     })
@@ -70,8 +64,15 @@ describe(`Home`, () => {
       expect(mockUseSession).toBeCalledTimes(1)
     })
 
+    it(`renders logo`, () => {
+      const { getByTestId } = render(<HomeShell />)
+      const logo = getByTestId("logo-with-name")
+      expect(logo).toBeInTheDocument()
+      expect(logo.parentNode).toHaveAttribute("href", "/")
+    })
+
     it(`renders login link`, () => {
-      const { getAllByText } = render(<Home />)
+      const { getAllByText } = render(<HomeShell />)
       const links = getAllByText("Login")
       expect(links).toHaveLength(2)
 
@@ -82,7 +83,7 @@ describe(`Home`, () => {
     })
 
     it(`renders signup link`, () => {
-      const { getAllByText } = render(<Home />)
+      const { getAllByText } = render(<HomeShell />)
       const links = getAllByText("Signup")
       expect(links).toHaveLength(2)
 
@@ -92,15 +93,8 @@ describe(`Home`, () => {
       }
     })
 
-    it(`renders main CTA`, () => {
-      const { getByText } = render(<Home />)
-      const cta = getByText("Git started")
-      expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", "/app")
-    })
-
     it(`renders footer`, () => {
-      const { getByText, getByTestId } = render(<Home />)
+      const { getByText, getByTestId } = render(<HomeShell />)
 
       const githubLink = getByText("GitHub")
       expect(githubLink).toBeInTheDocument()
@@ -121,21 +115,11 @@ describe(`Home`, () => {
   })
 
   describe(`with a user session`, () => {
-    const user: User = {
-      id: "auth0|5fe1c3f1d1e0eff6c2dff18d",
-      name: "Jane Doe",
-      username: "jdoe",
-      email: "jdoe@gitreads.com",
-      emailIsVerified: true,
-      avatar: "https://avatar.com/jdoe",
-      updatedAt: null,
-    }
-
     beforeEach(() => {
       mockUseSession.mockImplementation(
         (): Session => {
           return {
-            user,
+            user: fakeUser,
             isLoading: false,
           }
         }
@@ -146,8 +130,15 @@ describe(`Home`, () => {
       expect(mockUseSession).toBeCalledTimes(1)
     })
 
+    it(`renders logo`, () => {
+      const { getByTestId } = render(<HomeShell />)
+      const logo = getByTestId("logo-with-name")
+      expect(logo).toBeInTheDocument()
+      expect(logo.parentNode).toHaveAttribute("href", "/")
+    })
+
     it(`renders app link`, () => {
-      const { getAllByText } = render(<Home />)
+      const { getAllByText } = render(<HomeShell />)
       const links = getAllByText("App")
       expect(links).toHaveLength(2)
 
@@ -158,19 +149,19 @@ describe(`Home`, () => {
     })
 
     it(`renders user's avatar`, () => {
-      const { getAllByTestId } = render(<Home />)
+      const { getAllByTestId } = render(<HomeShell />)
       const avatars = getAllByTestId("avatar")
       expect(avatars).toHaveLength(2)
 
       for (const link of avatars) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("src", user.avatar)
+        expect(link).toHaveAttribute("src", fakeUser.avatar)
       }
     })
 
     it(`renders user's full name`, () => {
-      const { getAllByText } = render(<Home />)
-      const avatars = getAllByText(user.name)
+      const { getAllByText } = render(<HomeShell />)
+      const avatars = getAllByText(fakeUser.name)
       expect(avatars).toHaveLength(2)
 
       for (const link of avatars) {
@@ -179,8 +170,8 @@ describe(`Home`, () => {
     })
 
     it(`renders user's email`, () => {
-      const { getAllByText } = render(<Home />)
-      const avatars = getAllByText(user.email)
+      const { getAllByText } = render(<HomeShell />)
+      const avatars = getAllByText(fakeUser.email)
       expect(avatars).toHaveLength(2)
 
       for (const link of avatars) {
@@ -189,7 +180,7 @@ describe(`Home`, () => {
     })
 
     it(`renders logout link`, () => {
-      const { getAllByText } = render(<Home />)
+      const { getAllByText } = render(<HomeShell />)
       const links = getAllByText("Logout")
       expect(links).toHaveLength(2)
 
@@ -199,15 +190,8 @@ describe(`Home`, () => {
       }
     })
 
-    it(`renders main CTA`, () => {
-      const { getByText } = render(<Home />)
-      const cta = getByText("Git started")
-      expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", "/app")
-    })
-
     it(`renders footer`, () => {
-      const { getByText, getByTestId } = render(<Home />)
+      const { getByText, getByTestId } = render(<HomeShell />)
 
       const githubLink = getByText("GitHub")
       expect(githubLink).toBeInTheDocument()

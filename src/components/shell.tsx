@@ -165,8 +165,8 @@ export const AppShell = (props: ShellProps): JSX.Element => {
 
                 {hasSession && (
                   <Nav>
-                    <NavItem href="/books">Books</NavItem>
-                    <NavItem href="/libraries">Libraries</NavItem>
+                    <NavItem href="/app/books">Books</NavItem>
+                    <NavItem href="/app/libraries">Libraries</NavItem>
                   </Nav>
                 )}
               </div>
@@ -201,8 +201,8 @@ export const AppShell = (props: ShellProps): JSX.Element => {
         {hasSession && (
           <MenuContainer isOpen={menuIsOpen}>
             <MobileNav>
-              <NavItem href="/books">Books</NavItem>
-              <NavItem href="/libraries">Libraries</NavItem>
+              <NavItem href="/app/books">Books</NavItem>
+              <NavItem href="/app/libraries">Libraries</NavItem>
             </MobileNav>
 
             <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>

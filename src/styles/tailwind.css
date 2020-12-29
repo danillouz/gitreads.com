@@ -50,7 +50,7 @@ For more info see: https://tailwindcss.com/docs/extracting-components#extracting
   }
 
   .btn-retro {
-    @apply bg-gray-200 text-gray-800 leading-6 font-bold tracking-wider py-3 px-6 border-gray-800 border-2 rounded-lg shadow-retro hover:bg-white hover:shadow-retro-lg focus:shadow-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-800 focus:bg-white transition-all duration-100;
+    @apply bg-gray-200 text-gray-800 leading-6 font-bold tracking-wider py-3 px-6 border-gray-800 border-2 rounded-lg shadow-retro hover:bg-white hover:shadow-retro-lg focus:outline-none focus:bg-white focus:shadow-retro-lg transition-all duration-100;
   }
 
   .nav-link {

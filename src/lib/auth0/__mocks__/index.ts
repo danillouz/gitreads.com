@@ -9,3 +9,5 @@ export const useSession = jest.fn(() => {
     isLoading: true,
   }
 })
+
+export const useLoginIsRequired = jest.fn()
