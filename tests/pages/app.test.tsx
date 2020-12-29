@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react"
 import { useSession, useLoginIsRequired, Session } from "@lib/auth0"
 import { App } from "@pages/app/index"
+import { appRoute } from "@config/auth"
+
 import { fakeUser } from "../fixtures/session"
 
 jest.mock("@lib/auth0")
@@ -89,11 +91,11 @@ describe(`App`, () => {
 
       const addBook = getByText("Add book")
       expect(addBook).toBeInTheDocument()
-      expect(addBook.parentNode).toHaveAttribute("href", "/app/books/new")
+      expect(addBook.parentNode).toHaveAttribute("href", `${appRoute}/books/new`)
 
       const newLibrary = getByText("New library")
       expect(newLibrary).toBeInTheDocument()
-      expect(newLibrary.parentNode).toHaveAttribute("href", "/app/libraries/new")
+      expect(newLibrary.parentNode).toHaveAttribute("href", `${appRoute}/libraries/new`)
 
       const publicProfile = getByText("Public profile")
       expect(publicProfile).toBeInTheDocument()

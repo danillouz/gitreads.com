@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactElement } from "react"
 import { useRouter } from "next/router"
+import { authApi } from "@config/auth"
+
 import { User, Session } from "./types"
 
 // Use a global to "cache" the session's user data, to prevent refetching after page navigations
@@ -23,7 +25,7 @@ const fetchUser = async (): Promise<User> => {
     return globalUser
   }
 
-  const res = await fetch("/api/auth/me")
+  const res = await fetch(`${authApi}/me`)
   if (!res.ok) {
     globalUser = null
     return globalUser
@@ -112,7 +114,7 @@ export const useLoginIsRequired = (session: Session): void => {
     const loginIsRequired = !user && !isLoading
     if (loginIsRequired) {
       router.push({
-        pathname: "/api/auth/login",
+        pathname: `${authApi}/login`,
         query: {
           // When a user navigates to a page that requires them to be logged in, but there's no
           // session (anymore), make sure to redirect them back to said page after they logged in

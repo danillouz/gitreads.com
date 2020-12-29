@@ -2,17 +2,12 @@ import { useState } from "react"
 import Link from "next/link"
 import classnames from "classnames"
 import { useSession, useLoginIsRequired } from "@lib/auth0"
+import { appRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 import Page from "@components/page"
 import { LogoWithName, Logo } from "@components/logo"
 import { Nav, MobileNav, NavItem, MenuButton, MenuContainer } from "@components/nav"
 import { UserMenu, UserMenuItem, MobileUserMenu, MobileUserMenuItem } from "@components/user-menu"
 import Footer from "@components/footer"
-
-const apiBase = "/api/auth"
-const appRoute = "/app"
-const loginUrl = `${apiBase}/login?redirectTo=${encodeURIComponent(appRoute)}`
-const signupUrl = `${apiBase}/login?signup=true&redirectTo=${encodeURIComponent(appRoute)}`
-const logoutUrl = `${apiBase}/logout`
 
 type ShellProps = {
   children?: React.ReactNode
@@ -160,13 +155,13 @@ export const AppShell = (props: ShellProps): JSX.Element => {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0 mr-4">
-                  <Logo href="/app" />
+                  <Logo href={appRoute} />
                 </div>
 
                 {hasSession && (
                   <Nav>
-                    <NavItem href="/app/books">Books</NavItem>
-                    <NavItem href="/app/libraries">Libraries</NavItem>
+                    <NavItem href={`${appRoute}/books`}>Books</NavItem>
+                    <NavItem href={`${appRoute}/libraries`}>Libraries</NavItem>
                   </Nav>
                 )}
               </div>
@@ -201,8 +196,8 @@ export const AppShell = (props: ShellProps): JSX.Element => {
         {hasSession && (
           <MenuContainer isOpen={menuIsOpen}>
             <MobileNav>
-              <NavItem href="/app/books">Books</NavItem>
-              <NavItem href="/app/libraries">Libraries</NavItem>
+              <NavItem href={`${appRoute}/books`}>Books</NavItem>
+              <NavItem href={`${appRoute}/libraries`}>Libraries</NavItem>
             </MobileNav>
 
             <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>

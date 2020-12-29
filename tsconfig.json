@@ -19,7 +19,8 @@
       "@lib/*": ["src/lib/*"],
       "@hooks/*": ["src/hooks/*"],
       "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@config/*": ["src/config/*"]
     }
   },
   "exclude": ["node_modules", ".next"],

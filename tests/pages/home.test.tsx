@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react"
 import { useSession, Session } from "@lib/auth0"
 import { Home } from "@pages/index"
+import { appRoute } from "@config/auth"
+
 import { fakeUser } from "../fixtures/session"
 
 jest.mock("@lib/auth0")
@@ -36,19 +38,7 @@ describe(`Home`, () => {
 
       const cta = getByText("Git started")
       expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", "/app")
-    })
-
-    it(`does not render login link`, () => {
-      const { queryAllByText } = render(<Home />)
-      const links = queryAllByText("Login")
-      expect(links).toHaveLength(0)
-    })
-
-    it(`does not render signup link`, () => {
-      const { queryAllByText } = render(<Home />)
-      const links = queryAllByText("Signup")
-      expect(links).toHaveLength(0)
+      expect(cta).toHaveAttribute("href", appRoute)
     })
   })
 
@@ -72,7 +62,7 @@ describe(`Home`, () => {
       const { getByText } = render(<Home />)
       const cta = getByText("Git started")
       expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", "/app")
+      expect(cta).toHaveAttribute("href", appRoute)
     })
   })
 
@@ -96,7 +86,7 @@ describe(`Home`, () => {
       const { getByText } = render(<Home />)
       const cta = getByText("Git started")
       expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", "/app")
+      expect(cta).toHaveAttribute("href", appRoute)
     })
   })
 })

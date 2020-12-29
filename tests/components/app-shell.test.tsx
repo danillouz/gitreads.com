@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react"
 import { useSession, useLoginIsRequired, Session } from "@lib/auth0"
 import { AppShell } from "@components/shell"
+import { appRoute, logoutUrl } from "@config/auth"
+
 import { fakeUser } from "../fixtures/session"
 
 jest.mock("@lib/auth0")
@@ -94,7 +96,7 @@ describe(`App shell`, () => {
       const { getByTestId } = render(<AppShell />)
       const logo = getByTestId("logo")
       expect(logo).toBeInTheDocument()
-      expect(logo.parentNode).toHaveAttribute("href", "/app")
+      expect(logo.parentNode).toHaveAttribute("href", appRoute)
     })
 
     it(`renders nav`, () => {
@@ -103,13 +105,13 @@ describe(`App shell`, () => {
       const booksLinks = getAllByText("Books")
       for (const link of booksLinks) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", "/app/books")
+        expect(link).toHaveAttribute("href", `${appRoute}/books`)
       }
 
       const librariesLinks = getAllByText("Libraries")
       for (const link of librariesLinks) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", "/app/libraries")
+        expect(link).toHaveAttribute("href", `${appRoute}/libraries`)
       }
     })
 
@@ -151,7 +153,7 @@ describe(`App shell`, () => {
 
       for (const link of links) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", "/api/auth/logout")
+        expect(link).toHaveAttribute("href", logoutUrl)
       }
     })
 

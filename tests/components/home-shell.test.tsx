@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react"
 import { useSession, Session } from "@lib/auth0"
 import { HomeShell } from "@components/shell"
+import { appRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
+
 import { fakeUser } from "../fixtures/session"
 
 jest.mock("@lib/auth0")
@@ -78,7 +80,7 @@ describe(`Home shell`, () => {
 
       for (const link of links) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", "/api/auth/login?redirectTo=%2Fapp")
+        expect(link).toHaveAttribute("href", loginUrl)
       }
     })
 
@@ -89,7 +91,7 @@ describe(`Home shell`, () => {
 
       for (const link of links) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", "/api/auth/login?signup=true&redirectTo=%2Fapp")
+        expect(link).toHaveAttribute("href", signupUrl)
       }
     })
 
@@ -144,7 +146,7 @@ describe(`Home shell`, () => {
 
       for (const link of links) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", "/app")
+        expect(link).toHaveAttribute("href", appRoute)
       }
     })
 
@@ -186,7 +188,7 @@ describe(`Home shell`, () => {
 
       for (const link of links) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", "/api/auth/logout")
+        expect(link).toHaveAttribute("href", logoutUrl)
       }
     })
 

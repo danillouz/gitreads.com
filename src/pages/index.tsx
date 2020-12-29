@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { HomeShell } from "@components/shell"
+import { appRoute } from "@config/auth"
 
 export const Home = (): JSX.Element => {
   return (
@@ -20,7 +21,7 @@ export const Home = (): JSX.Element => {
         </p>
 
         <div className="flex flex-wrap items-center text-center my-12">
-          <Link href="/app">
+          <Link href={appRoute}>
             <a className="w-full sm:w-auto flex-none btn-retro text-lg">Git started</a>
           </Link>
         </div>

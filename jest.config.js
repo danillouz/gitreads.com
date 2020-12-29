@@ -14,5 +14,6 @@ module.exports = {
     "@hooks/(.*)": "<rootDir>/src/hooks/$1",
     "@components/(.*)": "<rootDir>/src/components/$1",
     "@pages/(.*)": "<rootDir>/src/pages/$1",
+    "@config/(.*)": "<rootDir>/src/config/$1",
   },
 }
