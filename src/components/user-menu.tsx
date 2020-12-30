@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useState } from "react"
-import classnames from "classnames"
+import clsx from "clsx"
 import useOutsideClicks from "@hooks/use-outside-clicks"
 import Avatar from "@components/avatar"
 
@@ -32,13 +32,10 @@ export const UserMenu = (props: UserMenuProps): JSX.Element => {
         </button>
 
         <div
-          className={classnames(
-            "origin-top-right absolute right-5 mt-1 w-48 rounded-lg shadow-xl",
-            {
-              block: isOpen,
-              hidden: !isOpen,
-            }
-          )}
+          className={clsx("origin-top-right absolute right-5 mt-1 w-48 rounded-lg shadow-xl", {
+            block: isOpen,
+            hidden: !isOpen,
+          })}
         >
           <div
             className="py-2 space-y-1 bg-white rounded-lg shadow-lg"

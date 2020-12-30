@@ -1,5 +1,5 @@
 import { useState } from "react"
-import classnames from "classnames"
+import clsx from "clsx"
 
 type AvatarProps = {
   src: string
@@ -18,7 +18,7 @@ const Avatar = (props: AvatarProps): JSX.Element => {
     <span className="inline-block w-10 h-10 overflow-hidden bg-gray-500 border-2 border-gray-700 rounded-full">
       <img
         data-testid="avatar"
-        className={classnames("w-100 h-100 transition-opacity duration-200 text-xs", {
+        className={clsx("w-100 h-100 transition-opacity duration-200 text-xs", {
           "opacity-0": !isLoaded,
           "opacity-100": isLoaded,
         })}

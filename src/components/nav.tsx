@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import classnames from "classnames"
+import clsx from "clsx"
 
 type NavProps = {
   children?: React.ReactNode
@@ -32,7 +32,7 @@ export const NavItem = (props: NavItemProps): JSX.Element => {
   return (
     <Link href={href}>
       <a
-        className={classnames("nav-link", {
+        className={clsx("nav-link", {
           "text-white bg-gray-900": isActive,
         })}
       >
@@ -87,7 +87,7 @@ export const MenuContainer = (props: MenuContainerProps): JSX.Element => {
 
   return (
     <div
-      className={classnames(
+      className={clsx(
         "md:hidden sticky top-header-height z-10 bg-gray-800 border-b border-gray-700",
         {
           block: isOpen,

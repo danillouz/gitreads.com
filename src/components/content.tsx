@@ -1,5 +1,5 @@
 import Link from "next/link"
-import classnames from "classnames"
+import clsx from "clsx"
 import { ReactNode } from "react"
 
 type HeaderProps = {
@@ -14,7 +14,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
   return (
     <div className="pb-20 bg-gray-800">
       <div
-        className={classnames("container mx-auto px-6", {
+        className={clsx("container mx-auto px-6", {
           "animate-pulse": isLoading,
         })}
       >
@@ -57,7 +57,7 @@ type ContainerProps = {
 
 export const Container = (props: ContainerProps): JSX.Element => {
   return (
-    <div className={classnames("page-container transform -translate-y-14", props.className)}>
+    <div className={clsx("page-container transform -translate-y-14", props.className)}>
       {props.children}
     </div>
   )
@@ -70,7 +70,7 @@ type SectionProps = {
 
 export const PageSection = (props: SectionProps): JSX.Element => {
   return (
-    <section className={classnames("bg-white rounded-lg shadow-md", props.className)}>
+    <section className={clsx("bg-white rounded-lg shadow-md", props.className)}>
       {props.children}
     </section>
   )
@@ -84,7 +84,7 @@ type SectionTitleProps = {
 export const SectionTitle = (props: SectionTitleProps): JSX.Element => {
   return (
     <h3
-      className={classnames(
+      className={clsx(
         "flex items-center space-x-2 pb-2 text-2xl border-b border-gray-100",
         props.className
       )}
@@ -105,7 +105,7 @@ type ActionProps = {
 export const Action = (props: ActionProps): JSX.Element => {
   const { isLoading, icon, name } = props
 
-  const className = classnames(
+  const className = clsx(
     "flex sm:flex-col items-center sm:justify-center sm:mt-2 sm:mr-6 mb-3 sm:mb-2 px-5 sm:px-2 py-5 w-full sm:w-40 h-18 sm:h-30 space-x-3 sm:space-x-0 sm:space-y-1 font-medium text-lg sm:text-base text-gray-50 tracking-wider rounded-lg shadow-md transform-gpu transition duration-200",
     props.className,
     {

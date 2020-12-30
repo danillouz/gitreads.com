@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Link from "next/link"
-import classnames from "classnames"
+import clsx from "clsx"
 import { useSession, useLoginIsRequired } from "@lib/auth0"
 import { appRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 import Page from "@components/page"
@@ -35,7 +35,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
               <Nav />
 
               <div
-                className={classnames(
+                className={clsx(
                   "flex items-center -mr-2 md:hidden transition-opacity duration-200",
                   {
                     "opacity-0": isLoading,
@@ -167,7 +167,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
               </div>
 
               <div
-                className={classnames(
+                className={clsx(
                   "flex items-center -mr-2 md:hidden transition-opacity duration-200",
                   {
                     "opacity-0": !hasSession,
