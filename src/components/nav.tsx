@@ -52,11 +52,11 @@ export const MenuButton = (props: MenuButtonProps): JSX.Element => {
   return (
     <button
       disabled={props.isLoading}
-      className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:ring-2 focus:ring-fuchsia-400 transition-colors duration-200"
+      className="inline-flex items-center justify-center p-2 text-gray-400 transition-colors duration-200 rounded-lg hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:ring-2 focus:ring-fuchsia-400"
       aria-label="Open menu"
       onClick={props.onMenuClick}
     >
-      <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="block w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         {props.isOpen ? (
           <path
             strokeLinecap="round"

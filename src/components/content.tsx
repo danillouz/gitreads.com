@@ -18,32 +18,32 @@ export const Header = (props: HeaderProps): JSX.Element => {
           "animate-pulse": isLoading,
         })}
       >
-        <div className="h-14 flex items-center">
+        <div className="flex items-center h-14">
           {isLoading ? (
             <div
               data-testid="skeleton"
-              className="h-5 bg-gray-400 rounded w-3/12 md:w-2/12 lg:w-1/12"
+              className="w-3/12 h-5 bg-gray-400 rounded md:w-2/12 lg:w-1/12"
             ></div>
           ) : (
-            <span className="link -mx-3"></span>
+            <span className="-mx-3 link"></span>
           )}
         </div>
 
         {isLoading ? (
           <div
             data-testid="skeleton"
-            className="h-9 sm:h-10 bg-gray-400 rounded w-2/5 md:w-1/4 lg:w-1/5"
+            className="w-2/5 bg-gray-400 rounded h-9 sm:h-10 md:w-1/4 lg:w-1/5"
           ></div>
         ) : (
-          <h1 className="text-3xl sm:text-4xl text-white tracking-wide">{props.title}</h1>
+          <h1 className="text-3xl tracking-wide text-white sm:text-4xl">{props.title}</h1>
         )}
         {isLoading ? (
           <div
             data-testid="skeleton"
-            className="h-7 my-2 bg-gray-400 rounded w-4/5 md:w-2/4 lg:w-2/5"
+            className="w-4/5 my-2 bg-gray-400 rounded h-7 md:w-2/4 lg:w-2/5"
           ></div>
         ) : (
-          <h2 className="my-2 text-gray-300 text-xl tracking-wide">{props.subtitle}</h2>
+          <h2 className="my-2 text-xl tracking-wide text-gray-300">{props.subtitle}</h2>
         )}
       </div>
     </div>

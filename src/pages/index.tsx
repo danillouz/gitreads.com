@@ -14,15 +14,15 @@ export const Home = (): JSX.Element => {
           <span className="text-pink-gradient">Share.</span>
         </h1>
 
-        <p className="max-w-screen-lg text-md sm:text-2xl sm:leading-10 font-medium text-gray-500">
+        <p className="max-w-screen-lg font-medium text-gray-500 text-md sm:text-2xl sm:leading-10">
           With GitReads you can{" "}
-          <b className="text-gray-800 font-bold">collect and showcase books you read</b> by using a
+          <b className="font-bold text-gray-800">collect and showcase books you read</b> by using a
           Git repository.
         </p>
 
-        <div className="flex flex-wrap items-center text-center my-12">
+        <div className="flex flex-wrap items-center my-12 text-center">
           <Link href={appRoute}>
-            <a className="w-full sm:w-auto flex-none btn-retro text-lg">Git started</a>
+            <a className="flex-none w-full text-lg sm:w-auto btn-retro">Git started</a>
           </Link>
         </div>
       </div>

@@ -14,23 +14,23 @@ For more info see: https://tailwindcss.com/docs/extracting-components#extracting
   }
 
   .page-container {
-    @apply container mx-auto px-6;
+    @apply container px-6 mx-auto;
   }
 
   .hero {
-    @apply text-7xl md:text-8xl lg:text-9xl leading-none font-bold tracking-tight mt-10 mb-8 sm:mt-14 sm:mb-10;
+    @apply mt-10 mb-8 font-bold leading-none tracking-tight text-7xl md:text-8xl lg:text-9xl sm:mt-14 sm:mb-10;
   }
 
   .text-orange-gradient {
-    @apply relative bg-clip-text text-transparent bg-gradient-to-br from-yellow-400 to-orange-600;
+    @apply relative text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 to-orange-600;
   }
 
   .text-purple-gradient {
-    @apply relative bg-clip-text text-transparent bg-gradient-to-br from-fuchsia-500 to-purple-600;
+    @apply relative text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-500 to-purple-600;
   }
 
   .text-pink-gradient {
-    @apply relative bg-clip-text text-transparent bg-gradient-to-br from-pink-500 to-rose-500;
+    @apply relative text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-rose-500;
   }
 
   .orange-gradient {
@@ -46,22 +46,22 @@ For more info see: https://tailwindcss.com/docs/extracting-components#extracting
   }
 
   .btn-primary {
-    @apply bg-gray-800 text-white antialiased leading-6 font-bold tracking-wider py-3 px-6 border border-transparent rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-800 focus:text-white transition-colors duration-200;
+    @apply px-6 py-3 antialiased font-bold leading-6 tracking-wider text-white transition-colors duration-200 bg-gray-800 border border-transparent rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-800 focus:text-white;
   }
 
   .btn-retro {
-    @apply bg-gray-200 text-gray-800 leading-6 font-bold tracking-wider py-3 px-6 border-gray-800 border-2 rounded-lg shadow-retro hover:bg-white hover:shadow-retro-lg focus:outline-none focus:bg-white focus:shadow-retro-lg transition-all duration-100;
+    @apply px-6 py-3 font-bold leading-6 tracking-wider text-gray-800 transition-all duration-100 bg-gray-200 border-2 border-gray-800 rounded-lg shadow-retro hover:bg-white hover:shadow-retro-lg focus:outline-none focus:bg-white focus:shadow-retro-lg;
   }
 
   .nav-link {
-    @apply block px-3 py-2 rounded-lg font-medium text-gray-400 antialiased hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:text-white transition-colors duration-200;
+    @apply block px-3 py-2 antialiased font-medium text-gray-400 transition-colors duration-200 rounded-lg hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:text-white;
   }
 
   .nav-link-cta {
-    @apply block px-3 py-2 rounded-lg font-medium text-white antialiased hover:bg-white hover:text-gray-800 border-2 border-white focus:ring-0 focus:outline-none focus:bg-white focus:text-gray-800 transition-colors duration-200;
+    @apply block px-3 py-2 antialiased font-medium text-white transition-colors duration-200 border-2 border-white rounded-lg hover:bg-white hover:text-gray-800 focus:ring-0 focus:outline-none focus:bg-white focus:text-gray-800;
   }
 
   .link {
-    @apply px-3 py-2 rounded-lg font-medium text-gray-400 antialiased hover:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:text-white transition-colors duration-200;
+    @apply px-3 py-2 antialiased font-medium text-gray-400 transition-colors duration-200 rounded-lg hover:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:text-white;
   }
 }

@@ -15,7 +15,7 @@ const Avatar = (props: AvatarProps): JSX.Element => {
   const onImgLoadErr = () => setIsLoaded(true)
 
   return (
-    <span className="h-10 w-10 inline-block overflow-hidden rounded-full border-2 border-gray-700 bg-gray-500">
+    <span className="inline-block w-10 h-10 overflow-hidden bg-gray-500 border-2 border-gray-700 rounded-full">
       <img
         data-testid="avatar"
         className={classnames("w-100 h-100 transition-opacity duration-200 text-xs", {
