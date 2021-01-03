@@ -23,7 +23,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
             <div
               data-testid="skeleton"
               className="w-3/12 h-5 bg-gray-400 rounded md:w-2/12 lg:w-1/12"
-            ></div>
+            />
           ) : (
             <span className="-mx-3 link"></span>
           )}
@@ -33,7 +33,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
           <div
             data-testid="skeleton"
             className="w-2/5 bg-gray-400 rounded h-9 sm:h-10 md:w-1/4 lg:w-1/5"
-          ></div>
+          />
         ) : (
           <h1 className="text-3xl tracking-wide text-white sm:text-4xl">{props.title}</h1>
         )}
@@ -41,7 +41,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
           <div
             data-testid="skeleton"
             className="w-4/5 my-2 bg-gray-400 rounded h-7 md:w-2/4 lg:w-2/5"
-          ></div>
+          />
         ) : (
           <h2 className="my-2 text-xl tracking-wide text-gray-300">{props.subtitle}</h2>
         )}
@@ -106,7 +106,7 @@ export const Action = (props: ActionProps): JSX.Element => {
   const { isLoading, icon, name } = props
 
   const className = clsx(
-    "flex sm:flex-col items-center sm:justify-center sm:mt-2 sm:mr-6 mb-3 sm:mb-2 px-5 sm:px-2 py-5 w-full sm:w-40 h-18 sm:h-30 space-x-3 sm:space-x-0 sm:space-y-1 font-medium text-lg sm:text-base text-gray-50 tracking-wider rounded-lg shadow-md transform-gpu transition duration-200",
+    "flex sm:flex-col items-center sm:justify-center sm:mr-5 mb-3 sm:mb-5 px-5 sm:px-2 py-5 w-full sm:w-40 h-18 sm:h-30 space-x-3 sm:space-x-0 sm:space-y-1 font-medium text-lg sm:text-base text-gray-50 tracking-wider rounded-lg shadow-md transform-gpu transition duration-200",
     props.className,
     {
       "cursor-not-allowed": isLoading,
