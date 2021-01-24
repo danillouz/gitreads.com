@@ -103,7 +103,7 @@ export const ContentAction = (props: ContentActionProps): JSX.Element => {
   const { isLoading, icon, name } = props
 
   const className = clsx(
-    "flex sm:flex-col items-center sm:justify-center sm:mr-5 mb-3 sm:mb-5 px-5 sm:px-2 py-5 w-full sm:w-40 h-18 sm:h-30 space-x-3 sm:space-x-0 sm:space-y-1 font-medium text-lg sm:text-base text-gray-50 tracking-wider rounded-lg shadow-md transform-gpu transition duration-200",
+    "flex sm:flex-col items-center sm:justify-center sm:mr-5 mb-6 sm:mb-5 px-5 sm:px-2 py-5 w-full sm:w-40 h-18 sm:h-30 space-x-3 sm:space-x-0 sm:space-y-1 font-medium text-lg sm:text-base text-gray-50 tracking-wider rounded-lg shadow-md transform-gpu transition duration-200",
     props.className,
     {
       "cursor-not-allowed": isLoading,

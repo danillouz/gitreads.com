@@ -52,7 +52,12 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
             <div className="flex items-center justify-between h-20 px-4 bg-gray-700 shadow-lg md:space-x-4 sm:rounded-full sm:bg-opacity-95 sm:mt-4">
               <div className="hidden sm:flex lg:flex-1">
                 {user ? (
-                  <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
+                  <UserMenu
+                    isDisabled={isLoading}
+                    avatar={user.avatar}
+                    name={user.name}
+                    email={user.email}
+                  >
                     <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
                   </UserMenu>
                 ) : (
@@ -190,11 +195,14 @@ export const AppShell = (props: ShellProps): JSX.Element => {
           <div className="px-0 mx-auto page-container sm:px-4">
             <div className="flex items-center justify-between h-20 px-4 space-x-4 bg-gray-700 shadow-lg sm:justify-start sm:rounded-full sm:bg-opacity-95 sm:mt-4">
               <div className="hidden sm:flex">
-                {user && (
-                  <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
-                    <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
-                  </UserMenu>
-                )}
+                <UserMenu
+                  isDisabled={!hasSession}
+                  avatar={user?.avatar}
+                  name={user?.name}
+                  email={user?.email}
+                >
+                  <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
+                </UserMenu>
               </div>
 
               <div className="sm:hidden">

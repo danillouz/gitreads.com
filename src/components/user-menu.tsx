@@ -8,6 +8,7 @@ type UserMenuProps = {
   avatar?: string
   name?: string
   email?: string
+  isDisabled: boolean
   children: React.ReactNode
 }
 
@@ -23,6 +24,7 @@ export const UserMenu = (props: UserMenuProps): JSX.Element => {
     <div className="flex items-center" ref={dropdownEl}>
       <div className="relative">
         <button
+          disabled={props.isDisabled}
           className="flex items-center max-w-xs transition duration-200 rounded-full focus:outline-white"
           aria-label="Open user menu"
           aria-haspopup="true"
