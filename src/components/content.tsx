@@ -14,7 +14,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
   return (
     <div className="pb-20 bg-gray-800">
       <div
-        className={clsx("container mx-auto px-6", {
+        className={clsx("page-container px-4 mx-auto", {
           "animate-pulse": isLoading,
         })}
       >
@@ -57,7 +57,7 @@ type ContainerProps = {
 
 export const Container = (props: ContainerProps): JSX.Element => {
   return (
-    <div className={clsx("page-container transform -translate-y-14", props.className)}>
+    <div className={clsx("page-container px-4 mx-auto transform -translate-y-14", props.className)}>
       {props.children}
     </div>
   )
@@ -110,7 +110,7 @@ export const Action = (props: ActionProps): JSX.Element => {
     props.className,
     {
       "cursor-not-allowed": isLoading,
-      "hover:text-white hover:scale-105 hover:shadow-lg focus:outline-none focus:text-white focus:scale-105 focus:shadow-lg": !isLoading,
+      "hover:text-white hover:scale-105 hover:shadow-lg focus:outline-white": !isLoading,
     }
   )
 
