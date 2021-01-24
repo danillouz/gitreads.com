@@ -3,65 +3,91 @@
 @tailwind utilities;
 
 /*
+Base styles
+
+For more info see: https://tailwindcss.com/docs/adding-base-styles
+*/
+@layer base {
+  @font-face {
+    font-family: Inter;
+    src: url(/fonts/inter-400.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: Inter;
+    src: url(/fonts/inter-500.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: Inter;
+    src: url(/fonts/inter-600.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: Inter;
+    src: url(/fonts/inter-700.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+  }
+}
+
+/*
 Custom utils
 
 For more info see: https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply
  */
 @layer components {
-  .top-header-height {
-    /* h-16 + border-b  */
-    top: calc(4rem + 1px);
-  }
+  /* Gradients */
 
-  .page-container {
-    @apply container px-6 mx-auto;
-  }
-
-  .hero {
-    @apply mt-10 mb-8 font-bold leading-none tracking-tight text-7xl md:text-8xl lg:text-9xl sm:mt-14 sm:mb-10;
-  }
-
-  .text-orange-gradient {
-    @apply relative text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 to-orange-600;
-  }
-
-  .text-purple-gradient {
-    @apply relative text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-500 to-purple-600;
-  }
-
-  .text-pink-gradient {
-    @apply relative text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-rose-500;
+  .text-gradient {
+    @apply text-transparent bg-clip-text;
   }
 
   .orange-gradient {
     @apply bg-gradient-to-br from-yellow-400 to-orange-600;
   }
 
-  .purple-gradient {
-    @apply bg-gradient-to-br from-fuchsia-500 to-purple-600;
+  .blue-gradient {
+    @apply bg-gradient-to-br from-blue-400 to-indigo-500;
   }
 
   .pink-gradient {
     @apply bg-gradient-to-br from-pink-500 to-rose-500;
   }
 
-  .btn-primary {
-    @apply px-6 py-3 antialiased font-bold leading-6 tracking-wider text-white transition-colors duration-200 bg-gray-800 border border-transparent rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-800 focus:text-white;
+  .purple-gradient {
+    @apply bg-gradient-to-br from-fuchsia-500 to-purple-600;
   }
 
-  .btn-retro {
-    @apply px-6 py-3 font-bold leading-6 tracking-wider text-gray-800 transition-all duration-100 bg-gray-200 border-2 border-gray-800 rounded-lg shadow-retro hover:bg-white hover:shadow-retro-lg focus:outline-none focus:bg-white focus:shadow-retro-lg;
-  }
+  /* Buttons */
 
-  .nav-link {
-    @apply block px-3 py-2 antialiased font-medium text-gray-400 transition-colors duration-200 rounded-lg hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:text-white;
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base antialiased font-medium leading-6 tracking-wider transition duration-200 rounded-lg focus:outline-white;
   }
+}
 
-  .nav-link-cta {
-    @apply block px-3 py-2 antialiased font-medium text-white transition-colors duration-200 border-2 border-white rounded-lg hover:bg-white hover:text-gray-800 focus:ring-0 focus:outline-none focus:bg-white focus:text-gray-800;
-  }
+@layer utilities {
+  @variants responsive {
+    .page-container {
+      max-width: 1024px;
+    }
 
-  .link {
-    @apply px-3 py-2 antialiased font-medium text-gray-400 transition-colors duration-200 rounded-lg hover:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:text-white;
+    .btn-sm {
+      @apply px-4 py-2;
+    }
+
+    .btn-lg {
+      @apply px-8 py-4 text-lg;
+    }
   }
 }

@@ -28,8 +28,7 @@ module.exports = {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       boxShadow: {
-        retro: "0.25rem 0.25rem 0 0 #0f172a",
-        "retro-lg": "0.5rem 0.5rem 0 0 #0f172a",
+        "purple-blur": "rgba(147, 51, 234, 0.5) 0px 1px 40px",
       },
     },
   },
