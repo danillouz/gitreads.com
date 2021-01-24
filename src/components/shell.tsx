@@ -4,10 +4,35 @@ import clsx from "clsx"
 import { useSession, useLoginIsRequired } from "@lib/auth0"
 import { appRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 import Page from "@components/page"
-import { LogoWithName, Logo } from "@components/logo"
-import { Nav, MobileNav, NavItem, MenuButton, MenuContainer } from "@components/nav"
-import { UserMenu, UserMenuItem, MobileUserMenu, MobileUserMenuItem } from "@components/user-menu"
-import Footer from "@components/footer"
+import { Logo } from "@components/logo"
+import { Nav, NavLink } from "@components/nav"
+import {
+  MobileMenu,
+  MobileMenuButton,
+  MobileMenuNav,
+  MobileMenuNavLink,
+  MobileMenuUserInfo,
+} from "@components/mobile-menu"
+import { UserMenu, UserMenuItem } from "@components/user-menu"
+import { Footer, FooterLink } from "@components/footer"
+
+type LogoLinkProps = {
+  gradientId: string
+}
+
+const LogoLink = (props: LogoLinkProps): JSX.Element => {
+  return (
+    <>
+      <span className="sr-only">GitReads</span>
+
+      <Link href="/">
+        <a className="flex items-center justify-center bg-gray-800 rounded-full shadow-sm w-14 h-14 focus:outline-white">
+          <Logo gradientId={props.gradientId} />
+        </a>
+      </Link>
+    </>
+  )
+}
 
 type ShellProps = {
   children?: React.ReactNode
@@ -16,119 +41,131 @@ type ShellProps = {
 export const HomeShell = (props: ShellProps): JSX.Element => {
   const { user, isLoading } = useSession()
 
-  const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
-
-  const handleMenuClick = () => setMenuIsOpen(!menuIsOpen)
+  const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState<boolean>(false)
+  const handleMenuButtonClick = () => setMobileMenuIsOpen((isOpen) => !isOpen)
 
   return (
-    <Page title="Home - GitReads">
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700">
-          <div className="page-container">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <LogoWithName href="/" />
-                </div>
+    <Page title="GitReads">
+      <div className="flex flex-col min-h-screen">
+        <header className="sticky top-0 z-10">
+          <div className="px-0 mx-auto page-container sm:px-4">
+            <div className="flex items-center justify-between h-20 px-4 bg-gray-700 shadow-lg md:space-x-4 sm:rounded-full sm:bg-opacity-95 sm:mt-4">
+              <div className="hidden sm:flex lg:flex-1">
+                {user ? (
+                  <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
+                    <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
+                  </UserMenu>
+                ) : (
+                  <LogoLink gradientId="gr_id_1" />
+                )}
               </div>
 
-              <Nav />
+              <div className="sm:hidden">
+                <LogoLink gradientId="gr_id_2" />
+              </div>
 
               <div
-                className={clsx(
-                  "flex items-center -mr-2 md:hidden transition-opacity duration-200",
-                  {
-                    "opacity-0": isLoading,
-                    "opacity-100": !isLoading,
-                  }
-                )}
+                className={clsx("-mr-2 -my-2 sm:hidden transition-opacity duration-200", {
+                  "opacity-0": isLoading,
+                  "opacity-100": !isLoading,
+                })}
               >
-                <MenuButton
-                  isLoading={isLoading}
-                  isOpen={menuIsOpen}
-                  onMenuClick={handleMenuClick}
+                <MobileMenuButton
+                  isDisabled={isLoading}
+                  isOpen={mobileMenuIsOpen}
+                  handleMenuButtonClick={handleMenuButtonClick}
                 />
               </div>
 
-              {!isLoading && (
-                <div className="hidden md:block">
-                  {user ? (
-                    <div className="flex items-center space-x-3">
-                      <Link href={appRoute}>
-                        <a className="nav-link">App</a>
-                      </Link>
+              <Nav>
+                {/* 
+                  Main nav, for example:
+                  
+                  <NavLink href="/product">Product</NavLink>
+                  <NavLink href="/pricing">Pricing</NavLink>
+                  <NavLink href="/docs">Docs</NavLink>
+                */}
+              </Nav>
 
-                      <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
-                        <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
-                      </UserMenu>
-                    </div>
-                  ) : (
-                    <div className="flex items-center space-x-3">
-                      <Link href={loginUrl}>
-                        <a className="nav-link">Login</a>
-                      </Link>
+              <div className="items-center justify-end hidden space-x-2 sm:flex sm:flex-1">
+                {!isLoading && (
+                  <>
+                    {user ? (
+                      <NavLink href={appRoute}>Dashboard</NavLink>
+                    ) : (
+                      <>
+                        <NavLink href={loginUrl}>Login</NavLink>
 
-                      <Link href={signupUrl}>
-                        <a className="nav-link-cta">Signup</a>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              )}
+                        <Link href={signupUrl}>
+                          <a className="text-white rounded-full shadow-sm btn btn-sm purple-gradient hover:shadow-purple-blur focus:ring-offset-gray-800 focus:ring-white">
+                            Signup
+                          </a>
+                        </Link>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </header>
 
         {!isLoading && (
-          <MenuContainer isOpen={menuIsOpen}>
-            {user ? (
-              <>
-                <MobileNav>
-                  <NavItem href={appRoute}>App</NavItem>
-                </MobileNav>
+          <MobileMenu isOpen={mobileMenuIsOpen}>
+            <div className="px-4 py-5">
+              <MobileMenuNav>
+                {/*
+                Main nav, for example:
 
-                <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
-                  <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
-                </MobileUserMenu>
-              </>
-            ) : (
-              <div className="px-2 py-3 space-y-1">
-                <Link href={loginUrl}>
-                  <a className="nav-link" role="menuitem">
-                    Login
-                  </a>
-                </Link>
+                <MobileMenuNavLink href="/product">Product</MobileMenuNavLink>
+                <MobileMenuNavLink href="/pricing">Pricing</MobileMenuNavLink>
+                <MobileMenuNavLink href="/docs">Docs</MobileMenuNavLink>
+              */}
+              </MobileMenuNav>
+            </div>
 
-                <Link href={signupUrl}>
-                  <a className="nav-link" role="menuitem">
-                    Signup
-                  </a>
-                </Link>
-              </div>
-            )}
-          </MenuContainer>
+            <div className="px-4 py-6 space-y-6">
+              {user ? (
+                <>
+                  <MobileMenuUserInfo avatar={user.avatar} name={user.name} email={user.email} />
+
+                  <div className="grid gap-y-6">
+                    <MobileMenuNavLink href={appRoute}>Dashboard</MobileMenuNavLink>
+                    <MobileMenuNavLink href={logoutUrl}>Logout</MobileMenuNavLink>
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <Link href={signupUrl}>
+                    <a className="flex items-center justify-center w-full text-white rounded-full shadow-sm btn purple-gradient focus:outline-white">
+                      Signup
+                    </a>
+                  </Link>
+
+                  <p className="mt-6 text-base antialiased font-medium text-center">
+                    <Link href={loginUrl}>
+                      <a className="font-semibold text-white focus:outline-white">
+                        <span className="font-normal text-gray-300">Already have an account?</span>{" "}
+                        Login
+                      </a>
+                    </Link>
+                  </p>
+                </div>
+              )}
+            </div>
+          </MobileMenu>
         )}
 
         <main className="flex-1">{props.children}</main>
 
         <Footer>
-          <a
-            href="https://github.com/gitreads"
-            className="link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <FooterLink href="https://github.com/gitreads" external>
             GitHub
-          </a>
+          </FooterLink>
 
-          <a
-            href="https://danillouz.dev"
-            className="link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <FooterLink href="https://danillouz.dev" external>
             About
-          </a>
+          </FooterLink>
         </Footer>
       </div>
     </Page>
@@ -143,93 +180,81 @@ export const AppShell = (props: ShellProps): JSX.Element => {
   const { user, isLoading } = session
   const hasSession = !isLoading && Boolean(user)
 
-  const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
-
-  const handleMenuClick = () => setMenuIsOpen(!menuIsOpen)
+  const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState<boolean>(false)
+  const handleMenuButtonClick = () => setMobileMenuIsOpen((isOpen) => !isOpen)
 
   return (
     <Page title="App - GitReads">
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700">
-          <div className="page-container">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center">
-                <div className="flex-shrink-0 mr-4">
-                  <Logo href={appRoute} />
-                </div>
-
-                {hasSession && (
-                  <Nav>
-                    <NavItem href={`${appRoute}/books`}>Books</NavItem>
-                    <NavItem href={`${appRoute}/libraries`}>Libraries</NavItem>
-                  </Nav>
-                )}
-              </div>
-
-              <div
-                className={clsx(
-                  "flex items-center -mr-2 md:hidden transition-opacity duration-200",
-                  {
-                    "opacity-0": !hasSession,
-                    "opacity-100": hasSession,
-                  }
-                )}
-              >
-                <MenuButton
-                  isLoading={!hasSession}
-                  isOpen={menuIsOpen}
-                  onMenuClick={handleMenuClick}
-                />
-              </div>
-
-              {hasSession && (
-                <div className="hidden md:block">
+      <div className="flex flex-col min-h-screen">
+        <header className="sticky top-0 z-10">
+          <div className="px-0 mx-auto page-container sm:px-4">
+            <div className="flex items-center justify-between h-20 px-4 space-x-4 bg-gray-700 shadow-lg sm:justify-start sm:rounded-full sm:bg-opacity-95 sm:mt-4">
+              <div className="hidden sm:flex">
+                {user && (
                   <UserMenu avatar={user.avatar} name={user.name} email={user.email}>
                     <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
                   </UserMenu>
-                </div>
-              )}
+                )}
+              </div>
+
+              <div className="sm:hidden">
+                <LogoLink gradientId="gr_id_3" />
+              </div>
+
+              <div
+                className={clsx("-mr-2 -my-2 sm:hidden transition-opacity duration-200", {
+                  "opacity-0": !hasSession,
+                  "opacity-100": hasSession,
+                })}
+              >
+                <MobileMenuButton
+                  isDisabled={!hasSession}
+                  isOpen={mobileMenuIsOpen}
+                  handleMenuButtonClick={handleMenuButtonClick}
+                />
+              </div>
+
+              <Nav>
+                <NavLink href={appRoute}>Dashboard</NavLink>
+                <NavLink href={`${appRoute}/books`}>Books</NavLink>
+                <NavLink href={`${appRoute}/libraries`}>Libraries</NavLink>
+              </Nav>
             </div>
           </div>
         </header>
 
         {hasSession && (
-          <MenuContainer isOpen={menuIsOpen}>
-            <MobileNav>
-              <NavItem href={`${appRoute}/books`}>Books</NavItem>
-              <NavItem href={`${appRoute}/libraries`}>Libraries</NavItem>
-            </MobileNav>
+          <MobileMenu isOpen={mobileMenuIsOpen}>
+            <div className="px-4 py-5">
+              <MobileMenuNav>
+                <MobileMenuNavLink href={appRoute}>Dashboard</MobileMenuNavLink>
+                <MobileMenuNavLink href={`${appRoute}/books`}>Books</MobileMenuNavLink>
+                <MobileMenuNavLink href={`${appRoute}/libraries`}>Libraries</MobileMenuNavLink>
+              </MobileMenuNav>
+            </div>
 
-            <MobileUserMenu avatar={user.avatar} name={user.name} email={user.email}>
-              <MobileUserMenuItem href={logoutUrl}>Logout</MobileUserMenuItem>
-            </MobileUserMenu>
-          </MenuContainer>
+            <div className="px-4 py-6 space-y-6">
+              <MobileMenuUserInfo avatar={user.avatar} name={user.name} email={user.email} />
+
+              <div className="grid gap-y-6">
+                <MobileMenuNavLink href={logoutUrl}>Logout</MobileMenuNavLink>
+              </div>
+            </div>
+          </MobileMenu>
         )}
 
-        <main className="flex-1">{props.children}</main>
+        <main className="flex-1 bg-gray-50">{props.children}</main>
 
         <Footer>
-          <Link href="/">
-            <a className="link">Home</a>
-          </Link>
+          <FooterLink href="/">Homepage</FooterLink>
 
-          <a
-            href="https://github.com/gitreads"
-            className="link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <FooterLink href="https://github.com/gitreads" external>
             GitHub
-          </a>
+          </FooterLink>
 
-          <a
-            href="https://danillouz.dev"
-            className="link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <FooterLink href="https://danillouz.dev" external>
             About
-          </a>
+          </FooterLink>
         </Footer>
       </div>
     </Page>
