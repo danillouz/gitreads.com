@@ -1,6 +1,6 @@
 import { useSession } from "@lib/auth0"
 import { AppShell } from "@components/shell"
-import { Header, Container, Action } from "@components/content"
+import { ContentHeader, ContentContainer, ContentAction } from "@components/content"
 import { LibraryIcon, BookIcon, GlobeIcon } from "@components/icons"
 import { appRoute } from "@config/auth"
 
@@ -13,8 +13,8 @@ const QuickActions = (props: QuickActionsProps): JSX.Element => {
   const { isLoading } = props
 
   return (
-    <div className="flex flex-wrap mb-5">
-      <Action
+    <>
+      <ContentAction
         isLoading={isLoading}
         className="orange-gradient"
         href={`${appRoute}/books/new`}
@@ -22,22 +22,22 @@ const QuickActions = (props: QuickActionsProps): JSX.Element => {
         name="Add book"
       />
 
-      <Action
+      <ContentAction
         isLoading={isLoading}
-        className="purple-gradient"
+        className="blue-gradient"
         href={`${appRoute}/libraries/new`}
         icon={<LibraryIcon className="w-8 h-8 sm:w-10 sm:h-10" />}
         name="New library"
       />
 
-      <Action
+      <ContentAction
         isLoading={isLoading}
         className="pink-gradient"
         href={`/${props.username}`}
         icon={<GlobeIcon className="w-8 h-8 sm:w-10 sm:h-10" />}
         name="Public profile"
       />
-    </div>
+    </>
   )
 }
 
@@ -48,15 +48,17 @@ export const App = (): JSX.Element => {
 
   return (
     <AppShell>
-      <Header
-        isLoading={!hasSession}
-        title="Dashboard"
-        subtitle={firstName ? `Welcome back ${firstName}. 👋` : "Welcome back. 👋"}
-      />
+      <ContentContainer>
+        <ContentHeader
+          isLoading={!hasSession}
+          title="Dashboard"
+          subtitle={firstName ? `Welcome back ${firstName}. 👋` : "Welcome back. 👋"}
+        />
 
-      <Container>
-        <QuickActions isLoading={!hasSession} username={user?.username} />
-      </Container>
+        <div className="flex flex-wrap my-8">
+          <QuickActions isLoading={!hasSession} username={user?.username} />
+        </div>
+      </ContentContainer>
     </AppShell>
   )
 }

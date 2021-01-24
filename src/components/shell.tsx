@@ -243,7 +243,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
           </MobileMenu>
         )}
 
-        <main className="flex-1 bg-gray-50">{props.children}</main>
+        <main className="flex-1">{props.children}</main>
 
         <Footer>
           <FooterLink href="/">Homepage</FooterLink>

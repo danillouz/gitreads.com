@@ -2,73 +2,70 @@ import Link from "next/link"
 import clsx from "clsx"
 import { ReactNode } from "react"
 
-type HeaderProps = {
+type ContentHeaderProps = {
   isLoading: boolean
   title: string | React.ReactNode
   subtitle?: string | React.ReactNode
 }
 
-export const Header = (props: HeaderProps): JSX.Element => {
+export const ContentHeader = (props: ContentHeaderProps): JSX.Element => {
   const { isLoading } = props
 
   return (
-    <div className="pb-20 bg-gray-800">
-      <div
-        className={clsx("page-container px-4 mx-auto", {
-          "animate-pulse": isLoading,
-        })}
-      >
-        <div className="flex items-center h-14">
-          {isLoading ? (
-            <div
-              data-testid="skeleton"
-              className="w-3/12 h-5 bg-gray-400 rounded md:w-2/12 lg:w-1/12"
-            />
-          ) : (
-            <span className="-mx-3 link"></span>
-          )}
-        </div>
-
+    <div
+      className={clsx({
+        "animate-pulse": isLoading,
+      })}
+    >
+      <div className="flex items-center h-14">
         {isLoading ? (
           <div
             data-testid="skeleton"
-            className="w-2/5 bg-gray-400 rounded h-9 sm:h-10 md:w-1/4 lg:w-1/5"
+            className="w-3/12 h-5 bg-gray-400 rounded md:w-2/12 lg:w-1/12"
           />
         ) : (
-          <h1 className="text-3xl tracking-wide text-white sm:text-4xl">{props.title}</h1>
-        )}
-        {isLoading ? (
-          <div
-            data-testid="skeleton"
-            className="w-4/5 my-2 bg-gray-400 rounded h-7 md:w-2/4 lg:w-2/5"
-          />
-        ) : (
-          <h2 className="my-2 text-xl tracking-wide text-gray-300">{props.subtitle}</h2>
+          <span className="-mx-3 link"></span>
         )}
       </div>
+
+      {isLoading ? (
+        <div
+          data-testid="skeleton"
+          className="w-2/5 bg-gray-400 rounded h-9 sm:h-10 md:w-1/4 lg:w-1/5"
+        />
+      ) : (
+        <h1 className="text-3xl tracking-wide text-gray-300 sm:text-4xl">{props.title}</h1>
+      )}
+
+      {isLoading ? (
+        <div
+          data-testid="skeleton"
+          className="w-4/5 my-2 bg-gray-400 rounded h-7 md:w-2/4 lg:w-2/5"
+        />
+      ) : (
+        <h2 className="my-2 text-xl tracking-wide text-gray-400">{props.subtitle}</h2>
+      )}
     </div>
   )
 }
 
-type ContainerProps = {
-  className?: string
+type ContentContainerProps = {
   children: React.ReactNode
+  className?: string
 }
 
-export const Container = (props: ContainerProps): JSX.Element => {
+export const ContentContainer = (props: ContentContainerProps): JSX.Element => {
   return (
-    <div className={clsx("page-container px-4 mx-auto transform -translate-y-14", props.className)}>
-      {props.children}
-    </div>
+    <div className={clsx("page-container px-4 mx-auto", props.className)}>{props.children}</div>
   )
 }
 
-type SectionProps = {
-  className?: string
+type ContentSectionProps = {
   children: React.ReactNode
+  className?: string
 }
 
-export const PageSection = (props: SectionProps): JSX.Element => {
+export const ContenteSection = (props: ContentSectionProps): JSX.Element => {
   return (
     <section className={clsx("bg-white rounded-lg shadow-md", props.className)}>
       {props.children}
@@ -76,12 +73,12 @@ export const PageSection = (props: SectionProps): JSX.Element => {
   )
 }
 
-type SectionTitleProps = {
+type ContentSectionTitleProps = {
   className?: string
   children: React.ReactNode
 }
 
-export const SectionTitle = (props: SectionTitleProps): JSX.Element => {
+export const ContentSectionTitle = (props: ContentSectionTitleProps): JSX.Element => {
   return (
     <h3
       className={clsx(
@@ -94,15 +91,15 @@ export const SectionTitle = (props: SectionTitleProps): JSX.Element => {
   )
 }
 
-type ActionProps = {
+type ContentActionProps = {
   isLoading: boolean
   href: string
-  className?: string
   icon: React.ReactNode
   name: string | ReactNode
+  className?: string
 }
 
-export const Action = (props: ActionProps): JSX.Element => {
+export const ContentAction = (props: ContentActionProps): JSX.Element => {
   const { isLoading, icon, name } = props
 
   const className = clsx(
