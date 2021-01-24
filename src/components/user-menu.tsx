@@ -23,7 +23,7 @@ export const UserMenu = (props: UserMenuProps): JSX.Element => {
     <div className="flex items-center" ref={dropdownEl}>
       <div className="relative">
         <button
-          className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
+          className="flex items-center max-w-xs transition duration-200 rounded-full focus:outline-white"
           aria-label="Open user menu"
           aria-haspopup="true"
           onClick={onClickBtn}
@@ -32,20 +32,20 @@ export const UserMenu = (props: UserMenuProps): JSX.Element => {
         </button>
 
         <div
-          className={clsx("origin-top-right absolute right-5 mt-1 w-48 rounded-lg shadow-xl", {
+          className={clsx("origin-top-left absolute left-7 mt-1 w-48", {
             block: isOpen,
             hidden: !isOpen,
           })}
         >
           <div
-            className="py-2 space-y-1 bg-white rounded-lg shadow-lg"
+            className="py-2 space-y-1 bg-gray-600 rounded-lg shadow-xl"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="user-menu"
           >
-            <div className="block px-4 py-2 border-b border-gray-100" role="menuitem">
-              <div className="text-base text-gray-800">{name}</div>
-              <div className="text-sm text-gray-500">{email}</div>
+            <div className="block px-4 py-2 border-b border-gray-500">
+              <div className="antialiased text-gray-300">{name}</div>
+              <div className="antialiased text-gray-400">{email}</div>
             </div>
 
             {children}
@@ -64,53 +64,7 @@ type UserMenuItemProps = {
 export const UserMenuItem = (props: UserMenuItemProps): JSX.Element => {
   return (
     <Link href={props.href}>
-      <a
-        className="block px-4 py-2 text-gray-800 transition-colors duration-200 text-md hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-        role="menuitem"
-      >
-        {props.children}
-      </a>
-    </Link>
-  )
-}
-
-type MobileUserMenuProps = {
-  avatar: string
-  name?: string
-  email?: string
-  children: React.ReactNode
-}
-
-export const MobileUserMenu = (props: MobileUserMenuProps): JSX.Element => {
-  const { name = "Anonymous", email = "no email address" } = props
-
-  return (
-    <div className="px-3 py-5">
-      <div className="flex items-center px-3 space-x-3">
-        <div className="flex-shrink-0">
-          <Avatar src={props.avatar} />
-        </div>
-
-        <div className="space-y-1">
-          <div className="text-base antialiased font-medium leading-none text-white">{name}</div>
-          <div className="text-sm antialiased font-medium leading-none text-gray-400">{email}</div>
-        </div>
-      </div>
-
-      <div className="mt-3 space-y-1">{props.children}</div>
-    </div>
-  )
-}
-
-type MobileUserMenuItemProps = {
-  href: string
-  children: React.ReactNode
-}
-
-export const MobileUserMenuItem = (props: MobileUserMenuItemProps): JSX.Element => {
-  return (
-    <Link href={props.href}>
-      <a className="nav-link" role="menuitem">
+      <a className="block px-4 py-2 antialiased font-medium text-gray-300 transition-colors duration-200 hover:bg-gray-500 hover:text-white focus:outline-white">
         {props.children}
       </a>
     </Link>

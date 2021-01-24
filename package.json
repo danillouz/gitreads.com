@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "0.16.0",
+    "@headlessui/react": "0.2.0",
     "autoprefixer": "10.1.0",
     "clsx": "1.1.1",
     "next": "10.0.4",
