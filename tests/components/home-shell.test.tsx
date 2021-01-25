@@ -151,25 +151,6 @@ describe(`Home shell`, () => {
       expect(avatar).toHaveAttribute("src", fakeUser.avatar)
     })
 
-    it(`renders user's full name`, () => {
-      const { getByText } = render(<HomeShell />)
-      const name = getByText(fakeUser.name)
-      expect(name).toBeInTheDocument()
-    })
-
-    it(`renders user's email`, () => {
-      const { getByText } = render(<HomeShell />)
-      const email = getByText(fakeUser.email)
-      expect(email).toBeInTheDocument()
-    })
-
-    it(`renders logout link`, () => {
-      const { getByText } = render(<HomeShell />)
-      const link = getByText("Logout")
-      expect(link).toBeInTheDocument()
-      expect(link).toHaveAttribute("href", logoutUrl)
-    })
-
     it(`renders footer`, () => {
       const { getByText, getByTestId } = render(<HomeShell />)
 

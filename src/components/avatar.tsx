@@ -1,32 +1,22 @@
-import { useState } from "react"
 import clsx from "clsx"
 
 type AvatarProps = {
   src: string
   alt?: string
+  className?: string
 }
 
 const Avatar = (props: AvatarProps): JSX.Element => {
-  const { src, alt = "user avatar" } = props
-
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
-
-  const onImgLoad = () => setIsLoaded(true)
-  const onImgLoadErr = () => setIsLoaded(true)
+  const { src, alt = "user avatar", className } = props
 
   return (
-    <span className="inline-block overflow-hidden bg-gray-500 rounded-full shadow-sm w-14 h-14">
-      <img
-        data-testid="avatar"
-        className={clsx("w-100 h-100 transition-opacity duration-200 text-xs", {
-          "opacity-0": !isLoaded,
-          "opacity-100": isLoaded,
-        })}
-        src={src}
-        alt={alt}
-        onLoad={onImgLoad}
-        onError={onImgLoadErr}
-      />
+    <span
+      className={clsx(
+        "inline-block overflow-hidden bg-gray-400 rounded-full shadow-sm w-10 h-10",
+        className
+      )}
+    >
+      <img data-testid="avatar" className="text-xs w-100 h-100" src={src} alt={alt} />
     </span>
   )
 }

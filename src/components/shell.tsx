@@ -13,7 +13,7 @@ import {
   MobileMenuNavLink,
   MobileMenuUserInfo,
 } from "@components/mobile-menu"
-import { UserMenu, UserMenuItem } from "@components/user-menu"
+import { UserDropdown, UserDropdownLink } from "@components/user-dropdown"
 import { Footer, FooterLink } from "@components/footer"
 
 type LogoLinkProps = {
@@ -53,14 +53,14 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
             <div className="flex items-center justify-between h-20 px-4 bg-gray-700 shadow-lg md:space-x-4 sm:rounded-full sm:bg-opacity-95 sm:mt-4">
               <div className="hidden sm:flex lg:flex-1">
                 {user ? (
-                  <UserMenu
+                  <UserDropdown
                     isDisabled={isLoading}
-                    avatar={user.avatar}
+                    avatarUrl={user.avatar}
                     name={user.name}
                     email={user.email}
                   >
-                    <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
-                  </UserMenu>
+                    <UserDropdownLink href={logoutUrl}>Logout</UserDropdownLink>
+                  </UserDropdown>
                 ) : (
                   <LogoLink gradientId="gr_id_1" href="/" />
                 )}
@@ -194,16 +194,16 @@ export const AppShell = (props: ShellProps): JSX.Element => {
       <div className="flex flex-col min-h-screen">
         <header className="sticky top-0 z-10">
           <div className="px-0 mx-auto page-container sm:px-4">
-            <div className="flex items-center justify-between h-20 px-4 space-x-4 bg-gray-700 shadow-lg sm:justify-start sm:rounded-full sm:bg-opacity-95 sm:mt-4">
+            <div className="flex items-center justify-between h-20 px-4 bg-gray-700 shadow-lg sm:space-x-4 sm:justify-start sm:rounded-full sm:bg-opacity-95 sm:mt-4">
               <div className="hidden sm:flex">
-                <UserMenu
+                <UserDropdown
                   isDisabled={!hasSession}
-                  avatar={user?.avatar}
+                  avatarUrl={user?.avatar}
                   name={user?.name}
                   email={user?.email}
                 >
-                  <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
-                </UserMenu>
+                  <UserDropdownLink href={logoutUrl}>Logout</UserDropdownLink>
+                </UserDropdown>
               </div>
 
               <div className="sm:hidden">
