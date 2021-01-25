@@ -2,7 +2,7 @@ import { useSession } from "@lib/auth0"
 import { AppShell } from "@components/shell"
 import { ContentHeader, ContentContainer, ContentAction } from "@components/content"
 import { LibraryIcon, BookIcon, GlobeIcon } from "@components/icons"
-import { appRoute } from "@config/auth"
+import { dashboardRoute } from "@config/auth"
 
 type QuickActionsProps = {
   isLoading: boolean
@@ -17,7 +17,7 @@ const QuickActions = (props: QuickActionsProps): JSX.Element => {
       <ContentAction
         isLoading={isLoading}
         className="orange-gradient"
-        href={`${appRoute}/books/new`}
+        href={`${dashboardRoute}/books/new`}
         icon={<BookIcon className="w-8 h-8 sm:w-10 sm:h-10" />}
         name="Add book"
       />
@@ -25,7 +25,7 @@ const QuickActions = (props: QuickActionsProps): JSX.Element => {
       <ContentAction
         isLoading={isLoading}
         className="blue-gradient"
-        href={`${appRoute}/libraries/new`}
+        href={`${dashboardRoute}/libraries/new`}
         icon={<LibraryIcon className="w-8 h-8 sm:w-10 sm:h-10" />}
         name="New library"
       />

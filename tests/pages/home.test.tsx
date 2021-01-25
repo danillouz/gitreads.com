@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 import { useSession, Session } from "@lib/auth0"
 import { Home } from "@pages/index"
-import { appRoute } from "@config/auth"
+import { dashboardRoute } from "@config/auth"
 
 import { fakeUser } from "../fixtures/session"
 
@@ -38,7 +38,7 @@ describe(`Home`, () => {
 
       const cta = getByText("Git started for free")
       expect(cta).toBeInTheDocument()
-      expect(cta.parentNode).toHaveAttribute("href", appRoute)
+      expect(cta.parentNode).toHaveAttribute("href", dashboardRoute)
     })
   })
 
@@ -62,7 +62,7 @@ describe(`Home`, () => {
       const { getByText } = render(<Home />)
       const cta = getByText("Git started for free")
       expect(cta).toBeInTheDocument()
-      expect(cta.parentNode).toHaveAttribute("href", appRoute)
+      expect(cta.parentNode).toHaveAttribute("href", dashboardRoute)
     })
   })
 
@@ -86,7 +86,7 @@ describe(`Home`, () => {
       const { getByText } = render(<Home />)
       const cta = getByText("Git started for free")
       expect(cta).toBeInTheDocument()
-      expect(cta.parentNode).toHaveAttribute("href", appRoute)
+      expect(cta.parentNode).toHaveAttribute("href", dashboardRoute)
     })
   })
 })

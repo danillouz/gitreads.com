@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 import { useSession, useLoginIsRequired, Session } from "@lib/auth0"
-import { App } from "@pages/app/index"
-import { appRoute } from "@config/auth"
+import { App } from "@pages/dashboard/index"
+import { dashboardRoute } from "@config/auth"
 
 import { fakeUser } from "../fixtures/session"
 
@@ -93,11 +93,11 @@ describe(`App`, () => {
 
       const addBook = getByText("Add book")
       expect(addBook).toBeInTheDocument()
-      expect(addBook.parentNode).toHaveAttribute("href", `${appRoute}/books/new`)
+      expect(addBook.parentNode).toHaveAttribute("href", `${dashboardRoute}/books/new`)
 
       const newLibrary = getByText("New library")
       expect(newLibrary).toBeInTheDocument()
-      expect(newLibrary.parentNode).toHaveAttribute("href", `${appRoute}/libraries/new`)
+      expect(newLibrary.parentNode).toHaveAttribute("href", `${dashboardRoute}/libraries/new`)
 
       const publicProfile = getByText("Public profile")
       expect(publicProfile).toBeInTheDocument()

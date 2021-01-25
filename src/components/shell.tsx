@@ -2,7 +2,7 @@ import { useState } from "react"
 import Link from "next/link"
 import clsx from "clsx"
 import { useSession, useLoginIsRequired } from "@lib/auth0"
-import { appRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
+import { dashboardRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 import Page from "@components/page"
 import { Logo } from "@components/logo"
 import { Nav, NavLink } from "@components/nav"
@@ -97,7 +97,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
                 {!isLoading && (
                   <>
                     {user ? (
-                      <NavLink href={appRoute}>Dashboard</NavLink>
+                      <NavLink href={dashboardRoute}>Dashboard</NavLink>
                     ) : (
                       <>
                         <NavLink href={loginUrl}>Login</NavLink>
@@ -136,7 +136,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
                   <MobileMenuUserInfo avatar={user.avatar} name={user.name} email={user.email} />
 
                   <div className="grid gap-y-6">
-                    <MobileMenuNavLink href={appRoute}>Dashboard</MobileMenuNavLink>
+                    <MobileMenuNavLink href={dashboardRoute}>Dashboard</MobileMenuNavLink>
                     <MobileMenuNavLink href={logoutUrl}>Logout</MobileMenuNavLink>
                   </div>
                 </>
@@ -207,7 +207,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
               </div>
 
               <div className="sm:hidden">
-                <LogoLink gradientId="gr_id_3" href={appRoute} />
+                <LogoLink gradientId="gr_id_3" href={dashboardRoute} />
               </div>
 
               <div
@@ -224,9 +224,9 @@ export const AppShell = (props: ShellProps): JSX.Element => {
               </div>
 
               <Nav>
-                <NavLink href={appRoute}>Dashboard</NavLink>
-                <NavLink href={`${appRoute}/books`}>Books</NavLink>
-                <NavLink href={`${appRoute}/libraries`}>Libraries</NavLink>
+                <NavLink href={dashboardRoute}>Dashboard</NavLink>
+                <NavLink href={`${dashboardRoute}/books`}>Books</NavLink>
+                <NavLink href={`${dashboardRoute}/libraries`}>Libraries</NavLink>
               </Nav>
             </div>
           </div>
@@ -236,9 +236,11 @@ export const AppShell = (props: ShellProps): JSX.Element => {
           <MobileMenu isOpen={mobileMenuIsOpen}>
             <div className="px-4 py-5">
               <MobileMenuNav>
-                <MobileMenuNavLink href={appRoute}>Dashboard</MobileMenuNavLink>
-                <MobileMenuNavLink href={`${appRoute}/books`}>Books</MobileMenuNavLink>
-                <MobileMenuNavLink href={`${appRoute}/libraries`}>Libraries</MobileMenuNavLink>
+                <MobileMenuNavLink href={dashboardRoute}>Dashboard</MobileMenuNavLink>
+                <MobileMenuNavLink href={`${dashboardRoute}/books`}>Books</MobileMenuNavLink>
+                <MobileMenuNavLink href={`${dashboardRoute}/libraries`}>
+                  Libraries
+                </MobileMenuNavLink>
               </MobileMenuNav>
             </div>
 

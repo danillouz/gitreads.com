@@ -4,7 +4,7 @@ import { useSession } from "@lib/auth0"
 import { AppShell } from "@components/shell"
 import { ContentHeader, ContentContainer } from "@components/content"
 import { GitHubIcon, AirtableIcon, NotionIcon } from "@components/icons"
-import { appRoute } from "@config/auth"
+import { dashboardRoute } from "@config/auth"
 
 type CardContainerProps = {
   isPreview: boolean
@@ -90,7 +90,7 @@ export const NewLibrary = (): JSX.Element => {
         <div className="flex flex-wrap my-8">
           <ProviderCard
             isLoading={!hasSession}
-            href={`${appRoute}/libraries/new/github`}
+            href={`${dashboardRoute}/libraries/new/github`}
             icon={<GitHubIcon className="w-12 h-12" />}
             title="GitHub"
             description="Connect to a Git repository."

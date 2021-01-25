@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 import { useSession, useLoginIsRequired, Session } from "@lib/auth0"
 import { AppShell } from "@components/shell"
-import { appRoute, logoutUrl } from "@config/auth"
+import { dashboardRoute, logoutUrl } from "@config/auth"
 
 import { fakeUser } from "../fixtures/session"
 
@@ -37,7 +37,7 @@ describe(`App shell`, () => {
       const { getByTestId } = render(<AppShell />)
       const logo = getByTestId("logo")
       expect(logo).toBeInTheDocument()
-      expect(logo.parentNode).toHaveAttribute("href", appRoute)
+      expect(logo.parentNode).toHaveAttribute("href", dashboardRoute)
     })
 
     it(`renders nav`, () => {
@@ -46,19 +46,19 @@ describe(`App shell`, () => {
       const dashboardLinks = getAllByText("Dashboard")
       for (const link of dashboardLinks) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", appRoute)
+        expect(link).toHaveAttribute("href", dashboardRoute)
       }
 
       const booksLinks = getAllByText("Books")
       for (const link of booksLinks) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", `${appRoute}/books`)
+        expect(link).toHaveAttribute("href", `${dashboardRoute}/books`)
       }
 
       const librariesLinks = getAllByText("Libraries")
       for (const link of librariesLinks) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", `${appRoute}/libraries`)
+        expect(link).toHaveAttribute("href", `${dashboardRoute}/libraries`)
       }
     })
 
@@ -108,7 +108,7 @@ describe(`App shell`, () => {
       const { getByTestId } = render(<AppShell />)
       const logo = getByTestId("logo")
       expect(logo).toBeInTheDocument()
-      expect(logo.parentNode).toHaveAttribute("href", appRoute)
+      expect(logo.parentNode).toHaveAttribute("href", dashboardRoute)
     })
 
     it(`renders nav`, () => {
@@ -117,19 +117,19 @@ describe(`App shell`, () => {
       const dashboardLinks = getAllByText("Dashboard")
       for (const link of dashboardLinks) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", appRoute)
+        expect(link).toHaveAttribute("href", dashboardRoute)
       }
 
       const booksLinks = getAllByText("Books")
       for (const link of booksLinks) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", `${appRoute}/books`)
+        expect(link).toHaveAttribute("href", `${dashboardRoute}/books`)
       }
 
       const librariesLinks = getAllByText("Libraries")
       for (const link of librariesLinks) {
         expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", `${appRoute}/libraries`)
+        expect(link).toHaveAttribute("href", `${dashboardRoute}/libraries`)
       }
     })
 

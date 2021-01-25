@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 import { useSession, Session } from "@lib/auth0"
 import { HomeShell } from "@components/shell"
-import { appRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
+import { dashboardRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 
 import { fakeUser } from "../fixtures/session"
 
@@ -141,7 +141,7 @@ describe(`Home shell`, () => {
       const { getByText } = render(<HomeShell />)
       const link = getByText("Dashboard")
       expect(link).toBeInTheDocument()
-      expect(link).toHaveAttribute("href", appRoute)
+      expect(link).toHaveAttribute("href", dashboardRoute)
     })
 
     it(`renders user's avatar`, () => {
