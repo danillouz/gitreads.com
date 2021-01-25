@@ -18,6 +18,7 @@ import { Footer, FooterLink } from "@components/footer"
 
 type LogoLinkProps = {
   gradientId: string
+  href: string
 }
 
 const LogoLink = (props: LogoLinkProps): JSX.Element => {
@@ -25,7 +26,7 @@ const LogoLink = (props: LogoLinkProps): JSX.Element => {
     <>
       <span className="sr-only">GitReads</span>
 
-      <Link href="/">
+      <Link href={props.href}>
         <a className="flex items-center justify-center bg-gray-800 rounded-full shadow-sm w-14 h-14 focus:outline-white">
           <Logo gradientId={props.gradientId} />
         </a>
@@ -61,12 +62,12 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
                     <UserMenuItem href={logoutUrl}>Logout</UserMenuItem>
                   </UserMenu>
                 ) : (
-                  <LogoLink gradientId="gr_id_1" />
+                  <LogoLink gradientId="gr_id_1" href="/" />
                 )}
               </div>
 
               <div className="sm:hidden">
-                <LogoLink gradientId="gr_id_2" />
+                <LogoLink gradientId="gr_id_2" href="/" />
               </div>
 
               <div
@@ -102,7 +103,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
                         <NavLink href={loginUrl}>Login</NavLink>
 
                         <Link href={signupUrl}>
-                          <a className="text-white rounded-full shadow-sm btn btn-sm purple-gradient hover:shadow-purple-blur focus:ring-offset-gray-800 focus:ring-white">
+                          <a className="text-white rounded-full shadow-sm btn btn-sm purple-gradient hover:shadow-purple-blur focus:outline-white">
                             Signup
                           </a>
                         </Link>
@@ -206,7 +207,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
               </div>
 
               <div className="sm:hidden">
-                <LogoLink gradientId="gr_id_3" />
+                <LogoLink gradientId="gr_id_3" href={appRoute} />
               </div>
 
               <div

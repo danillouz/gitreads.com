@@ -74,16 +74,18 @@ describe(`App`, () => {
     })
 
     it(`renders header title`, () => {
-      const { getByText } = render(<App />)
-      const msg = getByText("Dashboard")
-      expect(msg).toBeInTheDocument()
+      const { getByTestId } = render(<App />)
+      const header = getByTestId("content-header")
+      expect(header).toBeInTheDocument()
+      expect(header).toHaveTextContent("Dashboard")
     })
 
     it(`renders welcome message`, () => {
-      const { getByText } = render(<App />)
+      const { getByTestId } = render(<App />)
       const [firstName] = fakeUser.name.split(" ") || []
-      const msg = getByText(`Welcome back ${firstName}. 👋`)
-      expect(msg).toBeInTheDocument()
+      const subtitle = getByTestId("content-subtitle")
+      expect(subtitle).toBeInTheDocument()
+      expect(subtitle).toHaveTextContent(`Welcome back ${firstName}. 👋`)
     })
 
     it(`renders quick actions`, () => {

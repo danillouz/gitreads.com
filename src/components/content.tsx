@@ -34,7 +34,12 @@ export const ContentHeader = (props: ContentHeaderProps): JSX.Element => {
           className="w-2/5 bg-gray-400 rounded h-9 sm:h-10 md:w-1/4 lg:w-1/5"
         />
       ) : (
-        <h1 className="text-3xl tracking-wide text-gray-300 sm:text-4xl">{props.title}</h1>
+        <h1
+          data-testid="content-header"
+          className="text-3xl tracking-wide text-gray-300 sm:text-4xl"
+        >
+          {props.title}
+        </h1>
       )}
 
       {isLoading ? (
@@ -43,7 +48,9 @@ export const ContentHeader = (props: ContentHeaderProps): JSX.Element => {
           className="w-4/5 my-2 bg-gray-400 rounded h-7 md:w-2/4 lg:w-2/5"
         />
       ) : (
-        <h2 className="my-2 text-xl tracking-wide text-gray-400">{props.subtitle}</h2>
+        <h2 data-testid="content-subtitle" className="my-2 text-xl tracking-wide text-gray-400">
+          {props.subtitle}
+        </h2>
       )}
     </div>
   )

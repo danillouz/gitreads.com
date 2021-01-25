@@ -37,23 +37,35 @@ describe(`App shell`, () => {
       const { getByTestId } = render(<AppShell />)
       const logo = getByTestId("logo")
       expect(logo).toBeInTheDocument()
-      expect(logo.parentNode).toHaveAttribute("href", "/app")
+      expect(logo.parentNode).toHaveAttribute("href", appRoute)
     })
 
-    it(`does not render nav`, () => {
-      const { queryAllByText } = render(<AppShell />)
+    it(`renders nav`, () => {
+      const { getAllByText } = render(<AppShell />)
 
-      const booksLink = queryAllByText("Books")
-      expect(booksLink).toHaveLength(0)
+      const dashboardLinks = getAllByText("Dashboard")
+      for (const link of dashboardLinks) {
+        expect(link).toBeInTheDocument()
+        expect(link).toHaveAttribute("href", appRoute)
+      }
 
-      const librariesLink = queryAllByText("Libraries")
-      expect(librariesLink).toHaveLength(0)
+      const booksLinks = getAllByText("Books")
+      for (const link of booksLinks) {
+        expect(link).toBeInTheDocument()
+        expect(link).toHaveAttribute("href", `${appRoute}/books`)
+      }
+
+      const librariesLinks = getAllByText("Libraries")
+      for (const link of librariesLinks) {
+        expect(link).toBeInTheDocument()
+        expect(link).toHaveAttribute("href", `${appRoute}/libraries`)
+      }
     })
 
     it(`renders footer`, () => {
       const { getByText, getByTestId } = render(<AppShell />)
 
-      const homeLink = getByText("Home")
+      const homeLink = getByText("Homepage")
       expect(homeLink).toBeInTheDocument()
       expect(homeLink).toHaveAttribute("href", "/")
 
@@ -102,6 +114,12 @@ describe(`App shell`, () => {
     it(`renders nav`, () => {
       const { getAllByText } = render(<AppShell />)
 
+      const dashboardLinks = getAllByText("Dashboard")
+      for (const link of dashboardLinks) {
+        expect(link).toBeInTheDocument()
+        expect(link).toHaveAttribute("href", appRoute)
+      }
+
       const booksLinks = getAllByText("Books")
       for (const link of booksLinks) {
         expect(link).toBeInTheDocument()
@@ -116,51 +134,35 @@ describe(`App shell`, () => {
     })
 
     it(`renders user's avatar`, () => {
-      const { getAllByTestId } = render(<AppShell />)
-      const avatars = getAllByTestId("avatar")
-      expect(avatars).toHaveLength(2)
-
-      for (const link of avatars) {
-        expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("src", fakeUser.avatar)
-      }
+      const { getByTestId } = render(<AppShell />)
+      const avatar = getByTestId("avatar")
+      expect(avatar).toBeInTheDocument()
+      expect(avatar).toHaveAttribute("src", fakeUser.avatar)
     })
 
     it(`renders user's full name`, () => {
-      const { getAllByText } = render(<AppShell />)
-      const avatars = getAllByText(fakeUser.name)
-      expect(avatars).toHaveLength(2)
-
-      for (const link of avatars) {
-        expect(link).toBeInTheDocument()
-      }
+      const { getByText } = render(<AppShell />)
+      const name = getByText(fakeUser.name)
+      expect(name).toBeInTheDocument()
     })
 
     it(`renders user's email`, () => {
-      const { getAllByText } = render(<AppShell />)
-      const avatars = getAllByText(fakeUser.email)
-      expect(avatars).toHaveLength(2)
-
-      for (const link of avatars) {
-        expect(link).toBeInTheDocument()
-      }
+      const { getByText } = render(<AppShell />)
+      const email = getByText(fakeUser.email)
+      expect(email).toBeInTheDocument()
     })
 
     it(`renders logout link`, () => {
-      const { getAllByText } = render(<AppShell />)
-      const links = getAllByText("Logout")
-      expect(links).toHaveLength(2)
-
-      for (const link of links) {
-        expect(link).toBeInTheDocument()
-        expect(link).toHaveAttribute("href", logoutUrl)
-      }
+      const { getByText } = render(<AppShell />)
+      const link = getByText("Logout")
+      expect(link).toBeInTheDocument()
+      expect(link).toHaveAttribute("href", logoutUrl)
     })
 
     it(`renders footer`, () => {
       const { getByText, getByTestId } = render(<AppShell />)
 
-      const homeLink = getByText("Home")
+      const homeLink = getByText("Homepage")
       expect(homeLink).toBeInTheDocument()
       expect(homeLink).toHaveAttribute("href", "/")
 

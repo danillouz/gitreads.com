@@ -36,9 +36,9 @@ describe(`Home`, () => {
       const hero = getByTestId("hero")
       expect(hero).toBeInTheDocument()
 
-      const cta = getByText("Git started")
+      const cta = getByText("Git started for free")
       expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", appRoute)
+      expect(cta.parentNode).toHaveAttribute("href", appRoute)
     })
   })
 
@@ -60,9 +60,9 @@ describe(`Home`, () => {
 
     it(`renders main CTA`, () => {
       const { getByText } = render(<Home />)
-      const cta = getByText("Git started")
+      const cta = getByText("Git started for free")
       expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", appRoute)
+      expect(cta.parentNode).toHaveAttribute("href", appRoute)
     })
   })
 
@@ -84,9 +84,9 @@ describe(`Home`, () => {
 
     it(`renders main CTA`, () => {
       const { getByText } = render(<Home />)
-      const cta = getByText("Git started")
+      const cta = getByText("Git started for free")
       expect(cta).toBeInTheDocument()
-      expect(cta).toHaveAttribute("href", appRoute)
+      expect(cta.parentNode).toHaveAttribute("href", appRoute)
     })
   })
 })
