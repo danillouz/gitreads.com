@@ -49,7 +49,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
     <Page title="GitReads">
       <div className="flex flex-col min-h-screen">
         <header className="sticky top-0 z-10">
-          <div className="px-0 mx-auto page-container sm:px-4">
+          <div className="page-container mx-auto px-0 sm:px-4">
             <div className="flex items-center justify-between h-20 px-4 bg-gray-700 shadow-lg md:space-x-4 sm:rounded-full sm:bg-opacity-95 sm:mt-4">
               <div className="hidden sm:flex lg:flex-1">
                 {user ? (
@@ -193,7 +193,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
     <Page title="App - GitReads">
       <div className="flex flex-col min-h-screen">
         <header className="sticky top-0 z-10">
-          <div className="px-0 mx-auto page-container sm:px-4">
+          <div className="page-container mx-auto px-0 sm:px-4">
             <div className="flex items-center justify-between h-20 px-4 bg-gray-700 shadow-lg sm:space-x-4 sm:justify-start sm:rounded-full sm:bg-opacity-95 sm:mt-4">
               <div className="hidden sm:flex">
                 <UserDropdown

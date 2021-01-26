@@ -41,17 +41,11 @@ export const UserDropdown = (props: UserDropdownProps): JSX.Element => {
                   className="absolute w-56 mt-2 origin-top-left bg-gray-600 divide-y divide-gray-500 rounded-lg shadow-xl outline-none left-7"
                 >
                   <div className="px-4 py-3">
-                    <p
-                      className="text-sm antialiased leading-5 text-gray-300 truncate"
-                      title={name}
-                    >
+                    <p className="mb-1 antialiased leading-5 text-gray-300 truncate" title={name}>
                       {name}
                     </p>
 
-                    <p
-                      className="text-sm antialiased leading-5 text-gray-400 truncate"
-                      title={email}
-                    >
+                    <p className="antialiased leading-5 text-gray-400 truncate" title={email}>
                       {email}
                     </p>
                   </div>
@@ -80,7 +74,7 @@ export const UserDropdownLink = (props: UserDropdownLinkProps): JSX.Element => {
         <Link href={props.href}>
           <a
             className={clsx(
-              "flex justify-between w-full px-4 py-2 text-sm text-gray-300 leading-5 antialiased hover:text-white hover:bg-gray-500",
+              "flex justify-between w-full px-4 py-2 text-gray-300 leading-5 antialiased hover:text-white hover:bg-gray-500",
               {
                 "bg-gray-500 text-white": active,
               },

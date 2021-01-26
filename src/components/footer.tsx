@@ -7,7 +7,7 @@ type FooterProps = {
 export const Footer = (props: FooterProps): JSX.Element => {
   return (
     <footer className="bg-gray-800 border-t border-gray-700">
-      <div className="px-4 py-10 mx-auto page-container">
+      <div className="page-container mx-auto px-4 py-10">
         <div className="flex flex-col justify-center space-y-8 md:space-y-0 md:flex-row md:justify-between">
           <div className="flex flex-col items-center justify-center space-y-2 md:space-y-0 md:flex-row md:-mx-3 md:space-x-3">
             {props.children}

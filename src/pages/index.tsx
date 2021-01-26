@@ -5,7 +5,7 @@ import { dashboardRoute } from "@config/auth"
 export const Home = (): JSX.Element => {
   return (
     <HomeShell>
-      <div className="px-4 mx-auto page-container">
+      <div className="page-container mx-auto px-4">
         <h1
           data-testid="hero"
           className="mt-10 mb-8 font-bold leading-none tracking-tight text-7xl md:text-8xl lg:text-9xl sm:mt-14 sm:mb-10"

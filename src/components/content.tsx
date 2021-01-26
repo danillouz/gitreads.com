@@ -63,7 +63,7 @@ type ContentContainerProps = {
 
 export const ContentContainer = (props: ContentContainerProps): JSX.Element => {
   return (
-    <div className={clsx("page-container px-4 mx-auto", props.className)}>{props.children}</div>
+    <div className={clsx("page-container mx-auto px-4", props.className)}>{props.children}</div>
   )
 }
 

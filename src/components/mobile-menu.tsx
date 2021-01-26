@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { Transition } from "@headlessui/react"
 import Avatar from "@components/avatar"
-import { useEffect } from "react"
 
 type MenuButtonProps = {
   isDisabled: boolean
@@ -46,24 +45,16 @@ type MobileMenuProps = {
 export const MobileMenu = (props: MobileMenuProps): JSX.Element => {
   const { isOpen } = props
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add("menu-open")
-    } else {
-      document.body.classList.remove("menu-open")
-    }
-  })
-
   return (
     <Transition
       show={isOpen}
       enter="duration-200 ease-out"
-      enterFrom="opacity-0 scale-95"
-      enterTo="opacity-100 scale-100"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
       leave="duration-100 ease-in"
-      leaveFrom="opacity-100 scale-100"
-      leaveTo="opacity-0 scale-95"
-      className="fixed inset-x-0 bottom-0 z-20 transition origin-top-right transform top-20 md:hidden"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
+      className="fixed inset-x-0 z-20 transition origin-top-right transform shadow-lg top-20 md:hidden"
     >
       <div className="h-full bg-gray-700 divide-y divide-gray-600">{props.children}</div>
     </Transition>
@@ -105,7 +96,7 @@ export const MobileMenuUserInfo = (props: UserInfoProps): JSX.Element => {
   return (
     <div className="flex items-center space-x-3">
       <div className="flex items-center">
-        <Avatar src={props.avatar} />
+        <Avatar className="w-12 h-12" src={props.avatar} />
       </div>
 
       <div>
