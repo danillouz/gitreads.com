@@ -24,7 +24,7 @@ export const Home = (): JSX.Element => {
 
         <div className="flex flex-wrap items-center my-12 text-center">
           <Link href={dashboardRoute}>
-            <a className="flex items-center w-full space-x-2 text-white rounded-lg shadow-md purple-gradient hover:shadow-purple-blur sm:w-auto btn sm:btn-lg focus:ring-offset-gray-800 focus:ring-white">
+            <a className="flex items-center w-full space-x-2 text-white rounded-lg shadow-md purple-gradient hover:shadow-purple-blur sm:w-auto btn sm:btn-lg focus:ring-white">
               <span>Git started for free</span>
 
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

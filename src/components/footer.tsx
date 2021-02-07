@@ -17,7 +17,7 @@ export const Footer = (props: FooterProps): JSX.Element => {
             data-testid="copyright"
             className="flex items-center self-center justify-center text-sm antialiased text-center text-gray-400 md:self-auto"
           >
-            Copyright &copy; {new Date().getFullYear()} GitReads.
+            Copyright &copy; {new Date().getFullYear()} GitReads
           </div>
         </div>
       </div>

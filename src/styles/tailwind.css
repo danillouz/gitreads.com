@@ -69,6 +69,10 @@ For more info see: https://tailwindcss.com/docs/extracting-components#extracting
     @apply bg-gradient-to-br from-fuchsia-500 to-purple-600;
   }
 
+  .super-gradient {
+    @apply bg-gradient-to-r from-blue-400 via-indigo-500 to-pink-600;
+  }
+
   /* Buttons */
 
   .btn {

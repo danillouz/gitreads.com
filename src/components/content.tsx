@@ -2,6 +2,17 @@ import Link from "next/link"
 import clsx from "clsx"
 import { ReactNode } from "react"
 
+type ContentContainerProps = {
+  children: React.ReactNode
+  className?: string
+}
+
+export const ContentContainer = (props: ContentContainerProps): JSX.Element => {
+  return (
+    <div className={clsx("page-container mx-auto px-4", props.className)}>{props.children}</div>
+  )
+}
+
 type ContentHeaderProps = {
   isLoading: boolean
   title: string | React.ReactNode
@@ -19,51 +30,34 @@ export const ContentHeader = (props: ContentHeaderProps): JSX.Element => {
     >
       <div className="flex items-center h-14">
         {isLoading ? (
-          <div
-            data-testid="skeleton"
-            className="w-3/12 h-5 bg-gray-400 rounded md:w-2/12 lg:w-1/12"
-          />
+          <div data-testid="skeleton" className="w-32 h-5 bg-gray-400 rounded" />
         ) : (
           <span className="-mx-3 link"></span>
         )}
       </div>
 
       {isLoading ? (
-        <div
-          data-testid="skeleton"
-          className="w-2/5 bg-gray-400 rounded h-9 sm:h-10 md:w-1/4 lg:w-1/5"
-        />
+        <div data-testid="skeleton" className="w-80 bg-gray-400 rounded h-9 sm:h-10" />
       ) : (
         <h1
           data-testid="content-header"
-          className="text-3xl tracking-wide text-gray-300 sm:text-4xl"
+          className="text-3xl tracking-wide text-white antialiased sm:text-4xl"
         >
           {props.title}
         </h1>
       )}
 
       {isLoading ? (
-        <div
-          data-testid="skeleton"
-          className="w-4/5 my-2 bg-gray-400 rounded h-7 md:w-2/4 lg:w-2/5"
-        />
+        <div data-testid="skeleton" className="w-48 my-2 bg-gray-400 rounded h-7" />
       ) : (
-        <h2 data-testid="content-subtitle" className="my-2 text-xl tracking-wide text-gray-400">
+        <h2
+          data-testid="content-subtitle"
+          className="my-2 text-xl tracking-wide text-gray-300 antialiased"
+        >
           {props.subtitle}
         </h2>
       )}
     </div>
-  )
-}
-
-type ContentContainerProps = {
-  children: React.ReactNode
-  className?: string
-}
-
-export const ContentContainer = (props: ContentContainerProps): JSX.Element => {
-  return (
-    <div className={clsx("page-container mx-auto px-4", props.className)}>{props.children}</div>
   )
 }
 
@@ -74,7 +68,9 @@ type ContentSectionProps = {
 
 export const ContenteSection = (props: ContentSectionProps): JSX.Element => {
   return (
-    <section className={clsx("bg-white rounded-lg shadow-md", props.className)}>
+    <section
+      className={clsx("border border-gray-600 rounded-lg transition duration-200", props.className)}
+    >
       {props.children}
     </section>
   )
@@ -89,7 +85,7 @@ export const ContentSectionTitle = (props: ContentSectionTitleProps): JSX.Elemen
   return (
     <h3
       className={clsx(
-        "flex items-center space-x-2 pb-2 text-2xl border-b border-gray-100",
+        "flex items-center space-x-2 px-4 py-5 sm:px-6 text-2xl text-white antialiased",
         props.className
       )}
     >
@@ -110,11 +106,11 @@ export const ContentAction = (props: ContentActionProps): JSX.Element => {
   const { isLoading, icon, name } = props
 
   const className = clsx(
-    "flex sm:flex-col items-center sm:justify-center sm:mr-5 mb-6 sm:mb-5 px-5 sm:px-2 py-5 w-full sm:w-40 h-18 sm:h-30 space-x-3 sm:space-x-0 sm:space-y-1 font-medium text-lg sm:text-base text-gray-50 tracking-wider rounded-lg shadow-md transform-gpu transition duration-200",
+    "flex sm:flex-col items-center sm:justify-center sm:mr-5 mb-6 sm:mb-5 px-5 sm:px-2 py-5 w-full sm:w-40 h-18 sm:h-30 space-x-3 sm:space-x-0 sm:space-y-1 font-medium text-lg sm:text-base text-white antialiased tracking-wider rounded-lg shadow-md transform-gpu transition duration-200",
     props.className,
     {
       "cursor-not-allowed": isLoading,
-      "hover:text-white hover:scale-105 hover:shadow-lg focus:outline-white": !isLoading,
+      "hover:scale-105 hover:shadow-lg focus:outline-white": !isLoading,
     }
   )
 
