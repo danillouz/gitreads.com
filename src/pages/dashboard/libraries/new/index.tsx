@@ -1,6 +1,7 @@
+import { useUser } from "@auth0/nextjs-auth0"
 import Link from "next/link"
 import clsx from "clsx"
-import { useSession } from "@lib/auth0"
+
 import { AppShell } from "@components/shell"
 import { ContentHeader, ContentContainer } from "@components/content"
 import { GitHubIcon, AirtableIcon, NotionIcon } from "@components/icons"
@@ -76,7 +77,7 @@ const ProviderCard = (props: CardProps): JSX.Element => {
 }
 
 export const NewLibrary = (): JSX.Element => {
-  const { isLoading, user } = useSession()
+  const { isLoading, user } = useUser()
   const hasSession = !isLoading && Boolean(user)
 
   return (

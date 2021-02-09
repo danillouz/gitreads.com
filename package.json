@@ -11,7 +11,7 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "0.16.1",
+    "@auth0/nextjs-auth0": "1.0.0-beta.1",
     "@headlessui/react": "0.3.0",
     "autoprefixer": "10.2.4",
     "clsx": "1.1.1",

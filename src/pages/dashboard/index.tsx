@@ -1,4 +1,5 @@
-import { useSession } from "@lib/auth0"
+import { useUser } from "@auth0/nextjs-auth0"
+
 import { AppShell } from "@components/shell"
 import { ContentHeader, ContentContainer, ContentAction } from "@components/content"
 import { LibraryIcon, BookIcon, GlobeIcon } from "@components/icons"
@@ -6,7 +7,7 @@ import { dashboardRoute } from "@config/auth"
 
 type QuickActionsProps = {
   isLoading: boolean
-  username: string
+  username?: string
 }
 
 const QuickActions = (props: QuickActionsProps): JSX.Element => {
@@ -41,8 +42,9 @@ const QuickActions = (props: QuickActionsProps): JSX.Element => {
   )
 }
 
-export const App = (): JSX.Element => {
-  const { isLoading, user } = useSession()
+export const Dashboard = (): JSX.Element => {
+  const { user, isLoading } = useUser()
+
   const hasSession = !isLoading && Boolean(user)
   const [firstName] = user?.name.split(" ") || []
 
@@ -56,11 +58,11 @@ export const App = (): JSX.Element => {
         />
 
         <div className="flex flex-wrap my-8">
-          <QuickActions isLoading={!hasSession} username={user?.username} />
+          <QuickActions isLoading={!hasSession} username={user?.nickname} />
         </div>
       </ContentContainer>
     </AppShell>
   )
 }
 
-export default App
+export default Dashboard

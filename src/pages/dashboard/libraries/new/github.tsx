@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useUser } from "@auth0/nextjs-auth0"
 import Link from "next/link"
 
 import {
@@ -11,7 +12,6 @@ import {
 } from "@config/github"
 
 import { githubMeEndpoint } from "@config/providers"
-import { useSession } from "@lib/auth0"
 import { GitHubProviderMeResponse, GitHubProvider, GitHubRepo } from "@lib/api/types"
 import { AppShell } from "@components/shell"
 
@@ -198,7 +198,7 @@ const AppInfo = (props: AppInfoProps): JSX.Element => {
 }
 
 export const GitHub = (): JSX.Element => {
-  const { isLoading, user } = useSession()
+  const { isLoading, user } = useUser()
   const hasSession = !isLoading && Boolean(user)
 
   const [isFetching, setIsFetching] = useState<boolean>(true)

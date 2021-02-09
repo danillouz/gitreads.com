@@ -1,33 +1,35 @@
 import { render } from "@testing-library/react"
-import { useSession, Session } from "@lib/auth0"
+import { useUser, UserContext } from "@auth0/nextjs-auth0"
+
 import { HomeShell } from "@components/shell"
 import { dashboardRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 
 import { fakeUser } from "../fixtures/session"
 
-jest.mock("@lib/auth0")
+jest.mock("@auth0/nextjs-auth0")
 
-const mockUseSession = useSession as jest.MockedFunction<typeof useSession>
+const mockUseUser = useUser as jest.MockedFunction<typeof useUser>
 
 describe(`Home shell`, () => {
   beforeEach(() => {
-    mockUseSession.mockClear()
+    mockUseUser.mockClear()
   })
 
   describe(`when loading the user session`, () => {
     beforeEach(() => {
-      mockUseSession.mockImplementation(
-        (): Session => {
+      mockUseUser.mockImplementation(
+        (): UserContext => {
           return {
             user: null,
             isLoading: true,
+            checkSession: () => Promise.resolve(),
           }
         }
       )
     })
 
     afterEach(() => {
-      expect(mockUseSession).toBeCalledTimes(1)
+      expect(mockUseUser).toBeCalledTimes(1)
     })
 
     it(`renders logo`, () => {
@@ -54,18 +56,19 @@ describe(`Home shell`, () => {
 
   describe(`without a user session`, () => {
     beforeEach(() => {
-      mockUseSession.mockImplementation(
-        (): Session => {
+      mockUseUser.mockImplementation(
+        (): UserContext => {
           return {
             user: null,
             isLoading: false,
+            checkSession: () => Promise.resolve(),
           }
         }
       )
     })
 
     afterEach(() => {
-      expect(mockUseSession).toBeCalledTimes(1)
+      expect(mockUseUser).toBeCalledTimes(1)
     })
 
     it(`renders logo`, () => {
@@ -114,18 +117,19 @@ describe(`Home shell`, () => {
 
   describe(`with a user session`, () => {
     beforeEach(() => {
-      mockUseSession.mockImplementation(
-        (): Session => {
+      mockUseUser.mockImplementation(
+        (): UserContext => {
           return {
             user: fakeUser,
             isLoading: false,
+            checkSession: () => Promise.resolve(),
           }
         }
       )
     })
 
     afterEach(() => {
-      expect(mockUseSession).toBeCalledTimes(1)
+      expect(mockUseUser).toBeCalledTimes(1)
     })
 
     it(`renders logo`, () => {
@@ -148,7 +152,7 @@ describe(`Home shell`, () => {
       const { getByTestId } = render(<HomeShell />)
       const avatar = getByTestId("avatar")
       expect(avatar).toBeInTheDocument()
-      expect(avatar).toHaveAttribute("src", fakeUser.avatar)
+      expect(avatar).toHaveAttribute("src", fakeUser.picture)
     })
 
     it(`renders footer`, () => {

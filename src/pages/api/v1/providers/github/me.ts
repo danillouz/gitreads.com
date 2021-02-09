@@ -1,24 +1,19 @@
+import { withApiAuthRequired } from "@auth0/nextjs-auth0"
 import { NextApiRequest, NextApiResponse } from "next"
-import { ApiError, GitHubProviderMeResponse } from "@lib/api/types"
+
 import auth0 from "@lib/auth0"
+import { GitHubProviderMeResponse } from "@lib/api/types"
 import { connect } from "@lib/mongodb"
 import { getInstallationToken, getInstallationRepos } from "@lib/github"
 
 const githubMe = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const session = await auth0.getSession(req)
-
-    if (!session || !session.user) {
-      const err: ApiError = new Error("Unauthorized")
-      err.status = 401
-
-      throw err
-    }
+    const { user } = await auth0.getSession(req, res)
 
     const { db } = await connect()
     const provider = await db.collection("providers").findOne({
       type: "GitHub",
-      userId: session.user.sub,
+      userId: user.sub,
     })
 
     if (!provider) {
@@ -51,4 +46,4 @@ const githubMe = async (req: NextApiRequest, res: NextApiResponse): Promise<void
   }
 }
 
-export default githubMe
+export default withApiAuthRequired(githubMe)

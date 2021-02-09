@@ -1,11 +1,11 @@
-import { User } from "@lib/auth0"
+import { UserProfile } from "@auth0/nextjs-auth0"
 
-export const fakeUser: User = {
-  id: "auth0|5fe1c3f1d1e0eff6c2dff18d",
+export const fakeUser: UserProfile = {
+  sub: "auth0|5fe1c3f1d1e0eff6c2dff18d",
   name: "Jane Doe",
-  username: "jdoe",
+  nickname: "jdoe",
   email: "jdoe@gitreads.com",
-  emailIsVerified: true,
-  avatar: "https://avatar.com/jdoe",
-  updatedAt: null,
+  email_verified: true,
+  picture: "https://avatar.com/jdoe",
+  updated_at: null,
 }

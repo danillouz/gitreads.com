@@ -1,22 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next"
+import { withApiAuthRequired } from "@auth0/nextjs-auth0"
 
-import { newGithubLibraryRoute } from "@config/github"
-import { ApiError } from "@lib/api/types"
 import auth0 from "@lib/auth0"
 import { GitHubCallbackParams } from "@lib/github"
 import { connect } from "@lib/mongodb"
+import { newGithubLibraryRoute } from "@config/github"
+import { ApiError } from "@lib/api/types"
 
 const installed = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    // 1. Check if there's a session for the user installing the GitHub app
-    const session = await auth0.getSession(req)
-
-    if (!session || !session.user) {
-      const err: ApiError = new Error("Unauthorized")
-      err.status = 401
-
-      throw err
-    }
+    // 1. Get the session for the user installing the GitHub app
+    const session = await auth0.getSession(req, res)
 
     // 2. Extract the install ID
     const { installation_id, setup_action }: GitHubCallbackParams = req.query
@@ -52,4 +46,4 @@ const installed = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
   }
 }
 
-export default installed
+export default withApiAuthRequired(installed)

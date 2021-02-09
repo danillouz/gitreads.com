@@ -1,7 +1,9 @@
 import { useState } from "react"
+import { useUser } from "@auth0/nextjs-auth0"
 import Link from "next/link"
 import clsx from "clsx"
-import { useSession, useLoginIsRequired } from "@lib/auth0"
+
+import { useLoginIsRequired } from "@lib/auth0"
 import { dashboardRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 import Page from "@components/page"
 import { Logo } from "@components/logo"
@@ -40,7 +42,7 @@ type ShellProps = {
 }
 
 export const HomeShell = (props: ShellProps): JSX.Element => {
-  const { user, isLoading } = useSession()
+  const { user, isLoading } = useUser()
 
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState<boolean>(false)
   const handleMenuButtonClick = () => setMobileMenuIsOpen((isOpen) => !isOpen)
@@ -55,7 +57,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
                 {user ? (
                   <UserDropdown
                     isDisabled={isLoading}
-                    avatarUrl={user.avatar}
+                    avatarUrl={user.picture}
                     name={user.name}
                     email={user.email}
                   >
@@ -133,7 +135,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
             <div className="px-4 py-6 space-y-6">
               {user ? (
                 <>
-                  <MobileMenuUserInfo avatar={user.avatar} name={user.name} email={user.email} />
+                  <MobileMenuUserInfo avatar={user.picture} name={user.name} email={user.email} />
 
                   <div className="grid gap-y-6">
                     <MobileMenuNavLink href={dashboardRoute}>Dashboard</MobileMenuNavLink>
@@ -179,11 +181,10 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
 }
 
 export const AppShell = (props: ShellProps): JSX.Element => {
-  const session = useSession()
+  const { user, isLoading } = useUser()
 
-  useLoginIsRequired(session)
+  useLoginIsRequired({ user, isLoading })
 
-  const { user, isLoading } = session
   const hasSession = !isLoading && Boolean(user)
 
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState<boolean>(false)
@@ -198,7 +199,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
               <div className="hidden sm:flex">
                 <UserDropdown
                   isDisabled={!hasSession}
-                  avatarUrl={user?.avatar}
+                  avatarUrl={user?.picture}
                   name={user?.name}
                   email={user?.email}
                 >
@@ -245,7 +246,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
             </div>
 
             <div className="px-4 py-6 space-y-6">
-              <MobileMenuUserInfo avatar={user.avatar} name={user.name} email={user.email} />
+              <MobileMenuUserInfo avatar={user.picture} name={user.name} email={user.email} />
 
               <div className="grid gap-y-6">
                 <MobileMenuNavLink href={logoutUrl}>Logout</MobileMenuNavLink>

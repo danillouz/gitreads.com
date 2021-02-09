@@ -1,46 +1,50 @@
 import { render } from "@testing-library/react"
-import { useSession, useLoginIsRequired, Session } from "@lib/auth0"
-import { App } from "@pages/dashboard/index"
+import { useUser, UserContext } from "@auth0/nextjs-auth0"
+
+import { useLoginIsRequired } from "@lib/auth0"
+import { Dashboard } from "@pages/dashboard/index"
 import { dashboardRoute } from "@config/auth"
 
 import { fakeUser } from "../fixtures/session"
 
+jest.mock("@auth0/nextjs-auth0")
 jest.mock("@lib/auth0")
 
-const mockUseSession = useSession as jest.MockedFunction<typeof useSession>
+const mockUseUser = useUser as jest.MockedFunction<typeof useUser>
 const mockUseLoginIsRequired = useLoginIsRequired as jest.MockedFunction<typeof useLoginIsRequired>
 
-describe(`App`, () => {
+describe(`Dashboard`, () => {
   beforeEach(() => {
-    mockUseSession.mockClear()
+    mockUseUser.mockClear()
     mockUseLoginIsRequired.mockClear()
   })
 
   describe(`without a user session`, () => {
     beforeEach(() => {
-      mockUseSession.mockImplementation(
-        (): Session => {
+      mockUseUser.mockImplementation(
+        (): UserContext => {
           return {
             user: null,
             isLoading: false,
+            checkSession: () => Promise.resolve(),
           }
         }
       )
     })
 
     afterEach(() => {
-      expect(mockUseSession).toBeCalledTimes(2)
+      expect(mockUseUser).toBeCalledTimes(2)
       expect(mockUseLoginIsRequired).toBeCalledTimes(1)
     })
 
     it(`renders loading skeleton`, () => {
-      const { getAllByTestId } = render(<App />)
+      const { getAllByTestId } = render(<Dashboard />)
       const skeleton = getAllByTestId("skeleton")
       expect(skeleton).toHaveLength(3)
     })
 
     it(`renders disabled quick actions`, () => {
-      const { getByText } = render(<App />)
+      const { getByText } = render(<Dashboard />)
 
       const addBook = getByText("Add book")
       expect(addBook).toBeInTheDocument()
@@ -58,30 +62,31 @@ describe(`App`, () => {
 
   describe(`with a user session`, () => {
     beforeEach(() => {
-      mockUseSession.mockImplementation(
-        (): Session => {
+      mockUseUser.mockImplementation(
+        (): UserContext => {
           return {
             user: fakeUser,
             isLoading: false,
+            checkSession: () => Promise.resolve(),
           }
         }
       )
     })
 
     afterEach(() => {
-      expect(mockUseSession).toBeCalledTimes(2)
+      expect(mockUseUser).toBeCalledTimes(2)
       expect(mockUseLoginIsRequired).toBeCalledTimes(1)
     })
 
     it(`renders header title`, () => {
-      const { getByTestId } = render(<App />)
+      const { getByTestId } = render(<Dashboard />)
       const header = getByTestId("content-header")
       expect(header).toBeInTheDocument()
       expect(header).toHaveTextContent("Dashboard")
     })
 
     it(`renders welcome message`, () => {
-      const { getByTestId } = render(<App />)
+      const { getByTestId } = render(<Dashboard />)
       const [firstName] = fakeUser.name.split(" ") || []
       const subtitle = getByTestId("content-subtitle")
       expect(subtitle).toBeInTheDocument()
@@ -89,7 +94,7 @@ describe(`App`, () => {
     })
 
     it(`renders quick actions`, () => {
-      const { getByText } = render(<App />)
+      const { getByText } = render(<Dashboard />)
 
       const addBook = getByText("Add book")
       expect(addBook).toBeInTheDocument()
@@ -101,7 +106,7 @@ describe(`App`, () => {
 
       const publicProfile = getByText("Public profile")
       expect(publicProfile).toBeInTheDocument()
-      expect(publicProfile.parentNode).toHaveAttribute("href", `/${fakeUser.username}`)
+      expect(publicProfile.parentNode).toHaveAttribute("href", `/${fakeUser.nickname}`)
     })
   })
 })
