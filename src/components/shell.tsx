@@ -176,7 +176,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
       <div className="flex flex-col min-h-screen">
         <header>
           <div className="page-container mx-auto px-4">
-            <div className="flex items-center justify-end sm:justify-between h-20 sm:justify-start border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-end sm:justify-between h-20 border-b border-gray-200 dark:border-gray-700">
               <Nav>
                 <NavLink href={dashboardRoute}>Dashboard</NavLink>
                 <NavLink href={`${dashboardRoute}/books`}>Books</NavLink>

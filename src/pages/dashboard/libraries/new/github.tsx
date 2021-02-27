@@ -24,7 +24,6 @@ import {
 
 import { List, ListItem } from "@components/list"
 import { InfoIcon, GitHubIcon } from "@components/icons"
-import { formatDate } from "@utils/format-date"
 
 type AppInstallProps = {
   appPageLink: string
@@ -153,7 +152,7 @@ const AppInfo = (props: AppInfoProps): JSX.Element => {
         </h3>
 
         <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400 dark:antialiased">
-          {formatDate(props.createdAt)}
+          {new Date(props.createdAt).toDateString()}
         </p>
       </div>
 
