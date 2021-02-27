@@ -37,26 +37,17 @@ describe(`Dashboard`, () => {
       expect(mockUseLoginIsRequired).toBeCalledTimes(1)
     })
 
-    it(`renders loading skeleton`, () => {
-      const { getAllByTestId } = render(<Dashboard />)
-      const skeleton = getAllByTestId("skeleton")
-      expect(skeleton).toHaveLength(3)
-    })
-
-    it(`renders disabled quick actions`, () => {
+    it(`renders quick actions`, () => {
       const { getByText } = render(<Dashboard />)
 
       const addBook = getByText("Add book")
       expect(addBook).toBeInTheDocument()
-      expect(addBook.parentNode).not.toHaveAttribute("href")
 
       const newLibrary = getByText("New library")
       expect(newLibrary).toBeInTheDocument()
-      expect(newLibrary.parentNode).not.toHaveAttribute("href")
 
       const publicProfile = getByText("Public profile")
       expect(publicProfile).toBeInTheDocument()
-      expect(publicProfile.parentNode).not.toHaveAttribute("href")
     })
   })
 

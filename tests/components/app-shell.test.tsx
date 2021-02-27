@@ -37,13 +37,6 @@ describe(`App shell`, () => {
       expect(mockUseLoginIsRequired).toBeCalledTimes(1)
     })
 
-    it(`renders logo`, () => {
-      const { getByTestId } = render(<AppShell />)
-      const logo = getByTestId("logo")
-      expect(logo).toBeInTheDocument()
-      expect(logo.parentNode).toHaveAttribute("href", dashboardRoute)
-    })
-
     it(`renders nav`, () => {
       const { getAllByText } = render(<AppShell />)
 
@@ -69,7 +62,7 @@ describe(`App shell`, () => {
     it(`renders footer`, () => {
       const { getByText, getByTestId } = render(<AppShell />)
 
-      const homeLink = getByText("Homepage")
+      const homeLink = getByText("Home")
       expect(homeLink).toBeInTheDocument()
       expect(homeLink).toHaveAttribute("href", "/")
 
@@ -109,13 +102,6 @@ describe(`App shell`, () => {
       expect(mockUseLoginIsRequired).toBeCalledTimes(1)
     })
 
-    it(`renders logo`, () => {
-      const { getByTestId } = render(<AppShell />)
-      const logo = getByTestId("logo")
-      expect(logo).toBeInTheDocument()
-      expect(logo.parentNode).toHaveAttribute("href", dashboardRoute)
-    })
-
     it(`renders nav`, () => {
       const { getAllByText } = render(<AppShell />)
 
@@ -148,7 +134,7 @@ describe(`App shell`, () => {
     it(`renders footer`, () => {
       const { getByText, getByTestId } = render(<AppShell />)
 
-      const homeLink = getByText("Homepage")
+      const homeLink = getByText("Home")
       expect(homeLink).toBeInTheDocument()
       expect(homeLink).toHaveAttribute("href", "/")
 

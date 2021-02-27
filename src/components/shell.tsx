@@ -6,36 +6,17 @@ import clsx from "clsx"
 import { useLoginIsRequired } from "@lib/auth0"
 import { dashboardRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 import Page from "@components/page"
-import { Logo } from "@components/logo"
 import { Nav, NavLink } from "@components/nav"
 import {
   MobileMenu,
   MobileMenuButton,
+  MobileMenuButtonClose,
   MobileMenuNav,
   MobileMenuNavLink,
   MobileMenuUserInfo,
 } from "@components/mobile-menu"
 import { UserDropdown, UserDropdownLink } from "@components/user-dropdown"
 import { Footer, FooterLink } from "@components/footer"
-
-type LogoLinkProps = {
-  gradientId: string
-  href: string
-}
-
-const LogoLink = (props: LogoLinkProps): JSX.Element => {
-  return (
-    <>
-      <span className="sr-only">GitReads</span>
-
-      <Link href={props.href}>
-        <a className="flex items-center justify-center bg-gray-800 rounded-full shadow-sm w-14 h-14 focus:outline-white">
-          <Logo gradientId={props.gradientId} />
-        </a>
-      </Link>
-    </>
-  )
-}
 
 type ShellProps = {
   children?: React.ReactNode
@@ -45,31 +26,52 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
   const { user, isLoading } = useUser()
 
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState<boolean>(false)
-  const handleMenuButtonClick = () => setMobileMenuIsOpen((isOpen) => !isOpen)
+  const handleMenuButtonOpen = () => setMobileMenuIsOpen(true)
+  const handleMenuButtonClose = () => setMobileMenuIsOpen(false)
 
   return (
     <Page title="GitReads">
       <div className="flex flex-col min-h-screen">
-        <header className="sticky top-0 z-10">
-          <div className="page-container mx-auto px-0 sm:px-4">
-            <div className="flex items-center justify-between h-20 px-4 bg-gray-700 shadow-lg md:space-x-4 sm:rounded-full sm:bg-opacity-95 sm:mt-4">
-              <div className="hidden sm:flex lg:flex-1">
-                {user ? (
-                  <UserDropdown
-                    isDisabled={isLoading}
-                    avatarUrl={user.picture}
-                    name={user.name}
-                    email={user.email}
-                  >
-                    <UserDropdownLink href={logoutUrl}>Logout</UserDropdownLink>
-                  </UserDropdown>
-                ) : (
-                  <LogoLink gradientId="gr_id_1" href="/" />
-                )}
-              </div>
+        <header>
+          <div className="page-container mx-auto px-4">
+            <div className="flex items-center justify-end sm:justify-between h-20 border-b border-gray-200 dark:border-gray-700">
+              <Nav>
+                <NavLink href="/">Home</NavLink>
+              </Nav>
 
-              <div className="sm:hidden">
-                <LogoLink gradientId="gr_id_2" href="/" />
+              <div className="items-center justify-end hidden space-x-2 sm:flex sm:flex-1">
+                {!isLoading && (
+                  <>
+                    {user ? (
+                      <UserDropdown
+                        isDisabled={isLoading}
+                        avatarUrl={user.picture}
+                        name={user.name}
+                        email={user.email}
+                      >
+                        {user && (
+                          <UserDropdownLink href={dashboardRoute}>Dashboard</UserDropdownLink>
+                        )}
+                        <UserDropdownLink href={logoutUrl}>Logout</UserDropdownLink>
+                      </UserDropdown>
+                    ) : (
+                      <>
+                        <NavLink
+                          className="font-medium text-gray-800 hover:text-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
+                          href={loginUrl}
+                        >
+                          Log in
+                        </NavLink>
+
+                        <Link href={signupUrl}>
+                          <a className="btn btn-sm rounded-full text-gray-50 dark:text-gray-800 dark:antialiased bg-gray-800 dark:bg-gray-50 focus:outline-black dark:focus:outline-white">
+                            Sign up
+                          </a>
+                        </Link>
+                      </>
+                    )}
+                  </>
+                )}
               </div>
 
               <div
@@ -79,40 +81,9 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
                 })}
               >
                 <MobileMenuButton
-                  isDisabled={isLoading}
-                  isOpen={mobileMenuIsOpen}
-                  handleMenuButtonClick={handleMenuButtonClick}
+                  isDisabled={isLoading || mobileMenuIsOpen}
+                  handleMenuButtonClick={handleMenuButtonOpen}
                 />
-              </div>
-
-              <Nav>
-                {/* 
-                  Main nav, for example:
-                  
-                  <NavLink href="/product">Product</NavLink>
-                  <NavLink href="/pricing">Pricing</NavLink>
-                  <NavLink href="/docs">Docs</NavLink>
-                */}
-              </Nav>
-
-              <div className="items-center justify-end hidden space-x-2 sm:flex sm:flex-1">
-                {!isLoading && (
-                  <>
-                    {user ? (
-                      <NavLink href={dashboardRoute}>Dashboard</NavLink>
-                    ) : (
-                      <>
-                        <NavLink href={loginUrl}>Login</NavLink>
-
-                        <Link href={signupUrl}>
-                          <a className="text-white rounded-full shadow-sm btn btn-sm purple-gradient hover:shadow-purple-blur focus:outline-white">
-                            Signup
-                          </a>
-                        </Link>
-                      </>
-                    )}
-                  </>
-                )}
               </div>
             </div>
           </div>
@@ -120,19 +91,26 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
 
         {!isLoading && (
           <MobileMenu isOpen={mobileMenuIsOpen}>
-            <div className="px-4 py-5">
-              <MobileMenuNav>
-                {/*
-                Main nav, for example:
+            <div className="py-6 px-5">
+              <div className="flex items-center justify-between">
+                <div></div>
 
-                <MobileMenuNavLink href="/product">Product</MobileMenuNavLink>
-                <MobileMenuNavLink href="/pricing">Pricing</MobileMenuNavLink>
-                <MobileMenuNavLink href="/docs">Docs</MobileMenuNavLink>
-              */}
-              </MobileMenuNav>
+                <div className="-mr-2">
+                  <MobileMenuButtonClose
+                    isDisabled={isLoading || !mobileMenuIsOpen}
+                    handleMenuButtonClick={handleMenuButtonClose}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <MobileMenuNav>
+                  <MobileMenuNavLink href="/">Home</MobileMenuNavLink>
+                </MobileMenuNav>
+              </div>
             </div>
 
-            <div className="px-4 py-6 space-y-6">
+            <div className="py-6 px-5 space-y-6">
               {user ? (
                 <>
                   <MobileMenuUserInfo avatar={user.picture} name={user.name} email={user.email} />
@@ -145,16 +123,18 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
               ) : (
                 <div>
                   <Link href={signupUrl}>
-                    <a className="flex items-center justify-center w-full text-white rounded-full shadow-sm btn purple-gradient focus:outline-white">
-                      Signup
+                    <a className="flex items-center justify-center w-full btn rounded-full text-gray-50 bg-gray-800 dark:text-gray-800 dark:bg-gray-50 focus:outline-black dark:focus:outline-white">
+                      Sign up
                     </a>
                   </Link>
 
                   <p className="mt-6 text-base antialiased font-medium text-center">
                     <Link href={loginUrl}>
-                      <a className="font-semibold text-white focus:outline-white">
-                        <span className="font-normal text-gray-300">Already have an account?</span>{" "}
-                        Login
+                      <a className="font-semibold text-gray-800 dark:text-gray-50 focus:outline-black dark:focus:outline-white">
+                        <span className="font-normal text-gray-500 dark:text-gray-400">
+                          Already have an account?
+                        </span>{" "}
+                        Log in
                       </a>
                     </Link>
                   </p>
@@ -188,15 +168,22 @@ export const AppShell = (props: ShellProps): JSX.Element => {
   const hasSession = !isLoading && Boolean(user)
 
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState<boolean>(false)
-  const handleMenuButtonClick = () => setMobileMenuIsOpen((isOpen) => !isOpen)
+  const handleMenuButtonOpen = () => setMobileMenuIsOpen(true)
+  const handleMenuButtonClose = () => setMobileMenuIsOpen(false)
 
   return (
     <Page title="App - GitReads">
       <div className="flex flex-col min-h-screen">
-        <header className="sticky top-0 z-10">
-          <div className="page-container mx-auto px-0 sm:px-4">
-            <div className="flex items-center justify-between h-20 px-4 bg-gray-700 shadow-lg sm:space-x-4 sm:justify-start sm:rounded-full sm:bg-opacity-95 sm:mt-4">
-              <div className="hidden sm:flex">
+        <header>
+          <div className="page-container mx-auto px-4">
+            <div className="flex items-center justify-end sm:justify-between h-20 sm:justify-start border-b border-gray-200 dark:border-gray-700">
+              <Nav>
+                <NavLink href={dashboardRoute}>Dashboard</NavLink>
+                <NavLink href={`${dashboardRoute}/books`}>Books</NavLink>
+                <NavLink href={`${dashboardRoute}/libraries`}>Libraries</NavLink>
+              </Nav>
+
+              <div className="items-center justify-end hidden space-x-2 sm:flex sm:flex-1">
                 <UserDropdown
                   isDisabled={!hasSession}
                   avatarUrl={user?.picture}
@@ -207,45 +194,47 @@ export const AppShell = (props: ShellProps): JSX.Element => {
                 </UserDropdown>
               </div>
 
-              <div className="sm:hidden">
-                <LogoLink gradientId="gr_id_3" href={dashboardRoute} />
-              </div>
-
               <div
                 className={clsx("-mr-2 -my-2 sm:hidden transition-opacity duration-200", {
-                  "opacity-0": !hasSession,
-                  "opacity-100": hasSession,
+                  "opacity-0": isLoading,
+                  "opacity-100": !isLoading,
                 })}
               >
                 <MobileMenuButton
-                  isDisabled={!hasSession}
-                  isOpen={mobileMenuIsOpen}
-                  handleMenuButtonClick={handleMenuButtonClick}
+                  isDisabled={isLoading || mobileMenuIsOpen}
+                  handleMenuButtonClick={handleMenuButtonOpen}
                 />
               </div>
-
-              <Nav>
-                <NavLink href={dashboardRoute}>Dashboard</NavLink>
-                <NavLink href={`${dashboardRoute}/books`}>Books</NavLink>
-                <NavLink href={`${dashboardRoute}/libraries`}>Libraries</NavLink>
-              </Nav>
             </div>
           </div>
         </header>
 
         {hasSession && (
           <MobileMenu isOpen={mobileMenuIsOpen}>
-            <div className="px-4 py-5">
-              <MobileMenuNav>
-                <MobileMenuNavLink href={dashboardRoute}>Dashboard</MobileMenuNavLink>
-                <MobileMenuNavLink href={`${dashboardRoute}/books`}>Books</MobileMenuNavLink>
-                <MobileMenuNavLink href={`${dashboardRoute}/libraries`}>
-                  Libraries
-                </MobileMenuNavLink>
-              </MobileMenuNav>
+            <div className="py-6 px-5">
+              <div className="flex items-center justify-between">
+                <div></div>
+
+                <div className="-mr-2">
+                  <MobileMenuButtonClose
+                    isDisabled={isLoading || !mobileMenuIsOpen}
+                    handleMenuButtonClick={handleMenuButtonClose}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <MobileMenuNav>
+                  <MobileMenuNavLink href={dashboardRoute}>Dashboard</MobileMenuNavLink>
+                  <MobileMenuNavLink href={`${dashboardRoute}/books`}>Books</MobileMenuNavLink>
+                  <MobileMenuNavLink href={`${dashboardRoute}/libraries`}>
+                    Libraries
+                  </MobileMenuNavLink>
+                </MobileMenuNav>
+              </div>
             </div>
 
-            <div className="px-4 py-6 space-y-6">
+            <div className="py-6 px-5 space-y-6">
               <MobileMenuUserInfo avatar={user.picture} name={user.name} email={user.email} />
 
               <div className="grid gap-y-6">
@@ -258,7 +247,7 @@ export const AppShell = (props: ShellProps): JSX.Element => {
         <main className="flex-1">{props.children}</main>
 
         <Footer>
-          <FooterLink href="/">Homepage</FooterLink>
+          <FooterLink href="/">Home</FooterLink>
 
           <FooterLink href="https://github.com/gitreads" external>
             GitHub

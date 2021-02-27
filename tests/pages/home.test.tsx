@@ -15,35 +15,6 @@ describe(`Home`, () => {
     mockUseUser.mockClear()
   })
 
-  describe(`when loading the user session`, () => {
-    beforeEach(() => {
-      mockUseUser.mockImplementation(
-        (): UserContext => {
-          return {
-            user: null,
-            isLoading: true,
-            checkSession: () => Promise.resolve(),
-          }
-        }
-      )
-    })
-
-    afterEach(() => {
-      expect(mockUseUser).toBeCalledTimes(1)
-    })
-
-    it(`renders main content`, () => {
-      const { getByTestId, getByText } = render(<Home />)
-
-      const hero = getByTestId("hero")
-      expect(hero).toBeInTheDocument()
-
-      const cta = getByText("Git started for free")
-      expect(cta).toBeInTheDocument()
-      expect(cta.parentNode).toHaveAttribute("href", dashboardRoute)
-    })
-  })
-
   describe(`without a user session`, () => {
     beforeEach(() => {
       mockUseUser.mockImplementation(

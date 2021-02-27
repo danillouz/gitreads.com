@@ -34,8 +34,8 @@ type AppInstallProps = {
 
 const AppInstall = (props: AppInstallProps): JSX.Element => {
   return (
-    <div className="border border-gray-600 rounded-lg shadow-sm overflow-hidden">
-      <div className="px-4 py-5 sm:px-6 text-lg text-gray-300 antialiased">
+    <div className="rounded-md shadow-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden">
+      <div className="px-4 py-5 sm:px-6 text-lg text-gray-500 dark:text-gray-400 antialiased">
         <p>
           In order for us to access- and interact with your repositories, you&apos;ll need to
           install{" "}
@@ -50,7 +50,7 @@ const AppInstall = (props: AppInstallProps): JSX.Element => {
           .
         </p>
 
-        <p className="mt-4 pt-4 mb-2 border-t border-gray-700">
+        <p className="mt-4 pt-4 mb-2 border-t border-gray-200 dark:border-gray-600">
           By clicking the install button below, the following will happen:
         </p>
 
@@ -63,10 +63,10 @@ const AppInstall = (props: AppInstallProps): JSX.Element => {
           </li>
 
           <li className="mt-2">
-            Then GitHub will ask you to give access to your repositories.{" "}
+            GitHub will ask you to give access to your repositories.{" "}
             <b>We do not need access to all your repositories</b>. You can{" "}
             <a
-              className="underline focus:outline-white"
+              className="underline focus:outline-black dark:focus:outline-white"
               href={props.newRepoLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -81,7 +81,7 @@ const AppInstall = (props: AppInstallProps): JSX.Element => {
 
         <div className="mt-8">
           <a
-            className="w-full sm:w-auto text-white rounded-lg shadow-md btn sm:btn-lg bg-purple-500 hover:bg-purple-400 focus:ring-white"
+            className="btn w-full sm:w-auto text-gray-50 bg-gray-800 dark:text-gray-800 dark:bg-gray-50 dark:antialiased"
             href={props.appInstallLink}
           >
             Got it, install App
@@ -94,26 +94,26 @@ const AppInstall = (props: AppInstallProps): JSX.Element => {
 
 const AppInfoLoading = (): JSX.Element => {
   return (
-    <div className="border border-gray-600 rounded-lg shadow-sm overflow-hidden">
+    <div className="rounded-md shadow-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden">
       <div className="px-4 py-5 sm:px-6 animate-pulse">
-        <div className="w-60 h-7 bg-gray-400 rounded" />
-        <div className="w-40 h-5 mt-1 bg-gray-400 rounded" />
+        <div className="w-60 h-7 rounded bg-gray-200 dark:bg-gray-700" />
+        <div className="w-40 h-5 mt-1 rounded bg-gray-200 dark:bg-gray-700" />
       </div>
 
-      <dl className="border-t border-b border-gray-600">
+      <dl className="border-t border-b border-gray-200 dark:border-gray-600">
         <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 animate-pulse">
-          <div className="w-28 h-6 bg-gray-400 rounded" />
-          <div className="w-36 h-6 mt-1 sm:mt-0 sm:col-span-2 bg-gray-400 rounded" />
+          <div className="w-28 h-6 rounded bg-gray-200 dark:bg-gray-700" />
+          <div className="w-36 h-6 mt-1 sm:mt-0 sm:col-span-2 rounded bg-gray-200 dark:bg-gray-700" />
         </div>
 
         <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 animate-pulse">
-          <div className="w-24 h-6 bg-gray-400 rounded" />
-          <div className="w-40 h-6 mt-1 sm:mt-0 sm:col-span-2 bg-gray-400 rounded" />
+          <div className="w-24 h-6 rounded bg-gray-200 dark:bg-gray-700" />
+          <div className="w-40 h-6 mt-1 sm:mt-0 sm:col-span-2 rounded bg-gray-200 dark:bg-gray-700" />
         </div>
       </dl>
 
       <div className="px-4 py-5 sm:px-6 animate-pulse">
-        <div className="w-full h-5 sm:h-6 bg-gray-400 rounded" />
+        <div className="w-full h-5 sm:h-6 rounded bg-gray-200 dark:bg-gray-700" />
       </div>
     </div>
   )
@@ -131,11 +131,11 @@ type AppInfoProps = {
 
 const AppInfo = (props: AppInfoProps): JSX.Element => {
   return (
-    <div className="border border-gray-600 rounded-lg shadow-sm overflow-hidden transition duration-200">
+    <div className="rounded-md shadow-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden transition duration-200">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="flex items-center space-x-2 text-xl antialiased text-white">
+        <h3 className="flex items-center space-x-2 text-xl text-gray-800 dark:text-gray-50 dark:antialiased">
           <span>GitHub App installed</span>
-          <span className="w-6 h-6 text-green-400">
+          <span className="w-6 h-6 text-green-500 dark:text-green-400">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -152,17 +152,17 @@ const AppInfo = (props: AppInfoProps): JSX.Element => {
           </span>
         </h3>
 
-        <p className="mt-1 max-w-2xl text-sm text-gray-300 antialiased">
+        <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400 dark:antialiased">
           {formatDate(props.createdAt)}
         </p>
       </div>
 
-      <dl className="antialiased border-t border-b border-gray-600">
+      <dl className="dark:antialiased border-t border-b border-gray-200 dark:border-gray-600">
         <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt className="text-gray-400">Name</dt>
-          <dd className="mt-1 sm:mt-0 sm:col-span-2 text-gray-300">
+          <dt className="text-gray-500 dark:text-gray-400">Name</dt>
+          <dd className="mt-1 sm:mt-0 sm:col-span-2 text-gray-800 dark:text-gray-50">
             <a
-              className="underline focus:outline-white"
+              className="underline focus:outline-black focus:dark:outline-white"
               href={props.appPageLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -173,10 +173,10 @@ const AppInfo = (props: AppInfoProps): JSX.Element => {
         </div>
 
         <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt className="text-gray-400">Installation ID</dt>
-          <dd className="mt-1 sm:mt-0 sm:col-span-2 text-gray-300">
+          <dt className="text-gray-500 dark:text-gray-400">Installation ID</dt>
+          <dd className="mt-1 sm:mt-0 sm:col-span-2 text-gray-800 dark:text-gray-50">
             <a
-              className="underline focus:outline-white"
+              className="underline focus:outline-black focus:dark:outline-white"
               href={`${props.appSettingsLink}/${props.installationId}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -187,7 +187,7 @@ const AppInfo = (props: AppInfoProps): JSX.Element => {
         </div>
       </dl>
 
-      <div className="flex items-center space-x-1 px-4 py-5 sm:px-6 text-gray-400 antialiased">
+      <div className="flex items-center space-x-1 px-4 py-5 sm:px-6 text-gray-500 dark:text-gray-400 dark:antialiased">
         <InfoIcon className="hidden sm:block w-6 h-6" />
         <p className="text-sm">
           We use our GitHub App to access- and interact with your repositories.
@@ -273,7 +273,7 @@ export const GitHub = (): JSX.Element => {
 
         {repos && (
           <ContenteSection className="my-8">
-            <ContentSectionTitle className="border-b border-gray-600">
+            <ContentSectionTitle className="border-b border-gray-200 dark:border-gray-600">
               Repositories
             </ContentSectionTitle>
 
@@ -286,9 +286,9 @@ export const GitHub = (): JSX.Element => {
                   <ListItem key={repo.id}>
                     <div className="flex justify-between items-center space-x-2">
                       <div className="flex items-center space-x-2 truncate">
-                        <GitHubIcon className="w-8 h-8 text-white hidden sm:block" />
+                        <GitHubIcon className="w-8 h-8 text-black dark:text-white hidden sm:block" />
 
-                        <span className="text-gray-300 antialiased truncate">
+                        <span className="text-gray-800 dark:text-gray-400 dark:antialiased truncate">
                           <a
                             className="underline focus:outline-white"
                             href={repoLink}
@@ -301,7 +301,7 @@ export const GitHub = (): JSX.Element => {
                       </div>
 
                       <Link href="">
-                        <a className="text-white btn bg-purple-500 hover:bg-purple-400 focus:ring-white">
+                        <a className="btn btn-sm text-gray-50 antialiased dark:text-gray-800 bg-gray-800 dark:bg-gray-50 focus:outline-black dark:focus:outline-white">
                           Connect
                         </a>
                       </Link>
@@ -311,10 +311,10 @@ export const GitHub = (): JSX.Element => {
               })}
             </List>
 
-            <div className="flex items-center space-x-1 px-4 py-5 sm:px-6 text-gray-400 border-t border-gray-600">
+            <div className="flex items-center space-x-1 px-4 py-5 sm:px-6 text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-600">
               <InfoIcon className="hidden sm:block w-6 h-6" />
               <p className="text-sm">
-                Don&apos;t see your repository? Click on the <b>Installation ID</b> link above to
+                Don&apos;t see your repository? Click the <b>Installation ID</b> link above to
                 manage repository access on GitHub.
               </p>
             </div>

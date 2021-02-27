@@ -32,24 +32,15 @@ describe(`Home shell`, () => {
       expect(mockUseUser).toBeCalledTimes(1)
     })
 
-    it(`renders logo`, () => {
-      const { getAllByTestId } = render(<HomeShell />)
-      const logos = getAllByTestId("logo")
-      for (const logo of logos) {
-        expect(logo).toBeInTheDocument()
-        expect(logo.parentNode).toHaveAttribute("href", "/")
-      }
-    })
-
-    it(`does not render login link`, () => {
+    it(`does not render log in link`, () => {
       const { queryAllByText } = render(<HomeShell />)
-      const links = queryAllByText("Login")
+      const links = queryAllByText("Log in")
       expect(links).toHaveLength(0)
     })
 
-    it(`does not render signup link`, () => {
+    it(`does not render sign up link`, () => {
       const { queryAllByText } = render(<HomeShell />)
-      const links = queryAllByText("Signup")
+      const links = queryAllByText("Sign up")
       expect(links).toHaveLength(0)
     })
   })
@@ -71,25 +62,16 @@ describe(`Home shell`, () => {
       expect(mockUseUser).toBeCalledTimes(1)
     })
 
-    it(`renders logo`, () => {
-      const { getAllByTestId } = render(<HomeShell />)
-      const logos = getAllByTestId("logo")
-      for (const logo of logos) {
-        expect(logo).toBeInTheDocument()
-        expect(logo.parentNode).toHaveAttribute("href", "/")
-      }
-    })
-
-    it(`renders login link`, () => {
+    it(`renders log in link`, () => {
       const { getByText } = render(<HomeShell />)
-      const link = getByText("Login")
+      const link = getByText("Log in")
       expect(link).toBeInTheDocument()
       expect(link).toHaveAttribute("href", loginUrl)
     })
 
-    it(`renders signup link`, () => {
+    it(`renders sign up link`, () => {
       const { getByText } = render(<HomeShell />)
-      const link = getByText("Signup")
+      const link = getByText("Sign up")
       expect(link).toBeInTheDocument()
       expect(link).toHaveAttribute("href", signupUrl)
     })
@@ -130,22 +112,6 @@ describe(`Home shell`, () => {
 
     afterEach(() => {
       expect(mockUseUser).toBeCalledTimes(1)
-    })
-
-    it(`renders logo`, () => {
-      const { getAllByTestId } = render(<HomeShell />)
-      const logos = getAllByTestId("logo")
-      for (const logo of logos) {
-        expect(logo).toBeInTheDocument()
-        expect(logo.parentNode).toHaveAttribute("href", "/")
-      }
-    })
-
-    it(`renders dashboard link`, () => {
-      const { getByText } = render(<HomeShell />)
-      const link = getByText("Dashboard")
-      expect(link).toBeInTheDocument()
-      expect(link).toHaveAttribute("href", dashboardRoute)
     })
 
     it(`renders user's avatar`, () => {

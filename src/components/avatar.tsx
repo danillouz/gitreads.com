@@ -7,12 +7,12 @@ type AvatarProps = {
 }
 
 const Avatar = (props: AvatarProps): JSX.Element => {
-  const { src, alt = "user avatar", className } = props
+  const { src, alt, className } = props
 
   return (
     <span
       className={clsx(
-        "inline-block overflow-hidden bg-gray-400 rounded-full shadow-sm w-10 h-10",
+        "inline-block overflow-hidden bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 rounded-full shadow-sm w-10 h-10",
         className
       )}
     >

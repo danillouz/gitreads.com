@@ -1,6 +1,4 @@
-import Link from "next/link"
 import clsx from "clsx"
-import { ReactNode } from "react"
 
 type ContentContainerProps = {
   children: React.ReactNode
@@ -30,29 +28,29 @@ export const ContentHeader = (props: ContentHeaderProps): JSX.Element => {
     >
       <div className="flex items-center h-14">
         {isLoading ? (
-          <div data-testid="skeleton" className="w-32 h-5 bg-gray-400 rounded" />
+          <div className="w-32 h-5 bg-gray-200 dark:bg-gray-700 rounded" />
         ) : (
           <span className="-mx-3 link"></span>
         )}
       </div>
 
       {isLoading ? (
-        <div data-testid="skeleton" className="w-80 bg-gray-400 rounded h-9 sm:h-10" />
+        <div className="w-80 bg-gray-200 dark:bg-gray-700 rounded h-9 sm:h-10" />
       ) : (
         <h1
           data-testid="content-header"
-          className="text-3xl tracking-wide text-white antialiased sm:text-4xl"
+          className="text-3xl tracking-wide text-gray-800 dark:text-gray-50 dark:antialiased sm:text-4xl"
         >
           {props.title}
         </h1>
       )}
 
       {isLoading ? (
-        <div data-testid="skeleton" className="w-48 my-2 bg-gray-400 rounded h-7" />
+        <div className="w-48 my-2 bg-gray-200 dark:bg-gray-700 rounded h-7" />
       ) : (
         <h2
           data-testid="content-subtitle"
-          className="my-2 text-xl tracking-wide text-gray-300 antialiased"
+          className="my-2 text-xl tracking-wide text-gray-500 dark:text-gray-400 dark:antialiased"
         >
           {props.subtitle}
         </h2>
@@ -69,7 +67,10 @@ type ContentSectionProps = {
 export const ContenteSection = (props: ContentSectionProps): JSX.Element => {
   return (
     <section
-      className={clsx("border border-gray-600 rounded-lg transition duration-200", props.className)}
+      className={clsx(
+        "rounded-md shadow-sm dark:shadow-none bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600",
+        props.className
+      )}
     >
       {props.children}
     </section>
@@ -85,48 +86,11 @@ export const ContentSectionTitle = (props: ContentSectionTitleProps): JSX.Elemen
   return (
     <h3
       className={clsx(
-        "flex items-center space-x-2 px-4 py-5 sm:px-6 text-2xl text-white antialiased",
+        "flex items-center space-x-2 px-4 py-5 sm:px-6 text-2xl text-gray-800 dark:text-gray-50 dark:antialiased",
         props.className
       )}
     >
       {props.children}
     </h3>
-  )
-}
-
-type ContentActionProps = {
-  isLoading: boolean
-  href: string
-  icon: React.ReactNode
-  name: string | ReactNode
-  className?: string
-}
-
-export const ContentAction = (props: ContentActionProps): JSX.Element => {
-  const { isLoading, icon, name } = props
-
-  const className = clsx(
-    "flex sm:flex-col items-center sm:justify-center sm:mr-5 mb-6 sm:mb-5 px-5 sm:px-2 py-5 w-full sm:w-40 h-18 sm:h-30 space-x-3 sm:space-x-0 sm:space-y-1 font-medium text-lg sm:text-base text-white antialiased tracking-wider rounded-lg shadow-md transform-gpu transition duration-200",
-    props.className,
-    {
-      "cursor-not-allowed": isLoading,
-      "hover:scale-105 hover:shadow-lg focus:outline-white": !isLoading,
-    }
-  )
-
-  if (isLoading) {
-    return (
-      <span className={className}>
-        {icon} <span>{name}</span>
-      </span>
-    )
-  }
-
-  return (
-    <Link href={props.href}>
-      <a className={className}>
-        {icon} <span>{name}</span>
-      </a>
-    </Link>
   )
 }

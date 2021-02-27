@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Menu, Transition } from "@headlessui/react"
 import clsx from "clsx"
+
 import Avatar from "@components/avatar"
 
 type UserDropdownProps = {
@@ -22,9 +23,9 @@ export const UserDropdown = (props: UserDropdownProps): JSX.Element => {
             <>
               <Menu.Button
                 disabled={props.isDisabled}
-                className="flex items-center w-full transition duration-150 ease-in-out rounded-full focus:outline-white"
+                className="flex items-center w-full transition duration-150 ease-in-out rounded-full focus:outline-black dark:focus:outline-white"
               >
-                <Avatar className="w-14 h-14" src={avatarUrl} />
+                <Avatar className="w-12 h-12" src={avatarUrl} />
               </Menu.Button>
 
               <Transition
@@ -38,14 +39,14 @@ export const UserDropdown = (props: UserDropdownProps): JSX.Element => {
               >
                 <Menu.Items
                   static
-                  className="absolute w-56 mt-2 origin-top-left bg-gray-600 divide-y divide-gray-500 rounded-lg shadow-xl outline-none left-7"
+                  className="absolute w-56 mt-2 origin-top-right right-6 rounded-md shadow-md bg-gray-50 dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-500 border border-gray-200 dark:border-gray-500 outline-none"
                 >
-                  <div className="px-4 py-3">
-                    <p className="mb-1 antialiased leading-5 text-gray-300 truncate" title={name}>
+                  <div className="px-4 py-3 text-gray-500 dark:text-gray-300 dark:antialiased">
+                    <p className="mb-1 leading-5 truncate" title={name}>
                       {name}
                     </p>
 
-                    <p className="antialiased leading-5 text-gray-400 truncate" title={email}>
+                    <p className="leading-5 truncate" title={email}>
                       {email}
                     </p>
                   </div>
@@ -74,9 +75,9 @@ export const UserDropdownLink = (props: UserDropdownLinkProps): JSX.Element => {
         <Link href={props.href}>
           <a
             className={clsx(
-              "flex justify-between w-full px-4 py-2 text-gray-300 leading-5 antialiased hover:text-white hover:bg-gray-500",
+              "flex justify-between w-full px-4 py-2 leading-5 text-gray-800 dark:text-gray-50 dark:antialiased hover:bg-gray-200 dark:hover:bg-gray-500",
               {
-                "bg-gray-500 text-white": active,
+                "bg-gray-200 dark:bg-gray-500": active,
               },
               props.className
             )}

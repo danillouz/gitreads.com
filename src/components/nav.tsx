@@ -31,10 +31,10 @@ export const NavLink = (props: NavLinkProps): JSX.Element => {
     <Link href={href}>
       <a
         className={clsx(
-          "px-4 py-2 antialiased leading-6 tracking-wider transition duration-200 rounded-full hover:text-white focus:outline-white",
+          "px-4 py-2 dark:antialiased leading-6 tracking-wider transition duration-200 rounded-md hover:text-gray-800 dark:hover:text-gray-50 focus:outline-black dark:focus:outline-white",
           {
-            "text-white bg-gray-900": isActive,
-            "text-gray-300": !isActive,
+            "text-gray-800 dark:text-gray-50 bg-gray-200 dark:bg-gray-900": isActive,
+            "text-gray-500 dark:text-gray-400": !isActive,
           },
           className
         )}

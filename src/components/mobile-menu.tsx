@@ -1,10 +1,10 @@
 import Link from "next/link"
 import { Transition } from "@headlessui/react"
+
 import Avatar from "@components/avatar"
 
 type MenuButtonProps = {
   isDisabled: boolean
-  isOpen: boolean
   handleMenuButtonClick(event: React.MouseEvent<HTMLButtonElement>): void
 }
 
@@ -12,26 +12,32 @@ export const MobileMenuButton = (props: MenuButtonProps): JSX.Element => {
   return (
     <button
       disabled={props.isDisabled}
-      className="inline-flex items-center justify-center p-2 text-gray-400 focus:outline-white"
+      className="inline-flex items-center justify-center p-2 text-gray-400 focus:outline-black dark:focus:outline-white"
       aria-label="Open menu"
       onClick={props.handleMenuButtonClick}
     >
       <svg className="block w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        {props.isOpen ? (
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M6 18L18 6M6 6l12 12"
-          />
-        ) : (
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M4 8h16M4 16h16"
-          />
-        )}
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  )
+}
+
+export const MobileMenuButtonClose = (props: MenuButtonProps): JSX.Element => {
+  return (
+    <button
+      disabled={props.isDisabled}
+      className="inline-flex items-center justify-center p-2 text-gray-400 focus:outline-black dark:focus:outline-white"
+      aria-label="Open menu"
+      onClick={props.handleMenuButtonClick}
+    >
+      <svg className="block w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M6 18L18 6M6 6l12 12"
+        />
       </svg>
     </button>
   )
@@ -49,14 +55,16 @@ export const MobileMenu = (props: MobileMenuProps): JSX.Element => {
     <Transition
       show={isOpen}
       enter="duration-200 ease-out"
-      enterFrom="opacity-0"
-      enterTo="opacity-100"
+      enterFrom="opacity-0 scale-95"
+      enterTo="opacity-100 scale-100"
       leave="duration-100 ease-in"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0"
-      className="fixed inset-x-0 z-20 transition origin-top-right transform shadow-lg top-20 md:hidden"
+      leaveFrom="opacity-100 scale-100"
+      leaveTo="opacity-0 scale-95"
+      className="fixed inset-x-0 top-0 p-2 transition origin-top-right transform md:hidden"
     >
-      <div className="h-full bg-gray-700 divide-y divide-gray-600">{props.children}</div>
+      <div className="h-full rounded-md shadow-md bg-gray-50 dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-500 border border-gray-200 dark:border-gray-500">
+        {props.children}
+      </div>
     </Transition>
   )
 }
@@ -77,7 +85,7 @@ type MobileMenuNavLinkProps = {
 export const MobileMenuNavLink = (props: MobileMenuNavLinkProps): JSX.Element => {
   return (
     <Link href={props.href}>
-      <a className="block p-3 -m-3 antialiased text-gray-300 focus:outline-white">
+      <a className="block p-3 -m-3 text-gray-800 dark:text-gray-50 dark:antialiased focus:outline-white">
         {props.children}
       </a>
     </Link>
@@ -99,9 +107,14 @@ export const MobileMenuUserInfo = (props: UserInfoProps): JSX.Element => {
         <Avatar className="w-12 h-12" src={props.avatar} />
       </div>
 
-      <div>
-        <div className="antialiased text-gray-300">{name}</div>
-        <div className="antialiased text-gray-400">{email}</div>
+      <div className="text-gray-500 dark:text-gray-300 dark:antialiased">
+        <p className="mb-1 leading-5 truncate" title={name}>
+          {name}
+        </p>
+
+        <p className="leading-5 truncate" title={email}>
+          {email}
+        </p>
       </div>
     </div>
   )

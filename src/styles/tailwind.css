@@ -47,36 +47,8 @@ Custom utils
 For more info see: https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply
  */
 @layer components {
-  /* Gradients */
-
-  .text-gradient {
-    @apply text-transparent bg-clip-text;
-  }
-
-  .orange-gradient {
-    @apply bg-gradient-to-br from-yellow-400 to-orange-600;
-  }
-
-  .blue-gradient {
-    @apply bg-gradient-to-br from-blue-400 to-indigo-500;
-  }
-
-  .pink-gradient {
-    @apply bg-gradient-to-br from-pink-500 to-rose-500;
-  }
-
-  .purple-gradient {
-    @apply bg-gradient-to-br from-fuchsia-500 to-purple-600;
-  }
-
-  .super-gradient {
-    @apply bg-gradient-to-r from-blue-400 via-indigo-500 to-pink-600;
-  }
-
-  /* Buttons */
-
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base antialiased font-medium leading-6 tracking-wider transition duration-200 rounded-lg focus:outline-white;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-md text-base font-medium leading-6 tracking-wider transition duration-200;
   }
 }
 
