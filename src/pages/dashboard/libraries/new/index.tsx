@@ -47,7 +47,7 @@ type CardProps = {
 const ProviderCard = (props: CardProps): JSX.Element => {
   if (props.isLoading) {
     return (
-      <div className="w-full p-5 mb-5 sm:mr-5 sm:w-72 rounded-md bg-gray-50 dark:bg-gray-800 border border-gray-800 shadow-retro dark:border-gray-600 cursor-wait">
+      <div className="w-full p-5 mb-5 sm:mr-5 sm:w-72 rounded-md shadow-sm dark:shadow-none bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 cursor-wait">
         <div className="animate-pulse">
           <div className="w-14 h-14 rounded-xl bg-gray-200 dark:bg-gray-700" />
           <div className="w-28 mt-4 mb-1 rounded h-7 bg-gray-200 dark:bg-gray-700" />
