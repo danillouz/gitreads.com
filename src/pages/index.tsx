@@ -18,7 +18,7 @@ export const Home = (): JSX.Element => {
 
         <h2 className="text-4xl sm:text-6xl lg:text-8xl font-bold tracking-tight mt-8 mb-6 sm:mt-12 sm:mb-10">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-600 dark:antialiased">
-            Track. Organize. Share.
+            Your online bookshelf
           </span>
         </h2>
 
