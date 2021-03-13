@@ -4,7 +4,7 @@ import clsx from "clsx"
 
 import { AppShell } from "@components/shell"
 import { ContentHeader, ContentContainer } from "@components/content"
-import { GitHubIcon, AirtableIcon, NotionIcon } from "@components/icons"
+import { GitHubIcon, AirtableIcon } from "@components/icons"
 import { dashboardRoute } from "@config/auth"
 
 type CardContainerProps = {
@@ -107,14 +107,6 @@ export const NewLibrary = (): JSX.Element => {
             icon={<AirtableIcon className="w-10 h-10" />}
             title="Airtable"
             description="Connect to a base."
-          />
-
-          <ProviderCard
-            isLoading={!hasSession}
-            isPreview
-            icon={<NotionIcon className="w-10 h-10" />}
-            title="Notion"
-            description="Connect to a page."
           />
         </div>
       </ContentContainer>
