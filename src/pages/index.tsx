@@ -22,7 +22,7 @@ export const Home = (): JSX.Element => {
           </span>
         </h2>
 
-        <p className="max-w-screen-lg text-lg sm:text-2xl sm:leading-10 font-medium mb-10 sm:mb-11 text-gray-500 dark:text-gray-400 dark:antialiased">
+        <p className="max-w-screen-lg text-lg sm:text-2xl sm:leading-10 font-medium mb-10 sm:mb-11 text-gray-800 dark:text-gray-50 dark:antialiased">
           Use a Git repository to collect and showcase what you read.
         </p>
 

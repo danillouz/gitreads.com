@@ -34,7 +34,7 @@ type AppInstallProps = {
 const AppInstall = (props: AppInstallProps): JSX.Element => {
   return (
     <div className="rounded-md shadow-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden">
-      <div className="px-4 py-5 sm:px-6 text-lg text-gray-500 dark:text-gray-400 antialiased">
+      <div className="px-4 py-5 sm:px-6 text-lg text-gray-800 dark:text-gray-400 antialiased">
         <p>
           In order for us to access- and interact with your repositories, you&apos;ll need to
           install{" "}
