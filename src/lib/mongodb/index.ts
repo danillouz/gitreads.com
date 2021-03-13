@@ -1,8 +1,8 @@
 import { Db, MongoClient, MongoClientOptions } from "mongodb"
 
-const { MONGODB_USERNAME, MONGODB_PASSWORD, MONGODB_DB_NAME } = process.env
+const { MONGODB_CONN_STR, MONGODB_DB_NAME } = process.env
 
-const uri = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@main.lnkel.mongodb.net/${MONGODB_DB_NAME}?retryWrites=true&w=majority`
+const uri = `${MONGODB_CONN_STR}/${MONGODB_DB_NAME}?retryWrites=true&w=majority`
 
 let cachedClient: MongoClient | null = null
 let cachedDb: Db | null = null
