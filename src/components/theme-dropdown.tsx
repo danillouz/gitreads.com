@@ -43,7 +43,7 @@ export const ThemeDropdown = (): JSX.Element => {
 
           <div className="w-24 relative">
             <span className="inline-block w-full rounded-md">
-              <Listbox.Button className="text-sm text-gray-800 dark:text-gray-50 cursor-default relative w-full rounded-md border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 pl-3 pr-10 py-2 text-left focus:outline-black dark:focus:outline-white transition ease-in-out duration-150">
+              <Listbox.Button className="text-sm text-gray-800 dark:text-gray-50 cursor-default relative w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 pl-3 pr-10 py-2 text-left focus:outline-black dark:focus:outline-white transition ease-in-out duration-150">
                 <span className="block truncate capitalize">{appearance}</span>
 
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -69,7 +69,7 @@ export const ThemeDropdown = (): JSX.Element => {
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              className="w-24 absolute -top-24 rounded-md shadow-lg bg-gray-50 dark:bg-gray-600 border border-gray-300 dark:border-gray-600"
+              className="w-24 absolute -top-24 rounded-md shadow-lg bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-600"
             >
               <Listbox.Options static className="py-2 text-sm overflow-auto outline-none">
                 {Object.values(Theme).map((_theme) => (

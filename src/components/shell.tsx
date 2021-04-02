@@ -6,6 +6,7 @@ import clsx from "clsx"
 import { useLoginIsRequired } from "@lib/auth0"
 import { dashboardRoute, loginUrl, signupUrl, logoutUrl } from "@config/auth"
 import Page from "@components/page"
+import { Logo } from "@components/logo"
 import { Nav, NavLink } from "@components/nav"
 import {
   MobileMenu,
@@ -34,10 +35,16 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
       <div className="flex flex-col min-h-screen">
         <header>
           <div className="page-container mx-auto px-4">
-            <div className="flex items-center justify-end sm:justify-between h-20 border-b border-gray-200 dark:border-gray-700">
-              <Nav>
-                <NavLink href="/">Home</NavLink>
-              </Nav>
+            <div className="flex items-center justify-between space-x-4 md:justify-start h-20 border-b border-gray-200 dark:border-gray-700">
+              <div className="lg:flex-1">
+                <Link href="/">
+                  <a>
+                    <Logo className="w-auto h-10 text-gray-800 dark:text-gray-50 dark:antialiased" />
+                  </a>
+                </Link>
+              </div>
+
+              <Nav>{/* <NavLink href="/pricing">Pricing</NavLink> */}</Nav>
 
               <div className="items-center justify-end hidden space-x-2 sm:flex sm:flex-1">
                 {!isLoading && (
@@ -93,7 +100,13 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
           <MobileMenu isOpen={mobileMenuIsOpen}>
             <div className="py-6 px-5">
               <div className="flex items-center justify-between">
-                <div></div>
+                <div>
+                  <Link href="/">
+                    <a>
+                      <Logo className="w-auto h-10 text-gray-800 dark:text-gray-50 dark:antialiased" />
+                    </a>
+                  </Link>
+                </div>
 
                 <div className="-mr-2">
                   <MobileMenuButtonClose
@@ -105,7 +118,7 @@ export const HomeShell = (props: ShellProps): JSX.Element => {
 
               <div className="mt-5">
                 <MobileMenuNav>
-                  <MobileMenuNavLink href="/">Home</MobileMenuNavLink>
+                  {/* <MobileMenuNavLink href="/pricing">Pricing</MobileMenuNavLink> */}
                 </MobileMenuNav>
               </div>
             </div>
@@ -176,10 +189,16 @@ export const AppShell = (props: ShellProps): JSX.Element => {
       <div className="flex flex-col min-h-screen">
         <header>
           <div className="page-container mx-auto px-4">
-            <div className="flex items-center justify-end sm:justify-between h-20 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between space-x-4 md:justify-start h-20 border-b border-gray-200 dark:border-gray-700">
+              <div className="lg:flex-1">
+                <Link href={dashboardRoute}>
+                  <a>
+                    <Logo className="w-auto h-10 text-gray-800 dark:text-gray-50 dark:antialiased" />
+                  </a>
+                </Link>
+              </div>
+
               <Nav>
-                <NavLink href={dashboardRoute}>Dashboard</NavLink>
-                <NavLink href={`${dashboardRoute}/books`}>Books</NavLink>
                 <NavLink href={`${dashboardRoute}/libraries`}>Libraries</NavLink>
               </Nav>
 
@@ -213,7 +232,13 @@ export const AppShell = (props: ShellProps): JSX.Element => {
           <MobileMenu isOpen={mobileMenuIsOpen}>
             <div className="py-6 px-5">
               <div className="flex items-center justify-between">
-                <div></div>
+                <div>
+                  <Link href={dashboardRoute}>
+                    <a>
+                      <Logo className="w-auto h-10 text-gray-800 dark:text-gray-50 dark:antialiased" />
+                    </a>
+                  </Link>
+                </div>
 
                 <div className="-mr-2">
                   <MobileMenuButtonClose
@@ -225,8 +250,6 @@ export const AppShell = (props: ShellProps): JSX.Element => {
 
               <div className="mt-5">
                 <MobileMenuNav>
-                  <MobileMenuNavLink href={dashboardRoute}>Dashboard</MobileMenuNavLink>
-                  <MobileMenuNavLink href={`${dashboardRoute}/books`}>Books</MobileMenuNavLink>
                   <MobileMenuNavLink href={`${dashboardRoute}/libraries`}>
                     Libraries
                   </MobileMenuNavLink>

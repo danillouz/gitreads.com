@@ -33,7 +33,7 @@ type AppInstallProps = {
 
 const AppInstall = (props: AppInstallProps): JSX.Element => {
   return (
-    <div className="rounded-md shadow-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden">
+    <div className="rounded-md shadow-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden">
       <div className="px-4 py-5 sm:px-6 text-lg text-gray-800 dark:text-gray-400 antialiased">
         <p>
           In order for us to access- and interact with your repositories, you&apos;ll need to
@@ -93,7 +93,7 @@ const AppInstall = (props: AppInstallProps): JSX.Element => {
 
 const AppInfoLoading = (): JSX.Element => {
   return (
-    <div className="rounded-md shadow-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden">
+    <div className="rounded-md shadow-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden">
       <div className="px-4 py-5 sm:px-6 animate-pulse">
         <div className="w-60 h-7 rounded bg-gray-200 dark:bg-gray-700" />
         <div className="w-40 h-5 mt-1 rounded bg-gray-200 dark:bg-gray-700" />
@@ -130,7 +130,7 @@ type AppInfoProps = {
 
 const AppInfo = (props: AppInfoProps): JSX.Element => {
   return (
-    <div className="rounded-md shadow-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden transition duration-200">
+    <div className="rounded-md shadow-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 overflow-hidden transition duration-200">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="flex items-center space-x-2 text-xl text-gray-800 dark:text-gray-50 dark:antialiased">
           <span>GitHub App installed</span>

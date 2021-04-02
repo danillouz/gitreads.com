@@ -7,7 +7,7 @@ type PageProps = {
 }
 
 const Page = (props: PageProps): JSX.Element => {
-  const { title = "GitReads", description = "Your online bookshelf." } = props
+  const { title = "GitReads", description = "Collect and showcase your reads." } = props
 
   return (
     <>

@@ -62,7 +62,7 @@ export const MobileMenu = (props: MobileMenuProps): JSX.Element => {
       leaveTo="opacity-0 scale-95"
       className="fixed inset-x-0 top-0 p-2 transition origin-top-right transform md:hidden"
     >
-      <div className="h-full rounded-md shadow-md bg-gray-50 dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-500 border border-gray-200 dark:border-gray-500">
+      <div className="h-full rounded-md shadow-md bg-white dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-500 border border-gray-200 dark:border-gray-500">
         {props.children}
       </div>
     </Transition>

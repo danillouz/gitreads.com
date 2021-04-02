@@ -17,10 +17,10 @@ const CardContainer = (props: CardContainerProps): JSX.Element => {
   const { isPreview, href, children } = props
 
   const className = clsx(
-    "w-full p-5 mb-5 sm:mr-5 sm:w-72 rounded-md shadow-sm dark:shadow-none bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600",
+    "w-full p-5 mb-5 sm:mr-5 sm:w-72 rounded-md shadow-sm dark:shadow-none bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600",
     {
       "dark:focus:outline-white": !isPreview,
-      "cursor-not-allowed border-dashed bg-gray-100 border-gray-300 shadow-none": isPreview,
+      "cursor-not-allowed": isPreview,
     }
   )
 
@@ -47,7 +47,7 @@ type CardProps = {
 const ProviderCard = (props: CardProps): JSX.Element => {
   if (props.isLoading) {
     return (
-      <div className="w-full p-5 mb-5 sm:mr-5 sm:w-72 rounded-md shadow-sm dark:shadow-none bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 cursor-wait">
+      <div className="w-full p-5 mb-5 sm:mr-5 sm:w-72 rounded-md shadow-sm dark:shadow-none bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 cursor-wait">
         <div className="animate-pulse">
           <div className="w-14 h-14 rounded-xl bg-gray-200 dark:bg-gray-700" />
           <div className="w-28 mt-4 mb-1 rounded h-7 bg-gray-200 dark:bg-gray-700" />
@@ -71,7 +71,7 @@ const ProviderCard = (props: CardProps): JSX.Element => {
       <p className="text-gray-500 dark:text-gray-400 dark:antialiased">{props.description}</p>
 
       {props.isPreview && (
-        <span className="inline-block mt-6 text-sm font-medium tracking-wider px-2 py-1 rounded-full bg-gray-400 dark:bg-gray-600 text-gray-50 dark:text-gray-300 dark:antialiased uppercase">
+        <span className="inline-block mt-6 text-sm font-medium tracking-wider px-2 py-1 rounded-full bg-gray-800 dark:bg-gray-600 text-gray-50 dark:text-gray-300 dark:antialiased">
           Coming soon
         </span>
       )}

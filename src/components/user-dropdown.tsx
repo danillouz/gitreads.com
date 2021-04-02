@@ -39,7 +39,7 @@ export const UserDropdown = (props: UserDropdownProps): JSX.Element => {
               >
                 <Menu.Items
                   static
-                  className="absolute w-56 mt-2 origin-top-right right-6 rounded-md shadow-md bg-gray-50 dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-500 border border-gray-200 dark:border-gray-500 outline-none"
+                  className="absolute w-56 mt-2 origin-top-right right-6 rounded-md shadow-md bg-white dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-500 border border-gray-200 dark:border-gray-500 outline-none"
                 >
                   <div className="px-4 py-3 text-gray-500 dark:text-gray-300 dark:antialiased">
                     <p className="mb-1 leading-5 truncate" title={name}>
